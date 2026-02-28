@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Le Carnet — Índice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F0EBE1;--ivory:#E8E1D5;--ink:#1C1C2E;--ink-soft:#4A4A6A;--ink-faint:rgba(28,28,46,.1);--ink-mid:rgba(28,28,46,.4)}
+html{scroll-behavior:auto}
+body{background:var(--cream);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.8rem 3rem;background:rgba(240,235,225,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--ink-faint)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.1rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.nav-logo em{font-style:italic}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-by{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid)}
+.nav-by a{color:var(--ink-mid);text-decoration:none;transition:color .3s}
+.nav-by a:hover{color:var(--ink)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:300}
+.nav-burger span{display:block;width:22px;height:1px;background:var(--ink-mid);transition:all .4s cubic-bezier(.23,1,.32,1)}
+.nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:150;background:var(--cream);flex-direction:column;align-items:center;justify-content:center;gap:3rem;opacity:0;transition:opacity .4s ease}
+.nav-overlay.open{opacity:1}
+.nav-overlay a{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.2rem;color:var(--ink-soft);text-decoration:none;opacity:0;transform:translateY(16px);transition:opacity .4s ease,transform .4s ease,color .3s}
+.nav-overlay.open a{opacity:1;transform:translateY(0)}
+.nav-overlay.open a:nth-child(1){transition-delay:.1s}
+.nav-overlay.open a:nth-child(2){transition-delay:.18s}
+.nav-overlay a:hover{color:var(--ink)}
+.nav-overlay-tag{position:absolute;bottom:2.5rem;font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mid);opacity:.5}
+@media(max-width:640px){.nav-links{display:none}.nav-by{display:none}.nav-burger{display:flex}nav{padding:1.4rem 1.5rem}}
+.wrapper{max-width:860px;margin:0 auto;padding:0 3rem;width:100%}
+@media(max-width:640px){.wrapper{padding:0 1.5rem}}
+.page-header{padding:10rem 0 4rem}
+.page-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.5rem,6vw,5rem);line-height:.95;letter-spacing:-.01em;opacity:0;animation:fadeIn 1s .3s forwards}
+.page-title em{font-style:italic;color:var(--ink-soft)}
+.page-count{font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mid);margin-top:1.5rem;opacity:0;animation:fadeIn .8s .6s forwards}
+.sep{width:100%;height:1px;background:var(--ink-faint);margin:3rem 0}
+.indice-row{display:grid;grid-template-columns:3rem 1fr auto;align-items:center;gap:2rem;padding:1.8rem 0;border-bottom:1px solid var(--ink-faint);text-decoration:none;color:inherit;transition:opacity .3s}
+.indice-row:hover{opacity:.6}
+.indice-num{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--ink-mid)}
+.indice-nombre{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.4rem;color:var(--ink);display:block;margin-bottom:.25rem}
+.indice-meta{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mid)}
+.indice-right{text-align:right}
+.indice-score{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--ink);display:block}
+.indice-familia{font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mid);display:block}
+@media(max-width:500px){.indice-row{grid-template-columns:2.5rem 1fr auto;gap:1rem}.indice-nombre{font-size:1.2rem}}
+footer{padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--ink-faint);flex-wrap:wrap;gap:1rem;margin-top:auto}
+footer>span{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid);opacity:.45}
+.footer-right{display:flex;align-items:center;gap:2rem}
+.footer-ig{display:flex;align-items:center;gap:.5rem;text-decoration:none;opacity:.28;transition:opacity .3s}
+.footer-ig:hover{opacity:.6}
+.footer-ig svg{width:15px;height:15px;color:var(--ink)}
+.footer-ig span{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid)}
+.footer-lb{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid);opacity:.38;text-decoration:none;transition:opacity .3s}
+.footer-lb:hover{opacity:.7}
+.footer-top{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid);opacity:.38;text-decoration:none;transition:opacity .3s}
+.footer-top:hover{opacity:.7}
+.footer-top::after{content:' ↑'}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .9s,transform .9s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes fadeIn{to{opacity:1}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Le <em>Carnet</em></a>
+  <ul class="nav-links">
+    <li><a href="/">Inicio</a></li>
+    <li><a href="indice.html" class="active">Índice</a></li>
+  </ul>
+  <span class="nav-by">por <a href="https://lucasbanega.com" target="_blank">Lucas Banega</a></span>
+  <button class="nav-burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-overlay" id="nav-overlay">
+  <a href="/" onclick="closeMenu()">Inicio</a>
+  <a href="indice.html" onclick="closeMenu()">Índice</a>
+  <span class="nav-overlay-tag">Le Carnet · por Lucas Banega</span>
+</div>
+
+<main>
+  <div class="wrapper">
+    <div class="page-header">
+      <h1 class="page-title">Todas las<br/><em>entradas</em></h1>
+      <p class="page-count" id="entry-count"></p>
+    </div>
+    <div class="sep"></div>
+    <div id="indice-list"></div>
+    <div style="height:5rem"></div>
+  </div>
+</main>
+
+<footer>
+  <span>© 2025 Le Carnet</span>
+  <div class="footer-right">
+    <a class="footer-ig" href="https://www.instagram.com/lucasbanega_brand" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/>
+      </svg>
+      <span>Instagram</span>
+    </a>
+    <a class="footer-lb" href="https://lucasbanega.com" target="_blank">Lucas Banega</a>
+    <a class="footer-top" href="#">Inicio</a>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const burger=document.getElementById('burger');
+const overlay=document.getElementById('nav-overlay');
+function closeMenu(){burger.classList.remove('open');overlay.style.display='none';overlay.classList.remove('open');document.body.style.overflow='';}
+burger.addEventListener('click',()=>{
+  const open=burger.classList.toggle('open');
+  if(open){overlay.style.display='flex';requestAnimationFrame(()=>overlay.classList.add('open'));document.body.style.overflow='hidden';}
+  else closeMenu();
+});
+fetch('perfumes.json')
+  .then(r=>r.json())
+  .then(perfumes=>{
+    document.getElementById('entry-count').textContent=perfumes.length+' entradas';
+    const reversed=[...perfumes].reverse();
+    document.getElementById('indice-list').innerHTML=reversed.map((p,i)=>{
+      const realIdx=perfumes.length-1-i;
+      return `<a class="indice-row reveal" href="entrada.html?id=${realIdx}">
+        <span class="indice-num">${String(i+1).padStart(2,'0')}</span>
+        <div>
+          <span class="indice-nombre">${p.nombre}</span>
+          <span class="indice-meta">${p.casa} · ${p.año} · ${p.ocasion}</span>
+        </div>
+        <div class="indice-right">
+          <span class="indice-score">${p.puntuacion}</span>
+          <span class="indice-familia">${p.familia}</span>
+        </div>
+      </a>`;
+    }).join('');
+    document.querySelectorAll('.indice-row').forEach(el=>obs.observe(el));
+  });
+</script>
+</body>
+</html>

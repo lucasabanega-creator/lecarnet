@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Le Carnet — Entrada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F0EBE1;--ivory:#E8E1D5;
+  --ink:#1C1C2E;--ink-soft:#4A4A6A;
+  --ink-faint:rgba(28,28,46,.12);--ink-mid:rgba(28,28,46,.4);
+}
+html{scroll-behavior:auto}
+body{background:var(--cream);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.8rem 3rem;background:rgba(240,235,225,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--ink-faint)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.1rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.nav-logo em{font-style:italic}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;transition:color .3s}
+.nav-links a:hover{color:var(--ink)}
+.nav-by{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid)}
+.nav-by a{color:var(--ink-mid);text-decoration:none;transition:color .3s}
+.nav-by a:hover{color:var(--ink)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:300}
+.nav-burger span{display:block;width:22px;height:1px;background:var(--ink-mid);transition:all .4s cubic-bezier(.23,1,.32,1)}
+.nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:150;background:var(--cream);flex-direction:column;align-items:center;justify-content:center;gap:3rem;opacity:0;transition:opacity .4s ease}
+.nav-overlay.open{opacity:1}
+.nav-overlay a{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.2rem;color:var(--ink-soft);text-decoration:none;opacity:0;transform:translateY(16px);transition:opacity .4s ease,transform .4s ease,color .3s}
+.nav-overlay.open a{opacity:1;transform:translateY(0)}
+.nav-overlay.open a:nth-child(1){transition-delay:.1s}
+.nav-overlay.open a:nth-child(2){transition-delay:.18s}
+.nav-overlay a:hover{color:var(--ink)}
+.nav-overlay-tag{position:absolute;bottom:2.5rem;font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mid);opacity:.5}
+@media(max-width:640px){.nav-links{display:none}.nav-by{display:none}.nav-burger{display:flex}nav{padding:1.4rem 1.5rem}}
+
+/* BACK */
+.back-bar{padding:8rem 3rem 0;max-width:780px;margin:0 auto;width:100%}
+.back-link{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:color .3s}
+.back-link::before{content:'←';font-size:.75rem}
+.back-link:hover{color:var(--ink)}
+
+/* ARTICLE */
+article{flex:1;max-width:780px;margin:0 auto;padding:3.5rem 3rem 8rem;width:100%}
+
+/* HEADER */
+.entry-header{padding-bottom:3.5rem;border-bottom:1px solid var(--ink-faint);margin-bottom:4rem}
+.entry-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+.entry-familia{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--ink-faint);padding:5px 14px}
+.entry-ocasion{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid)}
+.entry-nombre{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3rem,7vw,5.5rem);line-height:.95;letter-spacing:-.02em;margin-bottom:.8rem}
+.entry-casa{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mid)}
+.entry-score-row{display:flex;align-items:baseline;gap:1.2rem;margin-top:3rem}
+.entry-score{font-family:'Cormorant Garamond',serif;font-size:5.5rem;font-weight:300;line-height:1;color:var(--ink)}
+.entry-score-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid)}
+.score-track{height:1px;background:var(--ink-faint);flex:1;margin-left:1.5rem;align-self:center;overflow:hidden}
+.score-fill{height:100%;background:var(--ink-soft);width:0;transition:width 1.4s ease}
+
+/* NOTAS */
+.entry-notas{margin-bottom:4rem}
+.section-label{font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:1.2rem}
+.notas-row{display:flex;flex-wrap:wrap;gap:8px}
+.nota-tag{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mid);border:1px solid var(--ink-faint);padding:5px 14px}
+
+/* TEXTO */
+.entry-texto{margin-bottom:5rem}
+.entry-body{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(1.25rem,2.5vw,1.6rem);line-height:2;color:var(--ink)}
+
+/* DATOS */
+.entry-datos{display:grid;grid-template-columns:1fr 1fr;gap:2rem;padding:2.5rem;background:var(--ivory);margin-bottom:5rem;border:1px solid var(--ink-faint)}
+.dato-label{font-size:.54rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:.4rem}
+.dato-value{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--ink)}
+
+/* NAV PREV/NEXT */
+.entry-nav{display:flex;justify-content:space-between;align-items:center;padding-top:3rem;border-top:1px solid var(--ink-faint)}
+.entry-nav a{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;transition:color .3s}
+.entry-nav a:hover{color:var(--ink)}
+
+/* FOOTER */
+footer{padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--ink-faint);flex-wrap:wrap;gap:1rem}
+footer span{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid);opacity:.5}
+.footer-right{display:flex;align-items:center;gap:2rem}
+.footer-ig{display:flex;align-items:center;gap:.6rem;text-decoration:none;opacity:.3;transition:opacity .3s}
+.footer-ig:hover{opacity:.6}
+.footer-ig svg{width:15px;height:15px;color:var(--ink)}
+.footer-top{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid);opacity:.4;text-decoration:none;transition:opacity .3s}
+.footer-top:hover{opacity:.8}
+.footer-top::after{content:' ↑'}
+.footer-lb{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid);opacity:.4;text-decoration:none;transition:opacity .3s}
+.footer-lb:hover{opacity:.8}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .9s,transform .9s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:640px){
+  article{padding:2.5rem 1.5rem 6rem}
+  .back-bar{padding:7rem 1.5rem 0}
+  .entry-datos{grid-template-columns:1fr}
+  .entry-score{font-size:4rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">Le <em>Carnet</em></a>
+  <ul class="nav-links">
+    <li><a href="/">Inicio</a></li>
+    <li><a href="archivo.html">Archivo</a></li>
+  </ul>
+  <span class="nav-by">por <a href="https://lucasbanega.com" target="_blank">Lucas Banega</a></span>
+  <button class="nav-burger" id="burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-overlay" id="nav-overlay">
+  <a href="/" onclick="closeMenu()">Inicio</a>
+  <a href="archivo.html" onclick="closeMenu()">Archivo</a>
+  <span class="nav-overlay-tag">Le Carnet · por Lucas Banega</span>
+</div>
+
+<div class="back-bar">
+  <a class="back-link reveal" href="/">Todas las entradas</a>
+</div>
+
+<article id="entry-content"></article>
+
+<footer>
+  <span>© 2025 Le Carnet</span>
+  <div class="footer-right">
+    <a class="footer-ig" href="https://www.instagram.com/lucasbanega_brand" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+    <a class="footer-lb" href="https://lucasbanega.com" target="_blank">Lucas Banega</a>
+    <a class="footer-top" href="#">Inicio</a>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold:.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+const burger = document.getElementById('burger');
+const overlay = document.getElementById('nav-overlay');
+function closeMenu(){ burger.classList.remove('open'); overlay.style.display='none'; overlay.classList.remove('open'); document.body.style.overflow=''; }
+burger.addEventListener('click', () => {
+  const isOpen = burger.classList.toggle('open');
+  if(isOpen){ overlay.style.display='flex'; requestAnimationFrame(() => overlay.classList.add('open')); document.body.style.overflow='hidden'; }
+  else closeMenu();
+});
+
+const id = parseInt(new URLSearchParams(window.location.search).get('id') || '0', 10);
+
+fetch('perfumes.json')
+  .then(r => r.json())
+  .then(perfumes => {
+    const p = perfumes[id];
+    if(!p){ document.getElementById('entry-content').innerHTML='<p style="padding:4rem;text-align:center;font-family:\'Cormorant Garamond\',serif;font-style:italic;color:var(--ink-mid)">Entrada no encontrada.</p>'; return; }
+
+    document.title = `Le Carnet — ${p.nombre}`;
+
+    const prev = id > 0 ? `<a href="entrada.html?id=${id-1}">← Anterior</a>` : '<span></span>';
+    const next = id < perfumes.length-1 ? `<a href="entrada.html?id=${id+1}">Siguiente →</a>` : '<span></span>';
+
+    document.getElementById('entry-content').innerHTML = `
+      <div class="entry-header reveal">
+        <div class="entry-top">
+          <span class="entry-familia">${p.familia}</span>
+          <span class="entry-ocasion">${p.ocasion}</span>
+        </div>
+        <h1 class="entry-nombre">${p.nombre}</h1>
+        <p class="entry-casa">${p.casa} · ${p.año}</p>
+        <div class="entry-score-row">
+          <span class="entry-score">${p.puntuacion}</span>
+          <div>
+            <p class="entry-score-label">sobre 10</p>
+          </div>
+          <div class="score-track"><div class="score-fill" id="score-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="entry-notas reveal">
+        <p class="section-label">Notas</p>
+        <div class="notas-row">${p.notas.map(n => `<span class="nota-tag">${n}</span>`).join('')}</div>
+      </div>
+
+      <div class="entry-texto reveal">
+        <p class="section-label">La entrada</p>
+        <p class="entry-body">${p.resena}</p>
+      </div>
+
+      <div class="entry-datos reveal">
+        <div><p class="dato-label">Casa</p><p class="dato-value">${p.casa}</p></div>
+        <div><p class="dato-label">Año</p><p class="dato-value">${p.año}</p></div>
+        <div><p class="dato-label">Familia</p><p class="dato-value">${p.familia}</p></div>
+        <div><p class="dato-label">Ocasión</p><p class="dato-value">${p.ocasion}</p></div>
+      </div>
+
+      <div class="entry-nav reveal">
+        ${prev}
+        <a href="/">Ver todas</a>
+        ${next}
+      </div>`;
+
+    document.getElementById('entry-content').querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    setTimeout(() => { const f = document.getElementById('score-fill'); if(f) f.style.width = (p.puntuacion * 10) + '%'; }, 500);
+  });
+</script>
+</body>
+</html>

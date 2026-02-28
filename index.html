@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Le Carnet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F0EBE1;--ivory:#E8E1D5;
+  --ink:#1C1C2E;--ink-soft:#4A4A6A;
+  --ink-faint:rgba(28,28,46,.1);--ink-mid:rgba(28,28,46,.4);
+}
+html{scroll-behavior:auto}
+body{background:var(--cream);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.8rem 3rem;background:rgba(240,235,225,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--ink-faint)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.1rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.nav-logo em{font-style:italic}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-by{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid)}
+.nav-by a{color:var(--ink-mid);text-decoration:none;transition:color .3s}
+.nav-by a:hover{color:var(--ink)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:300}
+.nav-burger span{display:block;width:22px;height:1px;background:var(--ink-mid);transition:all .4s cubic-bezier(.23,1,.32,1)}
+.nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:150;background:var(--cream);flex-direction:column;align-items:center;justify-content:center;gap:3rem;opacity:0;transition:opacity .4s ease}
+.nav-overlay.open{opacity:1}
+.nav-overlay a{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.2rem;color:var(--ink-soft);text-decoration:none;opacity:0;transform:translateY(16px);transition:opacity .4s ease,transform .4s ease,color .3s}
+.nav-overlay.open a{opacity:1;transform:translateY(0)}
+.nav-overlay.open a:nth-child(1){transition-delay:.1s}
+.nav-overlay.open a:nth-child(2){transition-delay:.18s}
+.nav-overlay a:hover{color:var(--ink)}
+.nav-overlay-tag{position:absolute;bottom:2.5rem;font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mid);opacity:.5}
+@media(max-width:640px){.nav-links{display:none}.nav-by{display:none}.nav-burger{display:flex}nav{padding:1.4rem 1.5rem}}
+
+/* ── WRAPPER ── */
+.wrapper{max-width:860px;margin:0 auto;padding:0 3rem;width:100%}
+@media(max-width:640px){.wrapper{padding:0 1.5rem}}
+
+/* ── HERO ── */
+.hero{padding:14rem 0 7rem}
+.hero-eyebrow{font-size:.56rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:2.5rem;opacity:0;animation:fadeIn .8s .3s forwards}
+.hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.2rem,8vw,7rem);line-height:.92;letter-spacing:-.02em;color:var(--ink);opacity:0;animation:fadeIn 1s .6s forwards}
+.hero-title em{font-style:italic;color:var(--ink-soft)}
+@media(max-width:640px){.hero{padding:10rem 0 5rem}}
+
+/* ── SEPARADORES ── */
+.sep{width:100%;height:1px;background:var(--ink-faint);margin:5rem 0}
+.sep-label{display:flex;align-items:center;gap:2rem;margin-bottom:3rem}
+.sep-label span{font-size:.56rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);white-space:nowrap}
+.sep-label::after{content:'';flex:1;height:1px;background:var(--ink-faint)}
+
+/* ── FILOSOFÍA ── */
+.filosofia-text{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(1.2rem,2.5vw,1.5rem);line-height:2;color:var(--ink);max-width:620px}
+.filosofia-text p+p{margin-top:1.8rem}
+
+/* ── DESTACADA ── */
+.destacada-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink-faint);text-decoration:none;color:inherit;transition:background .3s;background:var(--ivory)}
+.destacada-card:hover{background:var(--cream)}
+.destacada-left{padding:3.5rem;border-right:1px solid var(--ink-faint)}
+.destacada-right{padding:3.5rem;display:flex;flex-direction:column;justify-content:space-between}
+.destacada-score{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;line-height:1;color:var(--ink);margin-bottom:2.5rem}
+.destacada-score span{font-size:1rem;color:var(--ink-mid);font-family:'Jost',sans-serif;font-weight:200}
+.destacada-nombre{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1;color:var(--ink);margin-bottom:.5rem}
+.destacada-meta{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid)}
+.destacada-familia{font-size:.54rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--ink-faint);padding:4px 12px;display:inline-block;margin-bottom:2rem}
+.destacada-extracto{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;line-height:1.9;color:var(--ink-soft);flex:1}
+.destacada-notas{display:flex;flex-wrap:wrap;gap:6px;margin-top:2rem}
+.destacada-nota{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mid);border:1px solid var(--ink-faint);padding:3px 10px}
+.destacada-leer{font-size:.56rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-mid);margin-top:2.5rem;transition:color .3s}
+.destacada-card:hover .destacada-leer{color:var(--ink)}
+@media(max-width:680px){.destacada-card{grid-template-columns:1fr}.destacada-left{border-right:none;border-bottom:1px solid var(--ink-faint);padding:2.5rem 2rem}.destacada-right{padding:2.5rem 2rem}}
+
+/* ── RECIENTES ── */
+.recientes-row{display:grid;grid-template-columns:2.5rem 1fr auto;align-items:center;gap:2rem;padding:1.6rem 0;border-bottom:1px solid var(--ink-faint);text-decoration:none;color:inherit;transition:opacity .3s}
+.recientes-row:hover{opacity:.6}
+.recientes-num{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--ink-mid)}
+.recientes-nombre{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.3rem;color:var(--ink);display:block;margin-bottom:.2rem}
+.recientes-meta{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mid)}
+.recientes-score{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--ink);display:block;text-align:right}
+.recientes-familia{font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mid);text-align:right;display:block}
+.ver-todas{display:inline-flex;align-items:center;gap:.5rem;margin-top:2.5rem;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;transition:color .3s;border-bottom:1px solid var(--ink-faint);padding-bottom:2px}
+.ver-todas:hover{color:var(--ink);border-color:var(--ink-soft)}
+.ver-todas::after{content:'→';margin-left:.2rem}
+
+/* ── NEWSLETTER ── */
+.newsletter{padding:6rem 0;text-align:center}
+.newsletter-tag{font-size:.56rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:1.2rem}
+.newsletter h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin-bottom:1rem}
+.newsletter h2 em{font-style:italic;color:var(--ink-soft)}
+.newsletter p{font-size:.76rem;line-height:1.9;color:var(--ink-mid);margin-bottom:3rem;max-width:360px;margin-left:auto;margin-right:auto}
+.nl-form{display:flex;border-bottom:1px solid rgba(28,28,46,.2);max-width:360px;margin:0 auto}
+.nl-form input{flex:1;background:transparent;border:none;outline:none;font-family:'Jost',sans-serif;font-size:.78rem;letter-spacing:.08em;color:var(--ink);padding:.9rem 0}
+.nl-form input::placeholder{color:var(--ink-mid);letter-spacing:.15em;text-transform:uppercase;font-size:.64rem}
+.nl-form button{background:transparent;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);padding:.9rem 0 .9rem 1.2rem;transition:color .3s}
+.nl-form button:hover{color:var(--ink)}
+
+/* ── FOOTER ── */
+footer{padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--ink-faint);flex-wrap:wrap;gap:1rem}
+footer>span{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid);opacity:.45}
+.footer-right{display:flex;align-items:center;gap:2rem}
+.footer-ig{display:flex;align-items:center;gap:.5rem;text-decoration:none;opacity:.28;transition:opacity .3s}
+.footer-ig:hover{opacity:.6}
+.footer-ig svg{width:15px;height:15px;color:var(--ink)}
+.footer-ig span{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid)}
+.footer-lb{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid);opacity:.38;text-decoration:none;transition:opacity .3s}
+.footer-lb:hover{opacity:.7}
+.footer-top{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid);opacity:.38;text-decoration:none;transition:opacity .3s}
+.footer-top:hover{opacity:.7}
+.footer-top::after{content:' ↑'}
+@media(max-width:640px){footer{padding:2rem 1.5rem}}
+
+/* ── UTILS ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .9s,transform .9s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes fadeIn{to{opacity:1}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">Le <em>Carnet</em></a>
+  <ul class="nav-links">
+    <li><a href="/" class="active">Inicio</a></li>
+    <li><a href="indice.html">Índice</a></li>
+  </ul>
+  <span class="nav-by">por <a href="https://lucasbanega.com" target="_blank">Lucas Banega</a></span>
+  <button class="nav-burger" id="burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-overlay" id="nav-overlay">
+  <a href="/" onclick="closeMenu()">Inicio</a>
+  <a href="indice.html" onclick="closeMenu()">Índice</a>
+  <span class="nav-overlay-tag">Le Carnet · por Lucas Banega</span>
+</div>
+
+<main>
+
+  <div class="wrapper">
+    <section class="hero">
+      <p class="hero-eyebrow">Una guía personal de fragancias nicho</p>
+      <h1 class="hero-title">Lo que merece<br/><em>ser recordado</em></h1>
+    </section>
+  </div>
+
+  <div class="wrapper"><div class="sep"></div></div>
+
+  <!-- FILOSOFÍA -->
+  <div class="wrapper">
+    <section>
+      <div class="sep-label"><span>Filosofía</span></div>
+      <div class="reveal">
+        <div class="filosofia-text">
+          <p>Escribir sobre una fragancia es el ejercicio más difícil de la crítica. No hay imagen. No hay sonido. Solo palabras intentando capturar algo que existe únicamente en el aire y en la piel.</p>
+          <p>Le Carnet nació de una necesidad simple: tener un lugar donde anotar lo que vale y lo que no. Sin patrocinios. Sin condescendencia. Con el mismo criterio con el que elegiría cualquier otra cosa que va a durar.</p>
+          <p>Cada entrada es un juicio. No una descripción.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrapper"><div class="sep"></div></div>
+
+  <!-- ÚLTIMA ENTRADA -->
+  <div class="wrapper">
+    <section>
+      <div class="sep-label"><span>Última entrada</span></div>
+      <div id="destacada-card" class="reveal"></div>
+    </section>
+  </div>
+
+  <!-- RECIENTES -->
+  <div class="wrapper" style="margin-top:5rem">
+    <section>
+      <div class="sep-label"><span>Entradas recientes</span></div>
+      <div id="recientes-list"></div>
+      <a class="ver-todas reveal" href="indice.html">Ver todas las entradas</a>
+    </section>
+  </div>
+
+  <div class="wrapper"><div class="sep"></div></div>
+
+  <!-- NEWSLETTER -->
+  <div class="wrapper">
+    <section class="newsletter reveal" id="newsletter">
+      <p class="newsletter-tag">Nueva entrada</p>
+      <h2>Avisame cuando escriba<br/>sobre una <em>nueva fragancia</em></h2>
+      <p>Sin newsletter. Sin spam. Solo un email cuando aparezca algo que valga la pena leer.</p>
+      <form class="nl-form" name="lecarnet" netlify netlify-honeypot="bot-field" action="/gracias.html">
+        <input type="hidden" name="form-name" value="lecarnet"/>
+        <input type="hidden" name="bot-field"/>
+        <input type="email" name="email" placeholder="Tu email" required/>
+        <button type="submit">Avisame</button>
+      </form>
+    </section>
+  </div>
+
+  <div style="height:5rem"></div>
+
+</main>
+
+<footer>
+  <span>© 2025 Le Carnet</span>
+  <div class="footer-right">
+    <a class="footer-ig" href="https://www.instagram.com/lucasbanega_brand" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/>
+      </svg>
+      <span>Instagram</span>
+    </a>
+    <a class="footer-lb" href="https://lucasbanega.com" target="_blank">Lucas Banega</a>
+    <a class="footer-top" href="#">Inicio</a>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold:.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+function elegantScrollTo(t, d){
+  const s=window.scrollY, e=t.getBoundingClientRect().top+s, dist=e-s;
+  let t0=null;
+  function ease(t){return t<.5?8*t*t*t*t:1-8*(--t)*t*t*t}
+  function step(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/d,1);window.scrollTo(0,s+dist*ease(p));if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const id=this.getAttribute('href').slice(1), t=document.getElementById(id);
+    if(t){e.preventDefault();elegantScrollTo(t,1800);}
+  });
+});
+
+const burger=document.getElementById('burger');
+const overlay=document.getElementById('nav-overlay');
+function closeMenu(){burger.classList.remove('open');overlay.style.display='none';overlay.classList.remove('open');document.body.style.overflow='';}
+burger.addEventListener('click',()=>{
+  const open=burger.classList.toggle('open');
+  if(open){overlay.style.display='flex';requestAnimationFrame(()=>overlay.classList.add('open'));document.body.style.overflow='hidden';}
+  else closeMenu();
+});
+
+fetch('perfumes.json')
+  .then(r=>r.json())
+  .then(perfumes=>{
+    const last=perfumes[perfumes.length-1];
+    const li=perfumes.length-1;
+
+    document.getElementById('destacada-card').innerHTML=`
+      <a class="destacada-card" href="entrada.html?id=${li}">
+        <div class="destacada-left">
+          <div class="destacada-score">${last.puntuacion}<span>/10</span></div>
+          <h2 class="destacada-nombre">${last.nombre}</h2>
+          <p class="destacada-meta">${last.casa} · ${last.año}</p>
+        </div>
+        <div class="destacada-right">
+          <span class="destacada-familia">${last.familia}</span>
+          <p class="destacada-extracto">${last.resena}</p>
+          <div class="destacada-notas">${last.notas.map(n=>`<span class="destacada-nota">${n}</span>`).join('')}</div>
+          <p class="destacada-leer">Leer la entrada →</p>
+        </div>
+      </a>`;
+
+    const recientes=perfumes.slice(0,-1).reverse().slice(0,3);
+    document.getElementById('recientes-list').innerHTML=recientes.map((p,i)=>`
+      <a class="recientes-row" href="entrada.html?id=${li-1-i}">
+        <span class="recientes-num">${String(li-i).padStart(2,'0')}</span>
+        <div>
+          <span class="recientes-nombre">${p.nombre}</span>
+          <span class="recientes-meta">${p.casa} · ${p.año} · ${p.ocasion}</span>
+        </div>
+        <div>
+          <span class="recientes-score">${p.puntuacion}</span>
+          <span class="recientes-familia">${p.familia}</span>
+        </div>
+      </a>`).join('');
+
+    document.querySelectorAll('.destacada-card,.recientes-row').forEach(el=>obs.observe(el));
+  });
+</script>
+</body>
+</html>
