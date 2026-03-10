@@ -51,11 +51,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-c
 @media(max-width:640px){.wrapper{padding:0 1.5rem}}
 
 /* ── HERO ── */
-.hero{padding:14rem 0 7rem}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 0 4rem}
 .hero-eyebrow{font-size:.56rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:2.5rem;opacity:0;animation:fadeIn .8s .3s forwards}
 .hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.2rem,8vw,7rem);line-height:.92;letter-spacing:-.02em;color:var(--ink);opacity:0;animation:fadeIn 1s .6s forwards}
 .hero-title em{font-style:italic;color:var(--ink-soft)}
-@media(max-width:640px){.hero{padding:10rem 0 5rem}}
+@media(max-width:640px){.hero{height:100svh}}
 
 /* ── SEPARADORES ── */
 .sep{width:100%;height:1px;background:var(--ink-faint);margin:5rem 0}
@@ -63,9 +63,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-c
 .sep-label span{font-size:.56rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);white-space:nowrap}
 .sep-label::after{content:'';flex:1;height:1px;background:var(--ink-faint)}
 
-/* ── FILOSOFÍA ── */
-.filosofia-text{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(1.2rem,2.5vw,1.5rem);line-height:2;color:var(--ink);max-width:620px}
-.filosofia-text p+p{margin-top:1.8rem}
+/* ── FILOSOFÍA — editorial spread ── */
+.filosofia-spread{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;background:var(--cream);border-top:1px solid var(--ink-faint);border-bottom:1px solid var(--ink-faint)}
+.filosofia-left{padding:6rem 5rem 6rem 0;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--ink-faint)}
+.filosofia-eyebrow{font-size:.52rem;letter-spacing:.42em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:3rem}
+.filosofia-text{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.1rem,2vw,1.45rem);line-height:1.95;color:var(--ink)}
+.filosofia-text em{font-style:italic;color:var(--ink-soft)}
+.filosofia-text p+p{margin-top:2rem}
+.filosofia-rule{width:28px;height:1px;background:var(--ink-faint);margin-top:3rem}
+.filosofia-right{padding:6rem 0 6rem 5rem;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.filosofia-right-deco{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;overflow:hidden}
+.filosofia-right-deco span{font-family:'Cormorant Garamond',serif;font-size:28vw;font-weight:300;line-height:1;color:var(--ink);opacity:.025;letter-spacing:-.04em;white-space:nowrap}
+.filosofia-quote-wrap{position:relative;z-index:1;text-align:left;max-width:340px}
+.filosofia-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.18;color:var(--ink);letter-spacing:-.01em}
+.filosofia-quote em{color:var(--ink-soft)}
+.filosofia-quote-rule{width:24px;height:1px;background:var(--ink-faint);margin:1.8rem 0}
+.filosofia-quote-attr{font-size:.48rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mid);opacity:.6}
+@media(max-width:900px){
+  .filosofia-spread{grid-template-columns:1fr;min-height:auto}
+  .filosofia-left{padding:4rem 0;border-right:none;border-bottom:1px solid var(--ink-faint)}
+  .filosofia-right{padding:4rem 0;min-height:50vw}
+}
 
 /* ── DESTACADA ── */
 .destacada-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink-faint);text-decoration:none;color:inherit;transition:background .3s;background:var(--ivory)}
@@ -109,8 +127,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-c
 .nl-form button:hover{color:var(--ink)}
 
 /* ── FOOTER ── */
-/* ── FOOTER ── */
-footer{background:#2E2318;display:flex;flex-direction:column;align-items:center;padding:3.5rem 3rem 2.5rem;gap:2rem}
+footer{background:#2E2318;display:flex;flex-direction:column;align-items:stretch}
+.footer-nl{padding:5rem 3rem 4.5rem;display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:1px solid rgba(240,235,225,.07)}
+.footer-nl-tag{font-size:.52rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(240,235,225,.28);margin-bottom:1.4rem}
+.footer-nl-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.1;color:rgba(240,235,225,.88);margin-bottom:.6rem}
+.footer-nl-title em{font-style:italic;color:rgba(240,235,225,.45)}
+.footer-nl-sub{font-size:.7rem;line-height:1.9;color:rgba(240,235,225,.3);margin-bottom:2.8rem;max-width:320px}
+.footer-nl-form{display:flex;border-bottom:1px solid rgba(240,235,225,.2);max-width:340px;width:100%}
+.footer-nl-form input{flex:1;background:transparent;border:none;outline:none;font-family:'Jost',sans-serif;font-size:.78rem;letter-spacing:.06em;color:rgba(240,235,225,.85);padding:.9rem 0}
+.footer-nl-form input::placeholder{color:rgba(240,235,225,.2);letter-spacing:.18em;text-transform:uppercase;font-size:.6rem}
+.footer-nl-form button{background:transparent;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(240,235,225,.35);padding:.9rem 0 .9rem 1.2rem;transition:color .3s;white-space:nowrap}
+.footer-nl-form button:hover{color:rgba(240,235,225,.75)}
+.footer-mid{padding:3rem;display:flex;flex-direction:column;align-items:center;gap:2.2rem}
+footer{background:#2E2318;display:flex;flex-direction:column;align-items:stretch}
 .footer-logo-lc{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.1rem;letter-spacing:.18em;color:rgba(240,235,225,.42);text-decoration:none;transition:color .4s}
 .footer-logo-lc:hover{color:rgba(240,235,225,.78)}
 .footer-rule-lc{width:28px;height:1px;background:rgba(240,235,225,.1)}
@@ -167,19 +196,26 @@ footer{background:#2E2318;display:flex;flex-direction:column;align-items:center;
 
   <div class="wrapper"><div class="sep"></div></div>
 
-  <!-- FILOSOFÍA -->
-  <div class="wrapper">
-    <section>
-      <div class="sep-label"><span>Filosofía</span></div>
-      <div class="reveal">
-        <div class="filosofia-text">
-          <p>Escribir sobre una fragancia es el ejercicio más difícil de la crítica. No hay imagen. No hay sonido. Solo palabras intentando capturar algo que existe únicamente en el aire y en la piel.</p>
-          <p>Le Carnet nació de una necesidad simple: tener un lugar donde anotar lo que vale y lo que no. Sin patrocinios. Sin condescendencia. Con el mismo criterio con el que elegiría cualquier otra cosa que va a durar.</p>
-          <p>Cada entrada es un juicio. No una descripción.</p>
-        </div>
+  <!-- FILOSOFÍA — editorial spread -->
+  <section class="filosofia-spread">
+    <div class="filosofia-left wrapper reveal">
+      <p class="filosofia-eyebrow">Filosofía</p>
+      <div class="filosofia-text">
+        <p>Escribir sobre una fragancia es el ejercicio más difícil de la crítica. No hay imagen. No hay sonido. Solo palabras intentando capturar algo que existe únicamente en el aire y en la piel.</p>
+        <p>Le Carnet nació de una necesidad simple: tener un lugar donde anotar lo que vale y lo que no. Sin patrocinios. Sin condescendencia. Con el mismo criterio con el que elegiría <em>cualquier otra cosa que va a durar.</em></p>
+        <p>Cada entrada es un juicio. No una descripción.</p>
       </div>
-    </section>
-  </div>
+      <span class="filosofia-rule"></span>
+    </div>
+    <div class="filosofia-right">
+      <div class="filosofia-right-deco" aria-hidden="true"><span>LC</span></div>
+      <div class="filosofia-quote-wrap reveal">
+        <p class="filosofia-quote">"Cada entrada<br/>es un juicio.<br/>No una <em>descripción.</em>"</p>
+        <span class="filosofia-quote-rule"></span>
+        <span class="filosofia-quote-attr">Le Carnet</span>
+      </div>
+    </div>
+  </section>
 
   <div class="wrapper"><div class="sep"></div></div>
 
@@ -203,27 +239,32 @@ footer{background:#2E2318;display:flex;flex-direction:column;align-items:center;
   <div class="wrapper"><div class="sep"></div></div>
 
   <!-- NEWSLETTER -->
-  <div class="wrapper">
-    <section class="newsletter reveal" id="newsletter">
-      <p class="newsletter-tag">Nueva entrada</p>
-      <h2>Avisame cuando escriba<br/>sobre una <em>nueva fragancia</em></h2>
-      <p>Sin newsletter. Sin spam. Solo un email cuando aparezca algo que valga la pena leer.</p>
-      <form class="nl-form" name="lecarnet" netlify netlify-honeypot="bot-field" action="/gracias.html">
-        <input type="hidden" name="form-name" value="lecarnet"/>
-        <input type="hidden" name="bot-field"/>
-        <input type="email" name="email" placeholder="Tu email" required/>
-        <button type="submit">Avisame</button>
-      </form>
-    </section>
-  </div>
-
-  <div style="height:5rem"></div>
-
 </main>
 
 <footer>
-  <a class="footer-logo-lc" href="index.html"><em>Le Carnet</em></a>
-  <div class="footer-rule-lc"></div>
+  <!-- Newsletter integrado en el footer -->
+  <div class="footer-nl">
+    <p class="footer-nl-tag">Nueva entrada</p>
+    <h2 class="footer-nl-title">Avisame cuando escriba<br/>sobre una <em>nueva fragancia</em></h2>
+    <p class="footer-nl-sub">Sin newsletter. Sin spam. Solo un email cuando aparezca algo que valga la pena leer.</p>
+    <form class="footer-nl-form" name="lecarnet" netlify netlify-honeypot="bot-field" action="/gracias.html">
+      <input type="hidden" name="form-name" value="lecarnet"/>
+      <input type="hidden" name="bot-field"/>
+      <input type="email" name="email" placeholder="Tu email" required/>
+      <button type="submit">Avisame →</button>
+    </form>
+  </div>
+  <!-- Logo + links -->
+  <div class="footer-mid">
+    <a class="footer-logo-lc" href="index.html"><em>Le Carnet</em></a>
+    <div class="footer-rule-lc"></div>
+    <ul style="display:flex;gap:2rem;list-style:none;flex-wrap:wrap;justify-content:center">
+      <li><a href="/" style="font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(240,235,225,.22);text-decoration:none;transition:color .3s">Inicio</a></li>
+      <li><a href="indice.html" style="font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(240,235,225,.22);text-decoration:none;transition:color .3s">Índice</a></li>
+      <li><a href="explorador.html" style="font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(240,235,225,.22);text-decoration:none;transition:color .3s">Explorador</a></li>
+    </ul>
+  </div>
+  <!-- Bottom bar -->
   <div class="footer-bottom-lc">
     <span class="footer-copy-lc">© 2025 Le Carnet · Lucas Banega</span>
     <div class="footer-right">
