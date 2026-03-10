@@ -63,11 +63,37 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 @media(max-width:900px){.explorer-banner-inner{padding:4rem 2rem 4rem 2rem;max-width:100%}}
 @media(max-width:640px){.explorer-banner{min-height:auto}.explorer-banner-inner{padding:3.5rem 1.5rem}.deco-letter{font-size:16rem;right:-1rem}}
 
-.hero{padding:14rem 0 7rem}
+.hero{padding:14rem 0 7rem;position:relative}
 .hero-eyebrow{font-size:.56rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:2.5rem;opacity:0;animation:fadeIn .8s .3s forwards}
 .hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.2rem,8vw,7rem);line-height:.92;letter-spacing:-.02em;color:var(--ink);opacity:0;animation:fadeIn 1s .6s forwards}
 .hero-title em{font-style:italic;color:var(--ink-soft)}
-@media(max-width:640px){.hero{padding:10rem 0 5rem}}
+.hero-discover{display:inline-flex;flex-direction:column;align-items:center;gap:.9rem;margin-top:4rem;cursor:pointer;background:none;border:none;padding:0;opacity:0;animation:fadeIn .8s 1.2s forwards;text-decoration:none}
+.hero-discover-label{font-size:.52rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);transition:color .3s}
+.hero-discover-arrow{width:1px;height:52px;background:linear-gradient(to bottom, var(--ink-mid), transparent);position:relative;transition:transform .4s cubic-bezier(.23,1,.32,1)}
+.hero-discover:hover .hero-discover-label{color:var(--ink)}
+.hero-discover:hover .hero-discover-arrow{transform:scaleY(1.3);transform-origin:top}
+.hero-atmo{position:absolute;right:0;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.07;width:min(480px,45vw)}
+@media(max-width:640px){.hero{padding:10rem 0 5rem}.hero-atmo{width:55vw;opacity:.05}}
+
+/* ── DESTACADA mejorada ── */
+.destacada-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink-faint);text-decoration:none;color:inherit;transition:background .3s;background:var(--ivory);overflow:hidden}
+.destacada-card:hover{background:var(--cream)}
+.destacada-left{padding:3.5rem;border-right:1px solid var(--ink-faint);display:flex;flex-direction:column;justify-content:space-between;min-height:360px}
+.destacada-left-top{}
+.destacada-score{font-family:'Cormorant Garamond',serif;font-size:6rem;font-weight:300;line-height:1;color:var(--ink);letter-spacing:-.04em}
+.destacada-score span{font-size:1rem;color:var(--ink-mid);font-family:'Jost',sans-serif;font-weight:200;letter-spacing:.1em}
+.destacada-nombre{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.8rem,3vw,2.8rem);line-height:.95;color:var(--ink);margin-top:1.5rem;letter-spacing:-.02em}
+.destacada-meta{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid);margin-top:.7rem}
+.destacada-familia{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--ink-faint);padding:5px 14px;display:inline-block;margin-bottom:2.2rem}
+.destacada-extracto{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.08rem;line-height:2;color:var(--ink-soft);flex:1}
+.destacada-right{padding:3.5rem;display:flex;flex-direction:column;justify-content:space-between}
+.destacada-notas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2.5rem}
+.destacada-nota{font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mid);border:1px solid var(--ink-faint);padding:4px 11px}
+.destacada-leer{font-size:.54rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mid);margin-top:auto;transition:color .3s;display:flex;align-items:center;gap:.6rem}
+.destacada-leer::after{content:'';display:block;width:24px;height:1px;background:currentColor;transition:width .4s cubic-bezier(.23,1,.32,1)}
+.destacada-card:hover .destacada-leer{color:var(--ink)}
+.destacada-card:hover .destacada-leer::after{width:40px}
+@media(max-width:680px){.destacada-card{grid-template-columns:1fr}.destacada-left{border-right:none;border-bottom:1px solid var(--ink-faint);padding:2.5rem 2rem;min-height:auto}.destacada-right{padding:2.5rem 2rem}}
 
 /* ── SEPARADORES ── */
 .sep{width:100%;height:1px;background:var(--ink-faint);margin:5rem 0}
@@ -168,6 +194,38 @@ footer>span{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color
     <section class="hero">
       <p class="hero-eyebrow">Una guía personal de fragancias nicho</p>
       <h1 class="hero-title">Lo que merece<br/><em>ser recordado</em></h1>
+      <a class="hero-discover" id="discover-btn" href="#filosofia">
+        <span class="hero-discover-label">Descubrir</span>
+        <span class="hero-discover-arrow"></span>
+      </a>
+      <!-- Elemento atmosférico: botella abstracta SVG -->
+      <svg class="hero-atmo" viewBox="0 0 400 520" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Cuerpo de la botella -->
+        <path d="M160 180 C140 200 120 230 118 270 L112 420 C111 435 122 448 138 449 L262 449 C278 448 289 435 288 420 L282 270 C280 230 260 200 240 180 Z" stroke="#1C1C2E" stroke-width="1" fill="none"/>
+        <!-- Cuello -->
+        <path d="M175 180 L175 130 C175 124 178 119 183 117 L200 110 L217 117 C222 119 225 124 225 130 L225 180" stroke="#1C1C2E" stroke-width="1" fill="none"/>
+        <!-- Tapa -->
+        <rect x="185" y="88" width="30" height="24" rx="2" stroke="#1C1C2E" stroke-width="1" fill="none"/>
+        <!-- Línea horizontal interior superior -->
+        <line x1="118" y1="310" x2="282" y2="310" stroke="#1C1C2E" stroke-width=".5" opacity=".4"/>
+        <!-- Línea horizontal interior inferior -->
+        <line x1="115" y1="390" x2="285" y2="390" stroke="#1C1C2E" stroke-width=".5" opacity=".4"/>
+        <!-- Texto grabado simulado -->
+        <text x="200" y="355" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" fill="#1C1C2E" opacity=".5" font-style="italic" letter-spacing="3">Le Carnet</text>
+        <!-- Detalle geométrico central -->
+        <ellipse cx="200" cy="270" rx="28" ry="28" stroke="#1C1C2E" stroke-width=".5" opacity=".25" fill="none"/>
+        <ellipse cx="200" cy="270" rx="18" ry="18" stroke="#1C1C2E" stroke-width=".5" opacity=".2" fill="none"/>
+        <!-- Gotas / difusión en la parte superior -->
+        <circle cx="200" cy="64" r="2" fill="#1C1C2E" opacity=".2"/>
+        <circle cx="188" cy="52" r="1.5" fill="#1C1C2E" opacity=".15"/>
+        <circle cx="212" cy="50" r="1" fill="#1C1C2E" opacity=".12"/>
+        <circle cx="196" cy="40" r="1" fill="#1C1C2E" opacity=".1"/>
+        <circle cx="207" cy="38" r=".8" fill="#1C1C2E" opacity=".08"/>
+        <circle cx="180" cy="42" r=".8" fill="#1C1C2E" opacity=".07"/>
+        <!-- Líneas de difusión -->
+        <path d="M200 86 C200 80 195 72 192 62" stroke="#1C1C2E" stroke-width=".5" opacity=".12" fill="none"/>
+        <path d="M200 86 C202 78 206 70 210 58" stroke="#1C1C2E" stroke-width=".5" opacity=".1" fill="none"/>
+      </svg>
     </section>
   </div>
 
@@ -175,7 +233,7 @@ footer>span{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color
 
   <!-- FILOSOFÍA -->
   <div class="wrapper">
-    <section>
+    <section id="filosofia">
       <div class="sep-label"><span>Filosofía</span></div>
       <div class="reveal">
         <div class="filosofia-text">
@@ -296,15 +354,17 @@ fetch('perfumes.json')
     document.getElementById('destacada-card').innerHTML=`
       <a class="destacada-card" href="entrada.html?id=${li}">
         <div class="destacada-left">
-          <div class="destacada-score">${last.puntuacion}<span>/10</span></div>
-          <h2 class="destacada-nombre">${last.nombre}</h2>
-          <p class="destacada-meta">${last.casa} · ${last.año}</p>
+          <div class="destacada-left-top">
+            <div class="destacada-score">${last.puntuacion}<span>&thinsp;/&thinsp;10</span></div>
+            <h2 class="destacada-nombre">${last.nombre}</h2>
+            <p class="destacada-meta">${last.casa}&ensp;·&ensp;${last.año}</p>
+          </div>
+          <p class="destacada-leer">Leer la entrada</p>
         </div>
         <div class="destacada-right">
           <span class="destacada-familia">${last.familia}</span>
           <p class="destacada-extracto">${last.resena}</p>
           <div class="destacada-notas">${last.notas.map(n=>`<span class="destacada-nota">${n}</span>`).join('')}</div>
-          <p class="destacada-leer">Leer la entrada →</p>
         </div>
       </a>`;
 
