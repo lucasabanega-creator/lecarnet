@@ -13,7 +13,8 @@
 :root{
   --cream:#F0EBE1;--ivory:#E8E1D5;
   --ink:#1C1C2E;--ink-soft:#4A4A6A;
-  --ink-faint:rgba(28,28,46,.1);--ink-mid:rgba(28,28,46,.4);
+  --ink-faint:rgba(28,28,46,.08);--ink-mid:rgba(28,28,46,.38);
+  --accent:#8C5A48;--accent-light:#B87A68;
 }
 html{scroll-behavior:auto}
 body{background:var(--cream);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
@@ -21,13 +22,13 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;o
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.8rem 3rem;background:rgba(240,235,225,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--ink-faint)}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.1rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1.8rem 3rem;background:rgba(240,235,225,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--ink-faint)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.1rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none;grid-column:2;text-align:center;white-space:nowrap}
 .nav-logo em{font-style:italic}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links{display:flex;gap:2.5rem;list-style:none;grid-column:3;justify-self:end}
 .nav-links a{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;transition:color .3s}
 .nav-links a:hover,.nav-links a.active{color:var(--ink)}
-.nav-by{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid)}
+.nav-by{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid);grid-column:1}
 .nav-by a{color:var(--ink-mid);text-decoration:none;transition:color .3s}
 .nav-by a:hover{color:var(--ink)}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:300}
@@ -50,50 +51,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 @media(max-width:640px){.wrapper{padding:0 1.5rem}}
 
 /* ── HERO ── */
-.explorer-banner{position:relative;margin:0;background:var(--ink);overflow:hidden;display:flex;align-items:stretch;min-height:420px}
-.explorer-banner-inner{position:relative;z-index:2;max-width:760px;padding:5rem 3rem 5rem calc((100% - 900px)/2 + 3rem);display:flex;flex-direction:column;justify-content:center;gap:1.6rem}
-.explorer-banner-tag{font-size:.54rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,255,255,.35)}
-.explorer-banner-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.4rem,5vw,4rem);line-height:.95;letter-spacing:-.02em;color:#F0EBE1}
-.explorer-banner-title em{font-style:italic;color:rgba(240,235,225,.55)}
-.explorer-banner-body{font-size:.82rem;line-height:1.95;color:rgba(240,235,225,.5);max-width:480px}
-.explorer-banner-cta{display:inline-block;width:fit-content;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#F0EBE1;border-bottom:1px solid rgba(240,235,225,.3);padding-bottom:3px;text-decoration:none;transition:color .3s,border-color .3s;margin-top:.4rem}
-.explorer-banner-cta:hover{color:rgba(240,235,225,.7);border-color:rgba(240,235,225,.15)}
-.explorer-banner-deco{position:absolute;right:-2rem;top:50%;transform:translateY(-50%);z-index:1;pointer-events:none;user-select:none}
-.deco-letter{font-family:'Cormorant Garamond',serif;font-size:28rem;font-weight:300;line-height:1;color:rgba(255,255,255,.03);letter-spacing:-.04em}
-@media(max-width:900px){.explorer-banner-inner{padding:4rem 2rem 4rem 2rem;max-width:100%}}
-@media(max-width:640px){.explorer-banner{min-height:auto}.explorer-banner-inner{padding:3.5rem 1.5rem}.deco-letter{font-size:16rem;right:-1rem}}
-
-.hero{padding:14rem 0 7rem;position:relative}
+.hero{padding:14rem 0 7rem}
 .hero-eyebrow{font-size:.56rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:2.5rem;opacity:0;animation:fadeIn .8s .3s forwards}
 .hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.2rem,8vw,7rem);line-height:.92;letter-spacing:-.02em;color:var(--ink);opacity:0;animation:fadeIn 1s .6s forwards}
 .hero-title em{font-style:italic;color:var(--ink-soft)}
-.hero-discover{display:inline-flex;flex-direction:column;align-items:center;gap:.9rem;margin-top:4rem;cursor:pointer;background:none;border:none;padding:0;opacity:0;animation:fadeIn .8s 1.2s forwards;text-decoration:none}
-.hero-discover-label{font-size:.52rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);transition:color .3s}
-.hero-discover-arrow{width:1px;height:52px;background:linear-gradient(to bottom, var(--ink-mid), transparent);position:relative;transition:transform .4s cubic-bezier(.23,1,.32,1)}
-.hero-discover:hover .hero-discover-label{color:var(--ink)}
-.hero-discover:hover .hero-discover-arrow{transform:scaleY(1.3);transform-origin:top}
-.hero-atmo{position:absolute;right:0;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.07;width:min(480px,45vw)}
-@media(max-width:640px){.hero{padding:10rem 0 5rem}.hero-atmo{width:55vw;opacity:.05}}
-
-/* ── DESTACADA mejorada ── */
-.destacada-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink-faint);text-decoration:none;color:inherit;transition:background .3s;background:var(--ivory);overflow:hidden}
-.destacada-card:hover{background:var(--cream)}
-.destacada-left{padding:3.5rem;border-right:1px solid var(--ink-faint);display:flex;flex-direction:column;justify-content:space-between;min-height:360px}
-.destacada-left-top{}
-.destacada-score{font-family:'Cormorant Garamond',serif;font-size:6rem;font-weight:300;line-height:1;color:var(--ink);letter-spacing:-.04em}
-.destacada-score span{font-size:1rem;color:var(--ink-mid);font-family:'Jost',sans-serif;font-weight:200;letter-spacing:.1em}
-.destacada-nombre{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.8rem,3vw,2.8rem);line-height:.95;color:var(--ink);margin-top:1.5rem;letter-spacing:-.02em}
-.destacada-meta{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid);margin-top:.7rem}
-.destacada-familia{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--ink-faint);padding:5px 14px;display:inline-block;margin-bottom:2.2rem}
-.destacada-extracto{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.08rem;line-height:2;color:var(--ink-soft);flex:1}
-.destacada-right{padding:3.5rem;display:flex;flex-direction:column;justify-content:space-between}
-.destacada-notas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2.5rem}
-.destacada-nota{font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mid);border:1px solid var(--ink-faint);padding:4px 11px}
-.destacada-leer{font-size:.54rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mid);margin-top:auto;transition:color .3s;display:flex;align-items:center;gap:.6rem}
-.destacada-leer::after{content:'';display:block;width:24px;height:1px;background:currentColor;transition:width .4s cubic-bezier(.23,1,.32,1)}
-.destacada-card:hover .destacada-leer{color:var(--ink)}
-.destacada-card:hover .destacada-leer::after{width:40px}
-@media(max-width:680px){.destacada-card{grid-template-columns:1fr}.destacada-left{border-right:none;border-bottom:1px solid var(--ink-faint);padding:2.5rem 2rem;min-height:auto}.destacada-right{padding:2.5rem 2rem}}
+@media(max-width:640px){.hero{padding:10rem 0 5rem}}
 
 /* ── SEPARADORES ── */
 .sep{width:100%;height:1px;background:var(--ink-faint);margin:5rem 0}
@@ -147,18 +109,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .nl-form button:hover{color:var(--ink)}
 
 /* ── FOOTER ── */
-footer{padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--ink-faint);flex-wrap:wrap;gap:1rem}
-footer>span{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mid);opacity:.45}
+/* ── FOOTER ── */
+footer{background:#2E2318;display:flex;flex-direction:column;align-items:center;padding:3.5rem 3rem 2.5rem;gap:2rem}
+.footer-logo-lc{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.1rem;letter-spacing:.18em;color:rgba(240,235,225,.42);text-decoration:none;transition:color .4s}
+.footer-logo-lc:hover{color:rgba(240,235,225,.78)}
+.footer-rule-lc{width:28px;height:1px;background:rgba(240,235,225,.1)}
+.footer-bottom-lc{display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:1rem;padding-top:1.8rem;border-top:1px solid rgba(240,235,225,.05)}
+.footer-copy-lc{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,235,225,.14)}
 .footer-right{display:flex;align-items:center;gap:2rem}
-.footer-ig{display:flex;align-items:center;gap:.5rem;text-decoration:none;opacity:.28;transition:opacity .3s}
-.footer-ig:hover{opacity:.6}
-.footer-ig svg{width:15px;height:15px;color:var(--ink)}
-.footer-ig span{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid)}
-.footer-lb{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid);opacity:.38;text-decoration:none;transition:opacity .3s}
-.footer-lb:hover{opacity:.7}
-.footer-top{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid);opacity:.38;text-decoration:none;transition:opacity .3s}
-.footer-top:hover{opacity:.7}
-.footer-top::after{content:' ↑'}
+.footer-ig{display:flex;align-items:center;gap:.5rem;text-decoration:none;opacity:.18;transition:opacity .3s}
+.footer-ig:hover{opacity:.5}
+.footer-ig svg{width:14px;height:14px;color:rgba(240,235,225,.8)}
+.footer-ig span{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,235,225,.3)}
+.footer-lb{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,235,225,.18);text-decoration:none;transition:color .3s}
+.footer-lb:hover{color:rgba(240,235,225,.5)}
+.footer-top-lc{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,235,225,.16);text-decoration:none;transition:color .3s}
+.footer-top-lc:hover{color:rgba(240,235,225,.5)}
+.footer-top-lc::after{content:' ↑'}
+@media(max-width:640px){footer{padding:3rem 1.5rem 2rem}.footer-bottom-lc{flex-direction:column;align-items:center;text-align:center}}
 @media(max-width:640px){footer{padding:2rem 1.5rem}}
 
 /* ── UTILS ── */
@@ -192,40 +160,8 @@ footer>span{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color
 
   <div class="wrapper">
     <section class="hero">
-      <p class="hero-eyebrow">Una guía personal de fragancias nicho</p>
+      <p class="hero-eyebrow">Fragancias · Criterio · Buenos Aires</p>
       <h1 class="hero-title">Lo que merece<br/><em>ser recordado</em></h1>
-      <a class="hero-discover" id="discover-btn" href="#filosofia">
-        <span class="hero-discover-label">Descubrir</span>
-        <span class="hero-discover-arrow"></span>
-      </a>
-      <!-- Elemento atmosférico: botella abstracta SVG -->
-      <svg class="hero-atmo" viewBox="0 0 400 520" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Cuerpo de la botella -->
-        <path d="M160 180 C140 200 120 230 118 270 L112 420 C111 435 122 448 138 449 L262 449 C278 448 289 435 288 420 L282 270 C280 230 260 200 240 180 Z" stroke="#1C1C2E" stroke-width="1" fill="none"/>
-        <!-- Cuello -->
-        <path d="M175 180 L175 130 C175 124 178 119 183 117 L200 110 L217 117 C222 119 225 124 225 130 L225 180" stroke="#1C1C2E" stroke-width="1" fill="none"/>
-        <!-- Tapa -->
-        <rect x="185" y="88" width="30" height="24" rx="2" stroke="#1C1C2E" stroke-width="1" fill="none"/>
-        <!-- Línea horizontal interior superior -->
-        <line x1="118" y1="310" x2="282" y2="310" stroke="#1C1C2E" stroke-width=".5" opacity=".4"/>
-        <!-- Línea horizontal interior inferior -->
-        <line x1="115" y1="390" x2="285" y2="390" stroke="#1C1C2E" stroke-width=".5" opacity=".4"/>
-        <!-- Texto grabado simulado -->
-        <text x="200" y="355" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" fill="#1C1C2E" opacity=".5" font-style="italic" letter-spacing="3">Le Carnet</text>
-        <!-- Detalle geométrico central -->
-        <ellipse cx="200" cy="270" rx="28" ry="28" stroke="#1C1C2E" stroke-width=".5" opacity=".25" fill="none"/>
-        <ellipse cx="200" cy="270" rx="18" ry="18" stroke="#1C1C2E" stroke-width=".5" opacity=".2" fill="none"/>
-        <!-- Gotas / difusión en la parte superior -->
-        <circle cx="200" cy="64" r="2" fill="#1C1C2E" opacity=".2"/>
-        <circle cx="188" cy="52" r="1.5" fill="#1C1C2E" opacity=".15"/>
-        <circle cx="212" cy="50" r="1" fill="#1C1C2E" opacity=".12"/>
-        <circle cx="196" cy="40" r="1" fill="#1C1C2E" opacity=".1"/>
-        <circle cx="207" cy="38" r=".8" fill="#1C1C2E" opacity=".08"/>
-        <circle cx="180" cy="42" r=".8" fill="#1C1C2E" opacity=".07"/>
-        <!-- Líneas de difusión -->
-        <path d="M200 86 C200 80 195 72 192 62" stroke="#1C1C2E" stroke-width=".5" opacity=".12" fill="none"/>
-        <path d="M200 86 C202 78 206 70 210 58" stroke="#1C1C2E" stroke-width=".5" opacity=".1" fill="none"/>
-      </svg>
     </section>
   </div>
 
@@ -233,7 +169,7 @@ footer>span{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color
 
   <!-- FILOSOFÍA -->
   <div class="wrapper">
-    <section id="filosofia">
+    <section>
       <div class="sep-label"><span>Filosofía</span></div>
       <div class="reveal">
         <div class="filosofia-text">
@@ -266,21 +202,6 @@ footer>span{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color
 
   <div class="wrapper"><div class="sep"></div></div>
 
-  <!-- EXPLORADOR BANNER -->
-  <div class="explorer-banner reveal">
-    <div class="explorer-banner-inner">
-      <p class="explorer-banner-tag">Herramienta</p>
-      <h2 class="explorer-banner-title">El ingrediente,<br/><em>en su esencia</em></h2>
-      <p class="explorer-banner-body">Buscá cualquier materia prima — vetiver, oud, bergamota, neroli — y descubrí su familia olfativa, pirámide, restricciones IFRA, origen y usos en perfumería. Una biblioteca de ingredientes construida para quien perfuma en serio.</p>
-      <a class="explorer-banner-cta" href="explorador.html">Abrir el Explorador</a>
-    </div>
-    <div class="explorer-banner-deco" aria-hidden="true">
-      <span class="deco-letter">E</span>
-    </div>
-  </div>
-
-  <div class="wrapper"><div class="sep"></div></div>
-
   <!-- NEWSLETTER -->
   <div class="wrapper">
     <section class="newsletter reveal" id="newsletter">
@@ -301,18 +222,22 @@ footer>span{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color
 </main>
 
 <footer>
-  <span>© 2025 Le Carnet</span>
-  <div class="footer-right">
-    <a class="footer-ig" href="https://www.instagram.com/lucasbanega_brand" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-        <circle cx="12" cy="12" r="4"/>
-        <circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/>
-      </svg>
-      <span>Instagram</span>
-    </a>
-    <a class="footer-lb" href="https://lucasbanega.com" target="_blank">Lucas Banega</a>
-    <a class="footer-top" href="#">Inicio</a>
+  <a class="footer-logo-lc" href="index.html"><em>Le Carnet</em></a>
+  <div class="footer-rule-lc"></div>
+  <div class="footer-bottom-lc">
+    <span class="footer-copy-lc">© 2025 Le Carnet · Lucas Banega</span>
+    <div class="footer-right">
+      <a class="footer-ig" href="https://www.instagram.com/lucasbanega_brand" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/>
+        </svg>
+        <span>Instagram</span>
+      </a>
+      <a class="footer-lb" href="https://lucasbanega.com" target="_blank">lucasbanega.com</a>
+      <a class="footer-top-lc" href="#">Inicio</a>
+    </div>
   </div>
 </footer>
 
@@ -354,17 +279,15 @@ fetch('perfumes.json')
     document.getElementById('destacada-card').innerHTML=`
       <a class="destacada-card" href="entrada.html?id=${li}">
         <div class="destacada-left">
-          <div class="destacada-left-top">
-            <div class="destacada-score">${last.puntuacion}<span>&thinsp;/&thinsp;10</span></div>
-            <h2 class="destacada-nombre">${last.nombre}</h2>
-            <p class="destacada-meta">${last.casa}&ensp;·&ensp;${last.año}</p>
-          </div>
-          <p class="destacada-leer">Leer la entrada</p>
+          <div class="destacada-score">${last.puntuacion}<span>/10</span></div>
+          <h2 class="destacada-nombre">${last.nombre}</h2>
+          <p class="destacada-meta">${last.casa} · ${last.año}</p>
         </div>
         <div class="destacada-right">
           <span class="destacada-familia">${last.familia}</span>
           <p class="destacada-extracto">${last.resena}</p>
           <div class="destacada-notas">${last.notas.map(n=>`<span class="destacada-nota">${n}</span>`).join('')}</div>
+          <p class="destacada-leer">Leer la entrada →</p>
         </div>
       </a>`;
 
