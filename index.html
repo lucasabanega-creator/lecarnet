@@ -51,16 +51,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;flex-direction:
 @media(max-width:640px){.wrapper{padding:0 1.5rem}}
 
 /* ── HERO ── */
-.hero{height:100vh;position:relative;background:url('hero.jpg') center center/cover no-repeat;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:rgba(248,246,243,.25);z-index:0}
-.hero-card{position:absolute;bottom:5rem;left:5rem;background:var(--cream);padding:2.6rem 3rem;width:min(300px,40vw);z-index:2;opacity:0;animation:fadeIn 1.2s .8s forwards;text-align:left}
+.hero{height:100vh;position:relative;background:url('hero.jpg') center 40%/cover no-repeat;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:rgba(248,246,243,.30);z-index:0}
+.hero-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--cream);padding:3rem 3.5rem;width:min(340px,80vw);z-index:2;opacity:0;animation:fadeIn 1.2s .8s forwards;text-align:center}
 .hero-card-eyebrow{font-size:.5rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
 .hero-card-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.1;letter-spacing:.01em;color:var(--ink)}
 .hero-card-title em{font-style:italic;color:var(--ink-soft)}
 .hero-card-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:var(--gold);margin-top:.5rem;margin-bottom:1.8rem}
 .hero-card-cta{font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid rgba(168,145,110,.3);padding-bottom:2px;transition:color .3s,border-color .3s;display:inline-block}
 .hero-card-cta:hover{color:var(--ink);border-color:var(--ink)}
-@media(max-width:640px){.hero{height:100svh}.hero-card{bottom:4rem;left:1.5rem;right:1.5rem;width:auto;padding:1.8rem 2rem}}
+@media(max-width:640px){.hero{height:100svh}.hero-card{width:calc(100vw - 4rem);padding:2rem 2.2rem}}
 @keyframes scrollPulseLC{0%{opacity:.18;transform:scaleY(.55) translateY(-6px)}50%{opacity:.55;transform:scaleY(1) translateY(0)}100%{opacity:.18;transform:scaleY(.55) translateY(-6px)}}
 
 /* ── SEPARADORES ── */
@@ -175,8 +175,9 @@ footer{background:var(--ivory);display:flex;flex-direction:column;align-items:st
 <nav>
   <a class="nav-logo" href="/">Casa <em>Banega</em></a>
   <ul class="nav-links">
-    <li><a href="/" class="active">Inicio</a></li>
-    <li><a href="indice.html">Índice</a></li>
+    <li><a href="#fragancias">Fragancias</a></li>
+    <li><a href="#fibras">Fibras</a></li>
+    <li><a href="#mundo">Mundo</a></li>
     <li><a href="explorador.html">Explorador</a></li>
   </ul>
   <span class="nav-by">por <a href="https://lucasbanega.com" target="_blank">Lucas Banega</a></span>
@@ -185,8 +186,9 @@ footer{background:var(--ivory);display:flex;flex-direction:column;align-items:st
   </button>
 </nav>
 <div class="nav-overlay" id="nav-overlay">
-  <a href="/" onclick="closeMenu()">Inicio</a>
-  <a href="indice.html" onclick="closeMenu()">Índice</a>
+  <a href="#fragancias" onclick="closeMenu()">Fragancias</a>
+  <a href="#fibras" onclick="closeMenu()">Fibras</a>
+  <a href="#mundo" onclick="closeMenu()">Mundo</a>
   <a href="explorador.html" onclick="closeMenu()">Explorador</a>
   <span class="nav-overlay-tag">Casa Banega — Il senso dell'eleganza</span>
 </div>
@@ -195,9 +197,8 @@ footer{background:var(--ivory);display:flex;flex-direction:column;align-items:st
 
   <section class="hero">
     <div class="hero-card">
-      <p class="hero-card-eyebrow">Fragancias · Buenos Aires · 2026</p>
-      <h1 class="hero-card-title">Lo que merece<br/><em>ser recordado</em></h1>
-      <p class="hero-card-sub">Il senso dell'eleganza</p>
+      <p class="hero-card-eyebrow">Casa Banega</p>
+      <p class="hero-card-title"><em>Il senso dell'eleganza</em></p>
       <a class="hero-card-cta" href="#primer-sep">Descubrir</a>
     </div>
   </section>
@@ -216,7 +217,7 @@ footer{background:var(--ivory);display:flex;flex-direction:column;align-items:st
       <span class="filosofia-rule"></span>
     </div>
     <div class="filosofia-right">
-      <div class="filosofia-right-deco" aria-hidden="true"><span>LC</span></div>
+      <div class="filosofia-right-deco" aria-hidden="true"><span>CB</span></div>
       <div class="filosofia-quote-wrap reveal">
         <p class="filosofia-quote">"Cada entrada<br/>es un juicio.<br/>No una <em>descripción.</em>"</p>
         <span class="filosofia-quote-rule"></span>
@@ -227,7 +228,8 @@ footer{background:var(--ivory);display:flex;flex-direction:column;align-items:st
 
   <div class="wrapper"><div class="sep"></div></div>
 
-  <!-- ÚLTIMA ENTRADA -->
+  <!-- FRAGANCIAS -->
+  <div id="fragancias"></div>
   <div class="wrapper">
     <section>
       <div class="sep-label"><span>Última entrada</span></div>
@@ -243,6 +245,51 @@ footer{background:var(--ivory);display:flex;flex-direction:column;align-items:st
       <a class="ver-todas reveal" href="indice.html">Ver todas las entradas</a>
     </section>
   </div>
+
+  <div class="wrapper"><div class="sep"></div></div>
+
+  <!-- FIBRAS -->
+  <section id="fibras" class="filosofia-spread">
+    <div class="filosofia-left reveal">
+      <p class="filosofia-eyebrow">Fibras</p>
+      <div class="filosofia-text">
+        <p>La vicuña es la fibra más fina que existe. Doce micrones de diámetro — la mitad que el cashmere más fino. Los incas la llamaban <em>el oro de los Andes</em> y reservaban su uso para la realeza.</p>
+        <p>El cashmere de Mongolia grado A, el baby alpaca del altiplano peruano, el lino de Normandía. Cada fibra tiene una historia de origen que el objeto terminado lleva consigo sin declararlo.</p>
+        <p>Casa Banega escribe sobre fragancias. Pero el mundo que las rodea — la textura, el tacto, el silencio de lo bien hecho — también merece ser anotado.</p>
+      </div>
+      <span class="filosofia-rule"></span>
+    </div>
+    <div class="filosofia-right">
+      <div class="filosofia-right-deco" aria-hidden="true"><span>F</span></div>
+      <div class="filosofia-quote-wrap reveal">
+        <p class="filosofia-quote">"La mejor ropa<br/>es la que nadie<br/>puede <em>identificar.</em>"</p>
+        <span class="filosofia-quote-rule"></span>
+        <span class="filosofia-quote-attr">Casa Banega</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrapper"><div class="sep"></div></div>
+
+  <!-- MUNDO -->
+  <section id="mundo" class="filosofia-spread">
+    <div class="filosofia-left reveal">
+      <p class="filosofia-eyebrow">Mundo</p>
+      <div class="filosofia-text">
+        <p>Hay fabricantes en Umbría que trabajan con los mismos telares desde tres generaciones. Hay perfumistas en Grasse que conocen cada campo de lavanda por su latitud exacta. Hay pastores en los Andes que esquilan vicuña a mano, dos veces en la vida del animal.</p>
+        <p>El lujo silencioso no es un precio. Es una cadena de decisiones invisibles tomadas por personas que nunca van a conocer al cliente final. Casa Banega escribe sobre ese mundo — las personas, los lugares, los procesos que hacen que algo valga lo que vale.</p>
+      </div>
+      <span class="filosofia-rule"></span>
+    </div>
+    <div class="filosofia-right">
+      <div class="filosofia-right-deco" aria-hidden="true"><span>M</span></div>
+      <div class="filosofia-quote-wrap reveal">
+        <p class="filosofia-quote">"Lo que dura<br/>fue hecho por alguien<br/>que <em>creyó en ello.</em>"</p>
+        <span class="filosofia-quote-rule"></span>
+        <span class="filosofia-quote-attr">Casa Banega</span>
+      </div>
+    </div>
+  </section>
 
   <div class="wrapper"><div class="sep"></div></div>
 
@@ -267,8 +314,9 @@ footer{background:var(--ivory);display:flex;flex-direction:column;align-items:st
     <a class="footer-logo-lc" href="index.html">Casa Banega</a>
     <div class="footer-rule-lc"></div>
     <ul style="display:flex;gap:2rem;list-style:none;flex-wrap:wrap;justify-content:center">
-      <li><a href="/" style="font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(28,24,20,.25);text-decoration:none;transition:color .3s">Inicio</a></li>
-      <li><a href="indice.html" style="font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(28,24,20,.25);text-decoration:none;transition:color .3s">Índice</a></li>
+      <li><a href="#fragancias" style="font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(28,24,20,.25);text-decoration:none;transition:color .3s">Fragancias</a></li>
+      <li><a href="#fibras" style="font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(28,24,20,.25);text-decoration:none;transition:color .3s">Fibras</a></li>
+      <li><a href="#mundo" style="font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(28,24,20,.25);text-decoration:none;transition:color .3s">Mundo</a></li>
       <li><a href="explorador.html" style="font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(28,24,20,.25);text-decoration:none;transition:color .3s">Explorador</a></li>
     </ul>
   </div>
