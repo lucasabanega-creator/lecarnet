@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Le Carnet — Índice</title>
+<title>Casa Banega — Índice</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
@@ -11,24 +11,24 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --cream:#F0EBE1;--ivory:#E8E1D5;
-  --ink:#1C1C2E;--ink-soft:#4A4A6A;
-  --ink-faint:rgba(28,28,46,.08);--ink-mid:rgba(28,28,46,.38);
-  --accent:#8C5A48;--accent-light:#B87A68;
+  --cream:#F8F6F3;--ivory:#F2F0EC;
+  --ink:#1C1814;--ink-soft:#7D6A62;
+  --ink-faint:rgba(28,24,20,.08);--ink-mid:rgba(28,24,20,.38);
+  --gold:#A8916E;--gold-light:#C4B2A0;
 }
 html{scroll-behavior:auto}
 body{background:var(--cream);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1.8rem 3rem;background:rgba(240,235,225,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--ink-faint)}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.1rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none;grid-column:2;text-align:center;white-space:nowrap}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:1.4rem 3rem 1rem;background:rgba(248,246,243,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--ink-faint)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.1rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none;text-align:center;white-space:nowrap}
 .nav-logo em{font-style:italic}
-.nav-links{display:flex;gap:2.5rem;list-style:none;grid-column:3;justify-self:end}
+.nav-links{display:flex;gap:2.5rem;list-style:none;justify-content:center}
 .nav-links a{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;transition:color .3s}
 .nav-links a:hover,.nav-links a.active{color:var(--ink)}
-.nav-by{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mid);grid-column:1}
+.nav-by{display:none}
 .nav-by a{color:var(--ink-mid);text-decoration:none;transition:color .3s}
 .nav-by a:hover{color:var(--ink)}
-.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:300}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:300;position:absolute;top:1.4rem;right:1.5rem}
 .nav-burger span{display:block;width:22px;height:1px;background:var(--ink-mid);transition:all .4s cubic-bezier(.23,1,.32,1)}
 .nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
@@ -59,21 +59,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-c
 .indice-familia{font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mid);display:block}
 @media(max-width:500px){.indice-row{grid-template-columns:2.5rem 1fr auto;gap:1rem}.indice-nombre{font-size:1.2rem}}
 /* ── FOOTER ── */
-footer{background:#2E2318;display:flex;flex-direction:column;align-items:center;padding:3.5rem 3rem 2.5rem;gap:2rem}
-.footer-logo-lc{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.1rem;letter-spacing:.18em;color:rgba(240,235,225,.42);text-decoration:none;transition:color .4s}
-.footer-logo-lc:hover{color:rgba(240,235,225,.78)}
-.footer-rule-lc{width:28px;height:1px;background:rgba(240,235,225,.1)}
-.footer-bottom-lc{display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:1rem;padding-top:1.8rem;border-top:1px solid rgba(240,235,225,.05)}
-.footer-copy-lc{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,235,225,.14)}
+footer{background:var(--ivory);display:flex;flex-direction:column;align-items:center;padding:3.5rem 3rem 2.5rem;gap:2rem}
+.footer-logo-lc{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.1rem;letter-spacing:.18em;color:rgba(28,24,20,.35);text-decoration:none;transition:color .4s}
+.footer-logo-lc:hover{color:rgba(28,24,20,.75)}
+.footer-rule-lc{width:28px;height:1px;background:rgba(28,24,20,.1)}
+.footer-bottom-lc{display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:1rem;padding-top:1.8rem;border-top:1px solid rgba(28,24,20,.07)}
+.footer-copy-lc{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,24,20,.3)}
 .footer-right{display:flex;align-items:center;gap:2rem}
-.footer-ig{display:flex;align-items:center;gap:.5rem;text-decoration:none;opacity:.18;transition:opacity .3s}
+.footer-ig{display:flex;align-items:center;gap:.5rem;text-decoration:none;opacity:.35;transition:opacity .3s}
 .footer-ig:hover{opacity:.5}
-.footer-ig svg{width:14px;height:14px;color:rgba(240,235,225,.8)}
-.footer-ig span{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,235,225,.3)}
-.footer-lb{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,235,225,.18);text-decoration:none;transition:color .3s}
-.footer-lb:hover{color:rgba(240,235,225,.5)}
-.footer-top-lc{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,235,225,.16);text-decoration:none;transition:color .3s}
-.footer-top-lc:hover{color:rgba(240,235,225,.5)}
+.footer-ig svg{width:14px;height:14px;color:rgba(28,24,20,.6)}
+.footer-ig span{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,24,20,.35)}
+.footer-lb{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(28,24,20,.3);text-decoration:none;transition:color .3s}
+.footer-lb:hover{color:rgba(28,24,20,.6)}
+.footer-top-lc{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(28,24,20,.25);text-decoration:none;transition:color .3s}
+.footer-top-lc:hover{color:rgba(28,24,20,.6)}
 .footer-top-lc::after{content:' ↑'}
 @media(max-width:640px){footer{padding:3rem 1.5rem 2rem}.footer-bottom-lc{flex-direction:column;align-items:center;text-align:center}}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .9s,transform .9s}
@@ -83,11 +83,11 @@ footer{background:#2E2318;display:flex;flex-direction:column;align-items:center;
 </head>
 <body>
 <nav>
-  <a class="nav-logo" href="/">Le <em>Carnet</em></a>
+  <a class="nav-logo" href="/">Casa <em>Banega</em></a>
   <ul class="nav-links">
     <li><a href="/">Inicio</a></li>
     <li><a href="indice.html" class="active">Índice</a></li>
-    <li><a href="explorador.html">Explorador</a></li>
+    <li><a href="https://lucasbanega.com" target="_blank">Maison</a></li>
   </ul>
   <span class="nav-by">por <a href="https://lucasbanega.com" target="_blank">Lucas Banega</a></span>
   <button class="nav-burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
@@ -95,7 +95,7 @@ footer{background:#2E2318;display:flex;flex-direction:column;align-items:center;
 <div class="nav-overlay" id="nav-overlay">
   <a href="/" onclick="closeMenu()">Inicio</a>
   <a href="indice.html" onclick="closeMenu()">Índice</a>
-  <span class="nav-overlay-tag">Le Carnet · por Lucas Banega</span>
+  <span class="nav-overlay-tag">Casa Banega — Il senso dell'eleganza</span>
 </div>
 
 <main>
@@ -111,10 +111,10 @@ footer{background:#2E2318;display:flex;flex-direction:column;align-items:center;
 </main>
 
 <footer>
-  <a class="footer-logo-lc" href="index.html"><em>Le Carnet</em></a>
+  <a class="footer-logo-lc" href="index.html"><em>Casa Banega</em></a>
   <div class="footer-rule-lc"></div>
   <div class="footer-bottom-lc">
-    <span class="footer-copy-lc">© 2025 Le Carnet · Lucas Banega</span>
+    <span class="footer-copy-lc">© 2026 Casa Banega · Lucas Banega</span>
     <div class="footer-right">
       <a class="footer-ig" href="https://www.instagram.com/lucasbanega_brand" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
