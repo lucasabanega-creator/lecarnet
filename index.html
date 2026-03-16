@@ -51,18 +51,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;flex-direction:
 @media(max-width:640px){.wrapper{padding:0 1.5rem}}
 
 /* ── HERO ── */
-.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 0 4rem;position:relative;background:url('hero.jpg') center center/cover no-repeat}
-.hero::before{content:'';position:absolute;inset:0;background:rgba(248,246,243,.42);z-index:0}
-.hero .wrapper{position:relative;z-index:2}
-.hero-eyebrow,.hero-title{position:relative;z-index:2}
-.hero-scroll{z-index:2}
-.hero-eyebrow{font-size:.56rem;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:2.5rem;opacity:0;animation:fadeIn .8s .3s forwards}
-.hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.2rem,8vw,7rem);line-height:.92;letter-spacing:-.02em;color:var(--ink);opacity:0;animation:fadeIn 1s .6s forwards}
-.hero-title em{font-style:italic;color:var(--ink-soft)}
-@media(max-width:640px){.hero{height:100svh}}
-.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:.7rem;position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);opacity:0;animation:fadeIn .8s 1.6s forwards;cursor:pointer;text-decoration:none;z-index:2}
-.hero-scroll span{font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:var(--ink);opacity:.5}
-.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--ink-mid),transparent);animation:scrollPulseLC 2.6s ease-in-out infinite;transform-origin:top}
+.hero{height:100vh;position:relative;background:url('hero.jpg') center center/cover no-repeat;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:rgba(248,246,243,.25);z-index:0}
+.hero-card{position:absolute;bottom:5rem;left:5rem;background:var(--cream);padding:2.6rem 3rem;width:min(300px,40vw);z-index:2;opacity:0;animation:fadeIn 1.2s .8s forwards;text-align:left}
+.hero-card-eyebrow{font-size:.5rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
+.hero-card-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.1;letter-spacing:.01em;color:var(--ink)}
+.hero-card-title em{font-style:italic;color:var(--ink-soft)}
+.hero-card-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:var(--gold);margin-top:.5rem;margin-bottom:1.8rem}
+.hero-card-cta{font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid rgba(168,145,110,.3);padding-bottom:2px;transition:color .3s,border-color .3s;display:inline-block}
+.hero-card-cta:hover{color:var(--ink);border-color:var(--ink)}
+@media(max-width:640px){.hero{height:100svh}.hero-card{bottom:4rem;left:1.5rem;right:1.5rem;width:auto;padding:1.8rem 2rem}}
 @keyframes scrollPulseLC{0%{opacity:.18;transform:scaleY(.55) translateY(-6px)}50%{opacity:.55;transform:scaleY(1) translateY(0)}100%{opacity:.18;transform:scaleY(.55) translateY(-6px)}}
 
 /* ── SEPARADORES ── */
@@ -73,7 +71,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;flex-direction:
 
 /* ── FILOSOFÍA — editorial spread ── */
 .filosofia-spread{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;background:var(--cream);border-top:1px solid var(--ink-faint);border-bottom:1px solid var(--ink-faint)}
-.filosofia-left{padding:6rem 5rem 6rem 0;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--ink-faint)}
+.filosofia-left{padding:6rem 4rem 6rem 5rem;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--ink-faint)}
 .filosofia-eyebrow{font-size:.52rem;letter-spacing:.42em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:3rem}
 .filosofia-text{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.1rem,2vw,1.45rem);line-height:1.95;color:var(--ink)}
 .filosofia-text em{font-style:italic;color:var(--ink-soft)}
@@ -195,22 +193,20 @@ footer{background:var(--ivory);display:flex;flex-direction:column;align-items:st
 
 <main>
 
-  <div class="wrapper">
-    <section class="hero" style="position:relative">
-      <p class="hero-eyebrow">Fragancias · Criterio · Buenos Aires</p>
-      <h1 class="hero-title">Lo que merece<br/><em>ser recordado</em></h1>
-      <a class="hero-scroll" id="hero-descubrir" href="#primer-sep">
-        <span>Descubrir</span>
-        <div class="hero-scroll-line"></div>
-      </a>
-    </section>
-  </div>
+  <section class="hero">
+    <div class="hero-card">
+      <p class="hero-card-eyebrow">Fragancias · Buenos Aires · 2026</p>
+      <h1 class="hero-card-title">Lo que merece<br/><em>ser recordado</em></h1>
+      <p class="hero-card-sub">Il senso dell'eleganza</p>
+      <a class="hero-card-cta" href="#primer-sep">Descubrir</a>
+    </div>
+  </section>
 
   <div class="wrapper"><div class="sep" id="primer-sep"></div></div>
 
   <!-- FILOSOFÍA — editorial spread -->
   <section class="filosofia-spread">
-    <div class="filosofia-left wrapper reveal">
+    <div class="filosofia-left reveal">
       <p class="filosofia-eyebrow">Filosofía</p>
       <div class="filosofia-text">
         <p>Escribir sobre una fragancia es el ejercicio más difícil de la crítica. No hay imagen. No hay sonido. Solo palabras intentando capturar algo que existe únicamente en el aire y en la piel.</p>
