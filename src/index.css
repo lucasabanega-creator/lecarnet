@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #EAE6DF;
+  color: #2C2A28;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #F9F8F6;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4CFC6;
+  border-radius: 2px;
+}
+
+@layer utilities {
+  .markdown-body p {
+    margin-bottom: 0.75em;
+  }
+  .markdown-body strong {
+    font-weight: 500;
+  }
+  .markdown-body ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 1em;
+  }
+  .markdown-body li {
+    position: relative;
+    padding-left: 1rem;
+    margin-bottom: 0.875em;
+  }
+  .markdown-body li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: currentColor;
+    opacity: 0.5;
+  }
+  .markdown-body h1,
+  .markdown-body h2,
+  .markdown-body h3 {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+}
