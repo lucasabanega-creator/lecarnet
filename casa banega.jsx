@@ -320,7 +320,7 @@ function Home({ goTo, openExperiencia, openArticulo }) {
         <div className="absolute inset-0 pointer-events-none" style={{ filter: "url(#grain)" }} />
         <div className="hidden md:block absolute left-6 top-0 bottom-0 items-center" style={{ writingMode: "vertical-rl" }}>
           <span className="text-[10px] tracking-wider3 uppercase flex h-full items-center" style={{ color: C.stone }}>
-            Cultura del lujo latinoamericano
+            Cultura del lujo
           </span>
         </div>
         <div className="text-center max-w-3xl">
