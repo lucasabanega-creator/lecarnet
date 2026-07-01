@@ -295,7 +295,7 @@ function Nav({ page, goHome, goTo, scrolled }) {
 function PageFooter() {
   return (
     <p className="text-center text-[11px] uppercase tracking-wider2 py-16" style={{ color: C.stone }}>
-      Casa Banega — Cultura del lujo latinoamericano
+      Casa Banega — Cultura del lujo
     </p>
   );
 }
