@@ -1,6 +1,25 @@
 import { Link } from "react-router-dom";
 import { CATEGORIAS, destacadoPorCategoria } from "../data/items";
 
+function CatCard({ cat, item }) {
+  return (
+    <Link
+      to={`/${cat.slug}`}
+      className="cat-card"
+      style={{ background: item ? item.tono : "#F4F4F4" }}
+    >
+      <div className="cat-card-content">
+        <p className="card-cat">{item ? item.lugar : "Próximamente"}</p>
+        <h3>{cat.nombre}</h3>
+        <p className="card-desc">{cat.intro}</p>
+        <span className="ver-mas">
+          {item ? `Explorar ${cat.nombre.toLowerCase()}` : "Ver categoría"}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -23,12 +42,8 @@ export default function Home() {
           perfumería que entendieron que el lujo verdadero no necesita anunciarse.
         </p>
         <p className="lead">
-          Cada lugar de esta guía responde a un mismo criterio: la discreción como la forma
-          más alta de elegancia.
-        </p>
-        <p className="lead">
-          No es un directorio exhaustivo — es una selección curada, pensada para quienes ya
-          comparten esta sensibilidad.
+          Cada lugar de esta guía se publica con su historia verificada. Preferimos mostrar
+          poco y confirmado antes que mucho e inventado.
         </p>
       </section>
 
@@ -41,24 +56,9 @@ export default function Home() {
         </div>
 
         <div className="cat-grid">
-          {Object.values(CATEGORIAS).map((cat) => {
-            const item = destacadoPorCategoria(cat.slug);
-            return (
-              <Link
-                to={`/${cat.slug}`}
-                className="cat-card"
-                key={cat.slug}
-                style={{ background: item.tono }}
-              >
-                <div className="cat-card-content">
-                  <p className="card-cat">{cat.eyebrow}</p>
-                  <h3>{cat.nombre}</h3>
-                  <p className="card-desc">{cat.intro}</p>
-                  <span className="ver-mas">Explorar {cat.nombre.toLowerCase()}</span>
-                </div>
-              </Link>
-            );
-          })}
+          {Object.values(CATEGORIAS).map((cat) => (
+            <CatCard key={cat.slug} cat={cat} item={destacadoPorCategoria(cat.slug)} />
+          ))}
         </div>
       </section>
 

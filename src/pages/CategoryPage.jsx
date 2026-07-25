@@ -1,18 +1,60 @@
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { CATEGORIAS, OBJETOS } from "../data/items";
-import ItemPanel from "../components/ItemPanel";
+
+function CardMedia({ item }) {
+  const [error, setError] = useState(false);
+  const esProducto = item.estiloImagen === "producto";
+  const mostrarImagen = item.imagen && !error;
+
+  if (esProducto) {
+    return (
+      <div className="card-media-cuadro" style={{ background: item.tono }}>
+        {mostrarImagen && (
+          <img
+            src={item.imagen}
+            alt={item.nombre}
+            loading="lazy"
+            onError={() => setError(true)}
+          />
+        )}
+      </div>
+    );
+  }
+
+  if (mostrarImagen) {
+    return (
+      <img
+        className="card-media-foto"
+        src={item.imagen}
+        alt={item.nombre}
+        loading="lazy"
+        onError={() => setError(true)}
+      />
+    );
+  }
+  return <div className="card-media-tono" style={{ background: item.tono }} />;
+}
 
 export default function CategoryPage({ catSlug }) {
   const cat = CATEGORIAS[catSlug];
-  const items = OBJETOS.filter((o) => o.cat === catSlug);
-  const [destacado, ...resto] = items;
-  const [selected, setSelected] = useState(null);
+  const todos = OBJETOS.filter((o) => o.cat === catSlug);
+  const tipos = useMemo(
+    () => [...new Set(todos.map((o) => o.tipo).filter(Boolean))],
+    [todos]
+  );
 
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") setSelected(null); };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, []);
+  const [query, setQuery] = useState("");
+  const [tipoActivo, setTipoActivo] = useState(null);
+
+  const items = todos.filter((o) => {
+    const coincideTexto =
+      !query ||
+      o.nombre.toLowerCase().includes(query.toLowerCase()) ||
+      o.lugar.toLowerCase().includes(query.toLowerCase());
+    const coincideTipo = !tipoActivo || o.tipo === tipoActivo;
+    return coincideTexto && coincideTipo;
+  });
 
   return (
     <>
@@ -22,38 +64,68 @@ export default function CategoryPage({ catSlug }) {
         <p className="lead" style={{ maxWidth: 620, margin: "0 auto" }}>{cat.intro}</p>
       </section>
 
-      <section>
-        <div
-          className="card-grande"
-          style={{ background: destacado.tono }}
-          onClick={() => setSelected(destacado)}
-        >
-          <div className="card-grande-content">
-            <p className="card-cat">{destacado.lugar}</p>
-            <h3>{destacado.nombre}</h3>
-            <p className="card-desc">{destacado.desc}</p>
-            <span className="ver-mas">Ver más</span>
-          </div>
-        </div>
-
-        <div className="grid-cards">
-          {resto.map((obj) => (
-            <div
-              key={obj.nombre}
-              className="card-chica"
-              style={{ background: obj.tono }}
-              onClick={() => setSelected(obj)}
-            >
-              <div className="card-chica-content">
-                <p className="card-cat">{obj.lugar}</p>
-                <h3>{obj.nombre}</h3>
-              </div>
+      {todos.length === 0 ? (
+        <section className="estado-vacio centrado">
+          <p className="eyebrow">Próximamente</p>
+          <p className="lead" style={{ maxWidth: 460, margin: "0 auto" }}>
+            Todavía no publicamos ningún lugar verificado en esta categoría. Preferimos no
+            mostrar nada antes que mostrar algo sin confirmar.
+          </p>
+        </section>
+      ) : (
+        <section>
+          {todos.length > 1 && (
+            <div className="filtros">
+              <input
+                className="filtro-buscar"
+                type="text"
+                placeholder={`Buscar en ${cat.nombre.toLowerCase()}...`}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              {tipos.length > 1 && (
+                <div className="filtro-tags">
+                  <button
+                    className={"filtro-tag" + (!tipoActivo ? " activo" : "")}
+                    onClick={() => setTipoActivo(null)}
+                  >
+                    Todos
+                  </button>
+                  {tipos.map((t) => (
+                    <button
+                      key={t}
+                      className={"filtro-tag" + (tipoActivo === t ? " activo" : "")}
+                      onClick={() => setTipoActivo(t)}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-      </section>
+          )}
 
-      <ItemPanel item={selected} onClose={() => setSelected(null)} />
+          {items.length === 0 ? (
+            <p className="filtro-sin-resultados">No hay resultados para esa búsqueda.</p>
+          ) : (
+            <div className="grid-cards grid-cards-uniforme">
+              {items.map((obj) => (
+                <Link
+                  key={obj.slug}
+                  to={`/${cat.slug}/${obj.slug}`}
+                  className={"card-chica" + (obj.estiloImagen === "producto" ? " producto" : "")}
+                >
+                  <CardMedia item={obj} />
+                  <div className="card-chica-content">
+                    <p className="card-cat">{obj.lugar}</p>
+                    <h3>{obj.nombre}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
     </>
   );
 }

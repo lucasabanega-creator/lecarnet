@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
+import ItemPage from "./pages/ItemPage";
 import "./casa-banega.css";
 
 function ScrollToTop() {
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/experiencias" element={<CategoryPage catSlug="experiencias" />} />
         <Route path="/cafes" element={<CategoryPage catSlug="cafes" />} />
         <Route path="/perfumes" element={<CategoryPage catSlug="perfumes" />} />
+        <Route path="/:cat/:slug" element={<ItemPage />} />
       </Routes>
       <Footer />
     </div>
