@@ -440,15 +440,14 @@ h1.headline-principal {
 .card-media-cuadro {
   position: relative;
   aspect-ratio: 4/5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
+  overflow: hidden;
 }
 
 .card-media-cuadro img {
-  max-width: 100%;
-  max-height: 100%;
+  position: absolute;
+  inset: 18px;
+  width: calc(100% - 36px);
+  height: calc(100% - 36px);
   object-fit: contain;
 }
 
@@ -501,18 +500,15 @@ h1.headline-principal {
 }
 
 .item-media.producto {
+  position: relative;
   aspect-ratio: 4/3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 48px;
 }
 
 .item-media.producto img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
+  position: absolute;
+  inset: 48px;
+  width: calc(100% - 96px);
+  height: calc(100% - 96px);
   object-fit: contain;
 }
 
