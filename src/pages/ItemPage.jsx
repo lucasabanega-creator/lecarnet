@@ -24,11 +24,18 @@ export default function ItemPage() {
         <Link to={`/${cat.slug}`} className="volver">← {cat.nombre}</Link>
 
         <div
-          className={"item-media" + (item.estiloImagen === "producto" ? " producto" : "")}
+          className={
+            "item-media" +
+            (!item.imagenBanner && item.estiloImagen === "producto" ? " producto" : "")
+          }
           style={{ background: item.tono }}
         >
-          {item.imagen && !imgError && (
-            <img src={item.imagen} alt={item.nombre} onError={() => setImgError(true)} />
+          {(item.imagenBanner || item.imagen) && !imgError && (
+            <img
+              src={item.imagenBanner || item.imagen}
+              alt={item.nombre}
+              onError={() => setImgError(true)}
+            />
           )}
         </div>
 

@@ -28,7 +28,10 @@ export default function Home() {
           <source src="/hero.mp4" type="video/mp4" />
         </video>
         <div className="hero-content">
-          <h1 className="titulo-hero">Casa Banega</h1>
+          <h1 className="titulo-hero">
+            Casa Banega
+            <span className="titulo-hero-linea" />
+          </h1>
           <p className="subtitulo-hero">Guía de experiencias, cafés y perfumes</p>
         </div>
       </div>

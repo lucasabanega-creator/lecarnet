@@ -5,7 +5,10 @@ export default function Footer() {
     <footer>
       <div className="footer-inner">
         <div className="footer-col">
-          <p className="footer-wordmark">Casa Banega</p>
+          <p className="footer-wordmark">
+            Casa Banega
+            <span className="footer-wordmark-linea" />
+          </p>
           <p className="footer-tagline">Guía de experiencias, cafés y perfumes de quiet luxury.</p>
         </div>
         <div className="footer-col">

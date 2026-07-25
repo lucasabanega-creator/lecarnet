@@ -46,6 +46,7 @@ export const OBJETOS = [
     enlaceOficial: "https://www.bulgari.com/en-us/42504.html",
     tono: "#E9E9E7",
     imagen: "/perfumes/bvlgari-the-imperial.png",
+    imagenBanner: "/perfumes/bvlgari-the-imperial-banner.jpg",
     estiloImagen: "producto",
   },
 ];

@@ -21,7 +21,8 @@ export default function Header() {
     <header className={(solido ? "solido" : "") + (open ? " abierto" : "")}>
       <div className="header-inner">
         <Link to="/" className="wordmark" onClick={() => setOpen(false)}>
-          Casa Banega
+          <span className="wordmark-texto">Casa Banega</span>
+          <span className="wordmark-linea" />
         </Link>
         <nav className="nav-desktop">
           <NavLink to="/experiencias" className={linkClass}>Experiencias</NavLink>
