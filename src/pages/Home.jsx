@@ -1,13 +1,25 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CATEGORIAS, destacadoPorCategoria } from "../data/items";
 
 function CatCard({ cat, item }) {
+  const [imgError, setImgError] = useState(false);
+  const mostrarImagen = cat.imagenPortada && !imgError;
+
   return (
     <Link
       to={`/${cat.slug}`}
       className="cat-card"
       style={{ background: item ? item.tono : "#F4F4F4" }}
     >
+      {mostrarImagen && (
+        <img
+          src={cat.imagenPortada}
+          alt=""
+          className="cat-card-img"
+          onError={() => setImgError(true)}
+        />
+      )}
       <div className="cat-card-content">
         <p className="card-cat">{item ? item.lugar : "Próximamente"}</p>
         <h3>{cat.nombre}</h3>

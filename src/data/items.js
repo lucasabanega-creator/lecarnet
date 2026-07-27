@@ -6,6 +6,7 @@ export const CATEGORIAS = {
     eyebrow: "Hospitalidad y viaje",
     intro:
       "Hoteles, refugios y lugares que entendieron que la mejor forma de recibir a alguien es no interrumpirlo.",
+    imagenPortada: "/covers/experiencias.jpg",
   },
   cafes: {
     slug: "cafes",
@@ -14,6 +15,7 @@ export const CATEGORIAS = {
     eyebrow: "Salones, pastelerías y barras",
     intro:
       "Cafés que sostienen la misma receta y el mismo ritmo desde hace décadas, sin necesidad de reinventarse cada temporada.",
+    imagenPortada: "/covers/cafes.jpg",
   },
   perfumes: {
     slug: "perfumes",
@@ -22,6 +24,7 @@ export const CATEGORIAS = {
     eyebrow: "Casas de perfumería",
     intro:
       "Fragancias verificadas, con su historia y su pirámide olfativa documentadas — sin relatos inventados.",
+    imagenPortada: "/covers/perfumes.jpg",
   },
 };
 

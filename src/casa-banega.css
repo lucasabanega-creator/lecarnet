@@ -261,6 +261,15 @@ h1.headline-principal {
   display: block;
 }
 
+.cat-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
 .cat-card::after {
   content: '';
   position: absolute;
