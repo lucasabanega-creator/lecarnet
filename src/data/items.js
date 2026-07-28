@@ -25,6 +25,7 @@ export const CATEGORIAS = {
     intro:
       "Fragancias verificadas, con su historia y su pirámide olfativa documentadas — sin relatos inventados.",
     imagenPortada: "/covers/perfumes.jpg",
+    filtroPor: "marca",
   },
 };
 

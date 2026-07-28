@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CATEGORIAS, itemPorSlug } from "../data/items";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import VerificationBadge from "../components/VerificationBadge";
 
 function construirSchema(item, cat) {
   const imagen = item.imagenBanner || item.imagen;
@@ -128,19 +129,11 @@ export default function ItemPage() {
           </div>
         )}
 
-        {(item.fuente?.length > 0 || item.curador) && (
-          <div className="item-fuente">
-            {item.curador && (
-              <p>
-                Verificado por {item.curador}
-                {item.verificado ? ` el ${item.verificado}` : ""}.
-              </p>
-            )}
-            {item.fuente && item.fuente.length > 0 && (
-              <p>Fuentes: {item.fuente.join(" · ")}</p>
-            )}
-          </div>
-        )}
+        <VerificationBadge
+          curador={item.curador}
+          verificado={item.verificado}
+          fuentes={item.fuente}
+        />
       </section>
     </>
   );

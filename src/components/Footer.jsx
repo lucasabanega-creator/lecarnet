@@ -16,6 +16,7 @@ export default function Footer() {
           <Link to="/experiencias">Experiencias</Link>
           <Link to="/cafes">Cafés</Link>
           <Link to="/perfumes">Perfumes</Link>
+          <Link to="/sobre">Sobre</Link>
         </div>
         <div className="footer-col">
           <h4>Contacto</h4>

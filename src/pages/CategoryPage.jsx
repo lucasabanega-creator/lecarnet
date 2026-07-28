@@ -47,9 +47,10 @@ export default function CategoryPage({ catSlug }) {
     image: cat.imagenPortada,
   });
 
+  const campoFiltro = cat.filtroPor || "tipo";
   const tipos = useMemo(
-    () => [...new Set(todos.map((o) => o.tipo).filter(Boolean))],
-    [todos]
+    () => [...new Set(todos.map((o) => o[campoFiltro]).filter(Boolean))],
+    [todos, campoFiltro]
   );
 
   const [query, setQuery] = useState("");
@@ -60,7 +61,7 @@ export default function CategoryPage({ catSlug }) {
       !query ||
       o.nombre.toLowerCase().includes(query.toLowerCase()) ||
       o.lugar.toLowerCase().includes(query.toLowerCase());
-    const coincideTipo = !tipoActivo || o.tipo === tipoActivo;
+    const coincideTipo = !tipoActivo || o[campoFiltro] === tipoActivo;
     return coincideTexto && coincideTipo;
   });
 
@@ -71,6 +72,12 @@ export default function CategoryPage({ catSlug }) {
         <h1 className="headline-principal">{cat.nombre}</h1>
         <p className="lead" style={{ maxWidth: 620, margin: "0 auto" }}>{cat.intro}</p>
       </section>
+
+      {cat.imagenPortada && (
+        <div className="category-editorial-wrap">
+          <img className="category-editorial" src={cat.imagenPortada} alt="" />
+        </div>
+      )}
 
       {todos.length === 0 ? (
         <section className="estado-vacio centrado">

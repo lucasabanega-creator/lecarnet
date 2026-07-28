@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CATEGORIAS, destacadoPorCategoria } from "../data/items";
+import { CATEGORIAS, OBJETOS, destacadoPorCategoria } from "../data/items";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 function CatCard({ cat, item }) {
@@ -41,6 +41,11 @@ export default function Home() {
     description:
       "Casa Banega — guía curada de experiencias, cafés y perfumes de quiet luxury.",
   });
+
+  const recientes = [...OBJETOS]
+    .filter((o) => o.verificadoISO)
+    .sort((a, b) => b.verificadoISO.localeCompare(a.verificadoISO))
+    .slice(0, 3);
 
   return (
     <>
@@ -85,6 +90,29 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {recientes.length > 0 && (
+        <section id="verificaciones">
+          <div className="section-head-row">
+            <div>
+              <p className="eyebrow" style={{ marginBottom: 6 }}>Actividad de la guía</p>
+              <h2>Últimas verificaciones</h2>
+            </div>
+          </div>
+
+          <ul className="lista-verificaciones">
+            {recientes.map((item) => (
+              <li key={item.slug}>
+                <Link to={`/${item.cat}/${item.slug}`} className="verificacion-fila">
+                  <span className="verificacion-fecha">{item.verificado}</span>
+                  <span className="verificacion-nombre">{item.nombre}</span>
+                  <span className="verificacion-cat">{CATEGORIAS[item.cat].nombre}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section id="contacto">
         <div className="inner">
