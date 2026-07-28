@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { CATEGORIAS, OBJETOS } from "../data/items";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 function CardMedia({ item }) {
   const [error, setError] = useState(false);
@@ -39,6 +40,13 @@ function CardMedia({ item }) {
 export default function CategoryPage({ catSlug }) {
   const cat = CATEGORIAS[catSlug];
   const todos = OBJETOS.filter((o) => o.cat === catSlug);
+
+  useDocumentMeta({
+    title: `${cat.nombre} — Casa Banega`,
+    description: cat.intro,
+    image: cat.imagenPortada,
+  });
+
   const tipos = useMemo(
     () => [...new Set(todos.map((o) => o.tipo).filter(Boolean))],
     [todos]

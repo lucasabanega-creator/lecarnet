@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CATEGORIAS, destacadoPorCategoria } from "../data/items";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 function CatCard({ cat, item }) {
   const [imgError, setImgError] = useState(false);
@@ -21,18 +22,26 @@ function CatCard({ cat, item }) {
         />
       )}
       <div className="cat-card-content">
-        <p className="card-cat">{item ? item.lugar : "Próximamente"}</p>
+        <p className="card-cat">{item ? cat.eyebrow : "Próximamente"}</p>
         <h3>{cat.nombre}</h3>
         <p className="card-desc">{cat.intro}</p>
-        <span className="ver-mas">
-          {item ? `Explorar ${cat.nombre.toLowerCase()}` : "Ver categoría"}
-        </span>
+        {item ? (
+          <span className="ver-mas">Explorar {cat.nombre.toLowerCase()}</span>
+        ) : (
+          <span className="sin-cta">Todavía sin fichas publicadas</span>
+        )}
       </div>
     </Link>
   );
 }
 
 export default function Home() {
+  useDocumentMeta({
+    title: "Casa Banega — Guía de experiencias, cafés y perfumes",
+    description:
+      "Casa Banega — guía curada de experiencias, cafés y perfumes de quiet luxury.",
+  });
+
   return (
     <>
       <div className="hero-video">

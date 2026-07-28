@@ -5,7 +5,7 @@
   --superficie: #F4F4F3;
   --ink: #1B1B1A;
   --texto: #4C4C49;
-  --piedra: #86867F;
+  --piedra: #6E6E68;
   --linea: #E3E3E1;
   --accent: #6E6E68;
   --accent-claro: #B7B7B1;
@@ -318,6 +318,14 @@ h1.headline-principal {
   padding: 9px 18px;
 }
 
+.sin-cta {
+  display: inline-block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.7);
+}
+
 .ver-mas-inline {
   display: inline-block;
   margin-top: 22px;
@@ -590,6 +598,9 @@ h1.headline-principal {
   color: var(--piedra);
   padding: 24px 0 60px;
 }
+
+.item-fuente p { margin: 0 0 8px; }
+.item-fuente p:last-child { margin-bottom: 0; }
 
 #contacto {
   background: var(--ink);

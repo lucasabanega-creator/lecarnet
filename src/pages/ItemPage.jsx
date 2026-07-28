@@ -1,12 +1,58 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CATEGORIAS, itemPorSlug } from "../data/items";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
+
+function construirSchema(item, cat) {
+  const imagen = item.imagenBanner || item.imagen;
+  const imagenAbsoluta = imagen ? window.location.origin + imagen : undefined;
+
+  if (item.piramide) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: item.nombre,
+      description: item.desc,
+      image: imagenAbsoluta,
+      category: item.tipo,
+      brand: item.marca ? { "@type": "Brand", name: item.marca } : undefined,
+      additionalProperty: [
+        { "@type": "PropertyValue", name: "Nota de salida", value: item.piramide.salida },
+        { "@type": "PropertyValue", name: "Nota de corazón", value: item.piramide.corazon },
+        { "@type": "PropertyValue", name: "Nota de fondo", value: item.piramide.fondo },
+      ],
+    };
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: item.nombre,
+    description: item.desc,
+    image: imagenAbsoluta,
+    articleSection: cat.nombre,
+    author: item.curador ? { "@type": "Person", name: item.curador } : undefined,
+    dateModified: item.verificadoISO,
+  };
+}
 
 export default function ItemPage() {
   const { cat: catSlug, slug } = useParams();
   const cat = CATEGORIAS[catSlug];
   const item = cat ? itemPorSlug(catSlug, slug) : null;
   const [imgError, setImgError] = useState(false);
+
+  useDocumentMeta(
+    item
+      ? {
+          title: `${item.nombre} — Casa Banega`,
+          description: item.desc,
+          image: item.imagenBanner || item.imagen,
+          type: item.piramide ? "product" : "article",
+          structuredData: construirSchema(item, cat),
+        }
+      : { title: "No encontrado — Casa Banega" }
+  );
 
   if (!cat || !item) {
     return (
@@ -82,8 +128,18 @@ export default function ItemPage() {
           </div>
         )}
 
-        {item.fuente && item.fuente.length > 0 && (
-          <p className="item-fuente">Fuentes: {item.fuente.join(" · ")}</p>
+        {(item.fuente?.length > 0 || item.curador) && (
+          <div className="item-fuente">
+            {item.curador && (
+              <p>
+                Verificado por {item.curador}
+                {item.verificado ? ` el ${item.verificado}` : ""}.
+              </p>
+            )}
+            {item.fuente && item.fuente.length > 0 && (
+              <p>Fuentes: {item.fuente.join(" · ")}</p>
+            )}
+          </div>
         )}
       </section>
     </>
