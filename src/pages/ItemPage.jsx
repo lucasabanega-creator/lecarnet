@@ -8,6 +8,12 @@ function construirSchema(item, cat) {
   const imagen = item.imagenBanner || item.imagen;
   const imagenAbsoluta = imagen ? window.location.origin + imagen : undefined;
 
+  const datosProperty = (item.datosTecnicos || []).map((d) => ({
+    "@type": "PropertyValue",
+    name: d.label,
+    value: d.valor,
+  }));
+
   if (item.piramide) {
     return {
       "@context": "https://schema.org",
@@ -21,6 +27,7 @@ function construirSchema(item, cat) {
         { "@type": "PropertyValue", name: "Nota de salida", value: item.piramide.salida },
         { "@type": "PropertyValue", name: "Nota de corazón", value: item.piramide.corazon },
         { "@type": "PropertyValue", name: "Nota de fondo", value: item.piramide.fondo },
+        ...datosProperty,
       ],
     };
   }
@@ -34,7 +41,14 @@ function construirSchema(item, cat) {
     articleSection: cat.nombre,
     author: item.curador ? { "@type": "Person", name: item.curador } : undefined,
     dateModified: item.verificadoISO,
+    additionalProperty: datosProperty.length > 0 ? datosProperty : undefined,
   };
+}
+
+function FotoGaleria({ src, alt }) {
+  const [error, setError] = useState(false);
+  if (error) return null;
+  return <img src={src} alt={alt} loading="lazy" onError={() => setError(true)} />;
 }
 
 export default function ItemPage() {
@@ -87,18 +101,44 @@ export default function ItemPage() {
         </div>
 
         <div className="item-encabezado">
-          <p className="eyebrow">{item.lugar}{item.tipo ? ` — ${item.tipo}` : ""}</p>
+          <p className="eyebrow">
+            {item.lugarVinculo ? (
+              <Link
+                to={`/${item.lugarVinculo.cat}/${item.lugarVinculo.slug}`}
+                className="eyebrow-link"
+              >
+                {item.lugar}
+              </Link>
+            ) : (
+              item.lugar
+            )}
+            {item.tipo ? ` — ${item.tipo}` : ""}
+          </p>
           <h1 className="headline-principal">{item.nombre}</h1>
           <p className="lead item-desc">{item.desc}</p>
-          {item.enlaceOficial && (
-            <a
-              className="btn-externo"
-              href={item.enlaceOficial}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ver en el sitio oficial ↗
-            </a>
+          {(item.enlaceOficial || item.enlaceMenu) && (
+            <div className="item-enlaces">
+              {item.enlaceOficial && (
+                <a
+                  className="btn-externo"
+                  href={item.enlaceOficial}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Ver en el sitio oficial ↗
+                </a>
+              )}
+              {item.enlaceMenu && (
+                <a
+                  className="btn-externo"
+                  href={item.enlaceMenu}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Ver el menú ↗
+                </a>
+              )}
+            </div>
           )}
         </div>
 
@@ -125,6 +165,31 @@ export default function ItemPage() {
                 <p className="piramide-label">Fondo</p>
                 <p className="piramide-valor">{item.piramide.fondo}</p>
               </div>
+            </div>
+          </div>
+        )}
+
+        {item.datosTecnicos && item.datosTecnicos.length > 0 && (
+          <div className="item-cuerpo">
+            <h2 className="item-subtitulo">Ficha</h2>
+            <div className="piramide">
+              {item.datosTecnicos.map((d) => (
+                <div className="piramide-nivel" key={d.label}>
+                  <p className="piramide-label">{d.label}</p>
+                  <p className="piramide-valor">{d.valor}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {item.galeria && item.galeria.length > 0 && (
+          <div className="item-cuerpo">
+            <h2 className="item-subtitulo">En imágenes</h2>
+            <div className="item-galeria">
+              {item.galeria.map((src) => (
+                <FotoGaleria key={src} src={src} alt={item.nombre} />
+              ))}
             </div>
           </div>
         )}

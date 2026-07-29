@@ -31,7 +31,7 @@ export default function Sobre() {
           </div>
           <div className="sobre-ficha-fila">
             <dt>Enfoque</dt>
-            <dd>Experiencias, cafés y perfumes de quiet luxury</dd>
+            <dd>Experiencias, gastronomía y perfumes de quiet luxury</dd>
           </div>
           <div className="sobre-ficha-fila">
             <dt>Contacto</dt>

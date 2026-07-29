@@ -26,7 +26,7 @@ export default function Header() {
         </Link>
         <nav className="nav-desktop">
           <NavLink to="/experiencias" className={linkClass}>Experiencias</NavLink>
-          <NavLink to="/cafes" className={linkClass}>Cafés</NavLink>
+          <NavLink to="/gastronomia" className={linkClass}>Gastronomía</NavLink>
           <NavLink to="/perfumes" className={linkClass}>Perfumes</NavLink>
           <a className="btn-accent" href="mailto:hola@casabanega.com">Escribinos</a>
         </nav>
@@ -41,7 +41,7 @@ export default function Header() {
       </div>
       <nav className="nav-mobile">
         <NavLink to="/experiencias" className={linkClass} onClick={() => setOpen(false)}>Experiencias</NavLink>
-        <NavLink to="/cafes" className={linkClass} onClick={() => setOpen(false)}>Cafés</NavLink>
+        <NavLink to="/gastronomia" className={linkClass} onClick={() => setOpen(false)}>Gastronomía</NavLink>
         <NavLink to="/perfumes" className={linkClass} onClick={() => setOpen(false)}>Perfumes</NavLink>
         <a className="btn-accent" href="mailto:hola@casabanega.com">Escribinos</a>
       </nav>

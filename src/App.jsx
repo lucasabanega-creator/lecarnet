@@ -24,7 +24,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/experiencias" element={<CategoryPage catSlug="experiencias" />} />
-        <Route path="/cafes" element={<CategoryPage catSlug="cafes" />} />
+        <Route path="/gastronomia" element={<CategoryPage catSlug="gastronomia" />} />
         <Route path="/perfumes" element={<CategoryPage catSlug="perfumes" />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/:cat/:slug" element={<ItemPage />} />

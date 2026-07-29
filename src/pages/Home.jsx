@@ -37,9 +37,9 @@ function CatCard({ cat, item }) {
 
 export default function Home() {
   useDocumentMeta({
-    title: "Casa Banega — Guía de experiencias, cafés y perfumes",
+    title: "Casa Banega — Guía de experiencias, gastronomía y perfumes",
     description:
-      "Casa Banega — guía curada de experiencias, cafés y perfumes de quiet luxury.",
+      "Casa Banega — guía curada de experiencias, gastronomía y perfumes de quiet luxury.",
   });
 
   const recientes = [...OBJETOS]
@@ -58,7 +58,7 @@ export default function Home() {
             Casa Banega
             <span className="titulo-hero-linea" />
           </h1>
-          <p className="subtitulo-hero">Guía de experiencias, cafés y perfumes</p>
+          <p className="subtitulo-hero">Guía de experiencias, gastronomía y perfumes</p>
         </div>
       </div>
 
@@ -67,8 +67,8 @@ export default function Home() {
         <h2 className="headline-principal">CASA BANEGA</h2>
         <p className="sub-tracked">Guía personal de quiet luxury</p>
         <p className="lead">
-          Casa Banega reúne, desde una mirada personal, los hoteles, los cafés y las casas de
-          perfumería que entendieron que el lujo verdadero no necesita anunciarse.
+          Casa Banega reúne, desde una mirada personal, los hoteles, la gastronomía y las casas
+          de perfumería que entendieron que el lujo verdadero no necesita anunciarse.
         </p>
         <p className="lead">
           Cada lugar de esta guía se publica con su historia verificada. Preferimos mostrar

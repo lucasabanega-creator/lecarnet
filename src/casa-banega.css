@@ -205,6 +205,15 @@ section { max-width: 1200px; margin: 0 auto; padding: 110px 32px; }
   margin-bottom: 18px;
 }
 
+.eyebrow-link {
+  color: var(--piedra);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 250ms ease;
+}
+
+.eyebrow-link:hover { color: var(--accent); }
+
 h2.headline-principal,
 h1.headline-principal {
   font-family: 'Cormorant Garamond', serif;
@@ -615,6 +624,12 @@ h1.headline-principal {
 .item-encabezado { margin-bottom: 48px; }
 .item-encabezado .lead.item-desc { max-width: 620px; margin: 0 0 20px; }
 
+.item-enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .btn-externo {
   display: inline-block;
   font-size: 11px;
@@ -633,6 +648,23 @@ h1.headline-principal {
   border-top: 1px solid var(--linea);
   padding: 40px 0;
 }
+
+.item-galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  max-width: 640px;
+}
+
+.item-galeria img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+  transition: transform 500ms cubic-bezier(.2,.7,.2,1);
+}
+
+.item-galeria img:hover { transform: scale(1.04); }
 
 .item-subtitulo {
   font-family: 'Cormorant Garamond', serif;
@@ -713,7 +745,7 @@ h1.headline-principal {
 
 .piramide {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 24px;
   max-width: 640px;
 }

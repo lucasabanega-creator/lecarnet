@@ -9,12 +9,12 @@ export default function Footer() {
             Casa Banega
             <span className="footer-wordmark-linea" />
           </p>
-          <p className="footer-tagline">Guía de experiencias, cafés y perfumes de quiet luxury.</p>
+          <p className="footer-tagline">Guía de experiencias, gastronomía y perfumes de quiet luxury.</p>
         </div>
         <div className="footer-col">
           <h4>Explorar</h4>
           <Link to="/experiencias">Experiencias</Link>
-          <Link to="/cafes">Cafés</Link>
+          <Link to="/gastronomia">Gastronomía</Link>
           <Link to="/perfumes">Perfumes</Link>
           <Link to="/sobre">Sobre</Link>
         </div>
