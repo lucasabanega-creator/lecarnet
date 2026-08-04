@@ -10,6 +10,11 @@ export default function Sobre() {
       "Quién escribe Casa Banega y cómo se verifica cada ficha de la guía.",
   });
 
+  const recientes = [...OBJETOS]
+    .filter((o) => o.verificadoISO)
+    .sort((a, b) => b.verificadoISO.localeCompare(a.verificadoISO))
+    .slice(0, 5);
+
   return (
     <section className="sobre-page">
       <div className="sobre-grid">
@@ -79,6 +84,23 @@ export default function Sobre() {
               </Link>
             ))}
           </div>
+        </div>
+      )}
+
+      {recientes.length > 0 && (
+        <div className="sobre-criterio">
+          <h2 className="item-subtitulo">Actividad reciente</h2>
+          <ul className="lista-verificaciones">
+            {recientes.map((item) => (
+              <li key={item.slug}>
+                <Link to={`/${item.cat}/${item.slug}`} className="verificacion-fila">
+                  <span className="verificacion-fecha">{item.verificado}</span>
+                  <span className="verificacion-nombre">{item.nombre}</span>
+                  <span className="verificacion-cat">{CATEGORIAS[item.cat].nombre}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </section>

@@ -173,71 +173,11 @@ a.btn-accent-oscuro { border-color: var(--accent-claro); color: #FFFFFF; }
 
 header.solido .nav-toggle span { background: var(--ink); }
 
-.hero-video {
-  position: relative;
-  height: 100vh;
-  min-height: 600px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-video video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  filter: grayscale(0.5);
-}
-
-.hero-video::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 45% at center, rgba(8,8,7,0.55) 0%, rgba(8,8,7,0.2) 55%, rgba(8,8,7,0) 75%),
-    linear-gradient(180deg, rgba(16,16,15,0.55) 0%, rgba(16,16,15,0.38) 45%, rgba(16,16,15,0.6) 100%);
-  z-index: 2;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  color: #FFFFFF;
-  padding: 0 24px;
-  text-shadow: 0 1px 18px rgba(0,0,0,0.4);
-}
-
-h1.titulo-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 22px;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500;
-  font-size: clamp(38px, 6.4vw, 68px);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 18px;
-  line-height: 1.08;
-}
-
 .titulo-hero-linea {
-  width: 64px;
+  width: 44px;
   height: 1px;
   background: currentColor;
   opacity: 0.6;
-}
-
-.subtitulo-hero {
-  font-size: var(--fs-12);
-  text-transform: uppercase;
-  letter-spacing: 0.32em;
-  color: var(--accent-claro);
 }
 
 section { max-width: 1200px; margin: 0 auto; padding: 110px 32px; }
@@ -377,7 +317,7 @@ h1.headline-principal {
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  filter: grayscale(18%) saturate(0.85) contrast(1.05);
+  filter: grayscale(8%) saturate(0.95) contrast(1.03);
   transition: transform 700ms cubic-bezier(.2,.7,.2,1), filter 700ms ease;
 }
 
@@ -467,7 +407,7 @@ h1.headline-principal {
   width: 100%;
   aspect-ratio: 3/2;
   object-fit: cover;
-  filter: grayscale(15%) saturate(0.9) contrast(1.03);
+  filter: grayscale(6%) saturate(0.98) contrast(1.02);
 }
 
 /* --- Estado vacío / próximamente --- */
@@ -657,7 +597,7 @@ h1.headline-principal {
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(15%) saturate(0.9) contrast(1.03);
+  filter: grayscale(6%) saturate(0.98) contrast(1.02);
 }
 
 .item-media.producto {
@@ -714,7 +654,7 @@ h1.headline-principal {
   aspect-ratio: 4/5;
   object-fit: cover;
   display: block;
-  filter: grayscale(15%) saturate(0.9) contrast(1.03);
+  filter: grayscale(6%) saturate(0.98) contrast(1.02);
   transition: transform 500ms cubic-bezier(.2,.7,.2,1);
 }
 
@@ -743,7 +683,7 @@ h1.headline-principal {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(15%) saturate(0.9) contrast(1.03);
+  filter: grayscale(6%) saturate(0.98) contrast(1.02);
   transition: transform 500ms cubic-bezier(.2,.7,.2,1);
 }
 
@@ -1030,34 +970,101 @@ footer {
   color: rgba(255,255,255,0.4);
 }
 
-/* --- Gateway (splash de entrada) --- */
+/* --- Mosaico de inicio (inspirado en el gateway de Brunello Cucinelli:
+   un solo lenguaje visual de tiles de punta a punta, sin video full-bleed
+   interrumpiendo el scroll) --- */
 
-.gateway-splash {
-  max-width: none;
-  min-height: 100vh;
+.mosaico-wrap { padding-top: 70px; padding-bottom: 70px; }
+.mosaico-primera { padding-top: 168px; }
+
+.mosaico {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Tile de video */
+
+.tile-video { justify-content: center; align-items: center; background: var(--ink); }
+
+.tile-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.18) saturate(0.95) contrast(1.02);
+}
+
+.tile-video::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16,16,15,0.35) 0%, rgba(16,16,15,0.1) 45%, rgba(16,16,15,0.5) 100%);
+}
+
+.tile-video-overlay {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 0 24px;
+  text-shadow: 0 1px 14px rgba(0,0,0,0.35);
+}
+
+.tile-marca-titulo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 72px;
-  padding: 140px 32px 80px;
-  background: radial-gradient(ellipse 90% 65% at 50% 32%, #1B1B1A 0%, #000000 100%);
-  color: #FFFFFF;
-  text-align: center;
+  gap: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(24px, 3.4vw, 34px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 12px;
+  line-height: 1.1;
 }
 
-.gateway-cita { max-width: 640px; margin: 0; }
+.tile-marca-sub {
+  font-size: var(--fs-11);
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--accent-claro);
+  margin: 0;
+}
 
-.gateway-cita p {
+/* Tile de cita */
+
+.tile-cita {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--ink);
+  color: #FFFFFF;
+  padding: 32px;
+}
+
+.tile-cita p {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: clamp(24px, 3.4vw, 34px);
+  font-size: clamp(20px, 2.4vw, 27px);
   line-height: 1.5;
   color: #FFFFFF;
-  margin: 0 0 16px;
+  margin: 0 0 14px;
 }
 
-.gateway-cita cite {
+.tile-cita cite {
   display: block;
   font-style: normal;
   font-size: var(--fs-11);
@@ -1066,62 +1073,66 @@ footer {
   color: var(--accent-claro);
 }
 
-.gateway-accesos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  width: 100%;
-  max-width: 860px;
-}
+/* Tiles claros (accesos: Filosofía, Boutique) */
 
-.gateway-bloque {
-  display: flex;
-  flex-direction: column;
+.tile-clara {
+  justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 14px;
-  padding: 48px 32px;
-  border: 1px solid rgba(255,255,255,0.18);
-  text-decoration: none;
-  color: #FFFFFF;
+  padding: 40px 32px;
+  background: var(--superficie);
+  border: 1px solid var(--linea);
   transition: border-color 300ms ease, background 300ms ease;
 }
 
-.gateway-bloque:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.03); }
+.tile-clara:hover { border-color: var(--piedra); background: #EFEEEA; }
 
-.gateway-bloque-eyebrow {
-  font-size: var(--fs-10);
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--accent-claro);
-  margin: 0;
-}
-
-.gateway-bloque-titulo {
+.tile-titulo {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
-  font-size: var(--fs-22);
+  font-size: var(--fs-h3);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
+  color: var(--ink);
   margin: 0;
 }
 
-.gateway-bloque-apoyo {
-  font-size: var(--fs-13);
+.tile-apoyo {
+  font-size: var(--fs-body-sm);
   line-height: 1.6;
-  color: var(--accent-claro);
+  color: var(--texto);
   margin: 0;
   max-width: 320px;
 }
 
-.gateway-bloque .ver-mas { margin-top: 6px; }
+.tile-clara .ver-mas-inline { margin-top: 4px; }
 
-.gateway-categorias {
-  max-width: none;
-  background: radial-gradient(ellipse 90% 70% at 50% 15%, #1B1B1A 0%, #000000 100%);
-  padding: 90px 32px;
+/* Tile oscuro a todo el ancho (CTA de colaboración) */
+
+.tile-oscura {
+  aspect-ratio: auto;
+  min-height: 320px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: 64px 32px;
+  background: var(--ink);
+  color: #FFFFFF;
 }
 
-.gateway-categorias .cat-grid { max-width: 1200px; margin: 0 auto; }
+.tile-oscura .eyebrow { color: var(--accent-claro); }
+
+.tile-titulo-grande {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: var(--fs-h1);
+  color: #FFFFFF;
+  margin: 0 0 18px;
+}
+
+.tile-apoyo-oscura { color: rgba(255,255,255,0.75); max-width: 460px; margin-bottom: 30px; }
 
 /* --- Iconografía de categorías --- */
 
@@ -1206,8 +1217,9 @@ footer {
   .category-editorial-wrap { padding: 0 24px; }
   .verificacion-fila { flex-wrap: wrap; gap: 4px 16px; }
   .verificacion-fecha { flex-basis: 100%; order: 3; }
-  .gateway-splash { padding: 120px 24px 64px; gap: 56px; }
-  .gateway-accesos { grid-template-columns: 1fr; }
-  .gateway-categorias { padding: 64px 24px; }
   .filosofia-page { padding-top: 140px; }
+  .mosaico { grid-template-columns: 1fr; }
+  .mosaico-primera { padding-top: 140px; }
+  .tile { aspect-ratio: auto; min-height: 340px; }
+  .tile-oscura { min-height: 280px; padding: 48px 24px; }
 }
