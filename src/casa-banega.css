@@ -889,6 +889,132 @@ footer {
   color: rgba(255,255,255,0.4);
 }
 
+/* --- Gateway (splash de entrada) --- */
+
+.gateway-splash {
+  max-width: none;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 72px;
+  padding: 140px 32px 80px;
+  background: radial-gradient(ellipse 90% 65% at 50% 32%, #1B1B1A 0%, #000000 100%);
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.gateway-cita { max-width: 640px; margin: 0; }
+
+.gateway-cita p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(24px, 3.4vw, 34px);
+  line-height: 1.5;
+  color: #FFFFFF;
+  margin: 0 0 16px;
+}
+
+.gateway-cita cite {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent-claro);
+}
+
+.gateway-accesos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+  max-width: 860px;
+}
+
+.gateway-bloque {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 48px 32px;
+  border: 1px solid rgba(255,255,255,0.18);
+  text-decoration: none;
+  color: #FFFFFF;
+  transition: border-color 300ms ease, background 300ms ease;
+}
+
+.gateway-bloque:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.03); }
+
+.gateway-bloque-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.gateway-bloque-apoyo {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--accent-claro);
+  margin: 0;
+  max-width: 320px;
+}
+
+.gateway-bloque .ver-mas { margin-top: 6px; }
+
+.gateway-categorias {
+  max-width: none;
+  background: radial-gradient(ellipse 90% 70% at 50% 15%, #1B1B1A 0%, #000000 100%);
+  padding: 90px 32px;
+}
+
+.gateway-categorias .cat-grid { max-width: 1200px; margin: 0 auto; }
+
+/* --- Iconografía de categorías --- */
+
+.cat-icono { display: block; }
+.cat-card-icono { color: #FFFFFF; margin-bottom: 12px; }
+
+/* --- Página Filosofía --- */
+
+.filosofia-page { padding-top: 168px; padding-bottom: 100px; }
+
+.titulo-divisor {
+  display: inline-block;
+  width: 48px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+  margin: 8px 0 40px;
+}
+
+.filosofia-cuerpo { max-width: 640px; margin: 0 auto; }
+.filosofia-cuerpo .item-texto { margin: 0 auto 22px; }
+
+.filosofia-cita { margin: 44px auto; max-width: 520px; }
+
+.filosofia-cita p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 28px);
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+
+.filosofia-cita cite {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--piedra);
+}
+
 @media (max-width: 860px) {
   .nav-desktop { display: none; }
   .nav-toggle { display: flex; }
@@ -931,4 +1057,8 @@ footer {
   .category-editorial-wrap { padding: 0 24px; }
   .verificacion-fila { flex-wrap: wrap; gap: 4px 16px; }
   .verificacion-fecha { flex-basis: 100%; order: 3; }
+  .gateway-splash { padding: 120px 24px 64px; gap: 56px; }
+  .gateway-accesos { grid-template-columns: 1fr; }
+  .gateway-categorias { padding: 64px 24px; }
+  .filosofia-page { padding-top: 140px; }
 }

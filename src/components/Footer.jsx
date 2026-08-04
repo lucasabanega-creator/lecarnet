@@ -17,6 +17,7 @@ export default function Footer() {
           <Link to="/gastronomia">Gastronomía</Link>
           <Link to="/perfumes">Perfumes</Link>
           <Link to="/sobre">Sobre</Link>
+          <Link to="/filosofia">Filosofía</Link>
         </div>
         <div className="footer-col">
           <h4>Contacto</h4>
