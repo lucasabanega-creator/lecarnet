@@ -2,9 +2,9 @@
 
 :root {
   --blanco: #FFFFFF;
-  --superficie: #F4F4F3;
+  --superficie: #FAFAFA;
   --ink: #1B1B1A;
-  --texto: #4C4C49;
+  --texto: #2B2B2B;
   --piedra: #6E6E68;
   --linea: #E3E3E1;
   --accent: #6E6E68;
@@ -51,6 +51,8 @@
   --space-7: 48px;
   --space-8: 70px;
   --space-9: 110px;
+  --space-10: 140px;
+  --space-11: 180px;
 }
 
 * { box-sizing: border-box; }
@@ -89,7 +91,7 @@ header.solido {
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 22px 32px;
+  padding: 30px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -150,6 +152,22 @@ header.solido a.btn-accent { color: var(--ink); border-color: var(--piedra); }
 a.btn-accent:hover { background: var(--accent); color: #FFFFFF !important; border-color: var(--accent); }
 
 a.btn-accent-oscuro { border-color: var(--accent-claro); color: #FFFFFF; }
+
+/* El "Escribinos" del header: link simple, sin caja. El de la tile oscura
+   "Trabajemos juntos" no entra acá (no vive en .nav-desktop/.nav-mobile). */
+.nav-desktop a.btn-accent,
+.nav-mobile a.btn-accent {
+  padding: 0;
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.nav-desktop a.btn-accent:hover,
+.nav-mobile a.btn-accent:hover {
+  background: none;
+  color: var(--accent) !important;
+}
 
 .nav-toggle {
   display: none;
@@ -974,8 +992,8 @@ footer {
    un solo lenguaje visual de tiles de punta a punta, sin video full-bleed
    interrumpiendo el scroll) --- */
 
-.mosaico-wrap { padding-top: 70px; padding-bottom: 70px; }
-.mosaico-primera { padding-top: 168px; }
+.mosaico-wrap { padding-top: var(--space-11); padding-bottom: var(--space-11); }
+.mosaico-primera { padding-top: 190px; }
 
 .mosaico {
   display: grid;
@@ -1003,7 +1021,7 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(0.18) saturate(0.95) contrast(1.02);
+  filter: grayscale(0.95) contrast(1.05);
 }
 
 .tile-video::after {
@@ -1012,6 +1030,10 @@ footer {
   inset: 0;
   background: linear-gradient(180deg, rgba(16,16,15,0.35) 0%, rgba(16,16,15,0.1) 45%, rgba(16,16,15,0.5) 100%);
 }
+
+/* Lista para usar en fotos reales de Filosofía/Sobre cuando existan.
+   Gastronomía y Perfumes se quedan a color: no aplicar ahí. */
+.foto-narrativa { filter: grayscale(1) contrast(1.05); }
 
 .tile-video-overlay {
   position: relative;
@@ -1050,8 +1072,9 @@ footer {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: var(--ink);
-  color: #FFFFFF;
+  background: var(--superficie);
+  border: 1px solid var(--linea);
+  color: var(--ink);
   padding: 32px;
 }
 
@@ -1060,7 +1083,7 @@ footer {
   font-style: italic;
   font-size: clamp(20px, 2.4vw, 27px);
   line-height: 1.5;
-  color: #FFFFFF;
+  color: var(--ink);
   margin: 0 0 14px;
 }
 
@@ -1070,7 +1093,7 @@ footer {
   font-size: var(--fs-11);
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--accent-claro);
+  color: var(--piedra);
 }
 
 /* Tiles claros (accesos: Filosofía, Boutique) */
@@ -1141,7 +1164,7 @@ footer {
 
 /* --- Página Filosofía --- */
 
-.filosofia-page { padding-top: 168px; padding-bottom: 100px; }
+.filosofia-page { padding-top: 190px; padding-bottom: var(--space-11); }
 
 .titulo-divisor {
   display: inline-block;
@@ -1155,7 +1178,19 @@ footer {
 .filosofia-cuerpo { max-width: 640px; margin: 0 auto; }
 .filosofia-cuerpo .item-texto { margin: 0 auto 22px; }
 
-.filosofia-cita { margin: 44px auto; max-width: 520px; }
+.capitulo-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--fs-h3);
+  color: var(--ink);
+  margin: 0 0 20px;
+}
+
+.capitulo { margin-bottom: var(--space-11); }
+.capitulo:last-child { margin-bottom: 0; }
+
+.filosofia-cita { margin: 32px auto; max-width: 520px; }
 
 .filosofia-cita p {
   font-family: 'Cormorant Garamond', serif;
