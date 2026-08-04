@@ -7,6 +7,8 @@ import CategoryPage from "./pages/CategoryPage";
 import ItemPage from "./pages/ItemPage";
 import Sobre from "./pages/Sobre";
 import Filosofia from "./pages/Filosofia";
+import Notas from "./pages/Notas";
+import Nota from "./pages/Nota";
 import "./casa-banega.css";
 
 function ScrollToTop() {
@@ -29,6 +31,8 @@ export default function App() {
         <Route path="/perfumes" element={<CategoryPage catSlug="perfumes" />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/filosofia" element={<Filosofia />} />
+        <Route path="/notas" element={<Notas />} />
+        <Route path="/notas/:slug" element={<Nota />} />
         <Route path="/:cat/:slug" element={<ItemPage />} />
       </Routes>
       <Footer />

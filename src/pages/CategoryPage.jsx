@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { CATEGORIAS, OBJETOS } from "../data/items";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import CategoryIcon from "../components/CategoryIcon";
 
 function CardMedia({ item }) {
   const [error, setError] = useState(false);
@@ -66,8 +67,9 @@ export default function CategoryPage({ catSlug }) {
   });
 
   return (
-    <>
+    <div data-cat={catSlug}>
       <section className="page-hero centrado">
+        <CategoryIcon slug={catSlug} size={30} className="pagina-categoria-icono" />
         <p className="eyebrow">{cat.eyebrow}</p>
         <h1 className="headline-principal">{cat.nombre}</h1>
         <p className="lead" style={{ maxWidth: 620, margin: "0 auto" }}>{cat.intro}</p>
@@ -141,6 +143,6 @@ export default function CategoryPage({ catSlug }) {
           )}
         </section>
       )}
-    </>
+    </div>
   );
 }

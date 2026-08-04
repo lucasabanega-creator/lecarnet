@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { CATEGORIAS, itemPorSlug } from "../data/items";
+import { CATEGORIAS, OBJETOS, itemPorSlug } from "../data/items";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import VerificationBadge from "../components/VerificationBadge";
 
@@ -79,8 +79,13 @@ export default function ItemPage() {
     );
   }
 
+  const relacionados = [...OBJETOS]
+    .filter((o) => o.slug !== item.slug)
+    .sort((a, b) => (a.cat === item.cat ? -1 : 0) - (b.cat === item.cat ? -1 : 0))
+    .slice(0, 3);
+
   return (
-    <>
+    <div data-cat={cat.slug}>
       <section className="item-page">
         <Link to={`/${cat.slug}`} className="volver">← {cat.nombre}</Link>
 
@@ -149,6 +154,13 @@ export default function ItemPage() {
           </div>
         )}
 
+        {item.porQueElegido && (
+          <div className="item-cuerpo">
+            <h2 className="item-subtitulo">Por qué la elegí</h2>
+            <p className="item-texto">{item.porQueElegido}</p>
+          </div>
+        )}
+
         {item.piramide && (
           <div className="item-cuerpo">
             <h2 className="item-subtitulo">Pirámide olfativa</h2>
@@ -199,7 +211,29 @@ export default function ItemPage() {
           verificado={item.verificado}
           fuentes={item.fuente}
         />
+
+        {relacionados.length > 0 && (
+          <div className="item-cuerpo">
+            <h2 className="item-subtitulo">Seguí en la guía</h2>
+            <div className="item-relacionados">
+              {relacionados.map((rel) => (
+                <Link
+                  key={rel.slug}
+                  to={`/${rel.cat}/${rel.slug}`}
+                  className="item-relacionado"
+                  style={{ background: rel.tono }}
+                >
+                  {rel.imagen && <img src={rel.imagen} alt="" />}
+                  <span className="item-relacionado-content">
+                    <span className="card-cat">{CATEGORIAS[rel.cat].nombre}</span>
+                    <span className="item-relacionado-nombre">{rel.nombre}</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
-    </>
+    </div>
   );
 }

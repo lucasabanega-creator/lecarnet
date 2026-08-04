@@ -47,6 +47,8 @@ export const OBJETOS = [
       corazon: "Té negro de Sri Lanka",
       fondo: "Almizcle",
     },
+    porQueElegido:
+      "Lo elegí porque es un caso raro: un perfume que existió nueve años como secreto de hospitalidad antes de ser un producto. La mayoría de los lanzamientos van al revés — primero se venden, y si funcionan, después se vuelven parte de la experiencia de un hotel.",
     fuente: ["bulgari.com", "fragrantica.com", "nstperfume.com", "scentadvice.com"],
     enlaceOficial: "https://www.bulgari.com/en-us/42504.html",
     curador: "Lucas Banega",
@@ -72,6 +74,8 @@ export const OBJETOS = [
       { label: "Barrio", valor: "Recoleta" },
       { label: "Imprescindible", valor: "Flat white y croissant" },
     ],
+    porQueElegido:
+      "Elegí Nano Café por un detalle que se repite en los buenos cafés de especialidad y casi nunca en los otros: la carta marca qué es vegetariano, vegano, sin gluten y sin lácteos sin que se lo pidas. Es la clase de cuidado que no se nota hasta que falta en otro lado.",
     fuente: ["instagram.com/nano.feca"],
     enlaceOficial: "https://www.instagram.com/nano.feca/",
     enlaceMenu: "https://drive.google.com/drive/folders/14eb9AZrmZkBXUPp-8jwyxMf7PPw5lY0n",

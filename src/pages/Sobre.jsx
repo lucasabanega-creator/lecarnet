@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import Monogram from "../components/Monogram";
+import { CATEGORIAS, OBJETOS } from "../data/items";
 
 export default function Sobre() {
   useDocumentMeta({
@@ -59,6 +61,26 @@ export default function Sobre() {
           detrás de la palabra "verificado" que aparece en cada ficha de Casa Banega.
         </p>
       </div>
+
+      {OBJETOS.some((item) => item.porQueElegido) && (
+        <div className="sobre-criterio">
+          <h2 className="item-subtitulo">Criterio de selección</h2>
+          <p className="item-texto" style={{ marginBottom: 24 }}>
+            No hay una fórmula fija — pero cada ficha publicada tiene una razón concreta
+            detrás, no solo "está de moda" o "es lindo". Dos ejemplos reales:
+          </p>
+          <div className="sobre-ejemplos">
+            {OBJETOS.filter((item) => item.porQueElegido).map((item) => (
+              <Link key={item.slug} to={`/${item.cat}/${item.slug}`} className="sobre-ejemplo">
+                <p className="card-cat">{CATEGORIAS[item.cat].nombre}</p>
+                <h3 className="sobre-ejemplo-nombre">{item.nombre}</h3>
+                <p className="item-texto">{item.porQueElegido}</p>
+                <span className="ver-mas-inline">Ver la ficha</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

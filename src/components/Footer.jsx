@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom";
+import { CATEGORIAS, destacadoPorCategoria } from "../data/items";
+
+const CATEGORIAS_CON_CONTENIDO = Object.values(CATEGORIAS).filter((cat) =>
+  destacadoPorCategoria(cat.slug)
+);
 
 export default function Footer() {
   return (
@@ -13,9 +18,9 @@ export default function Footer() {
         </div>
         <div className="footer-col">
           <h4>Explorar</h4>
-          <Link to="/experiencias">Experiencias</Link>
-          <Link to="/gastronomia">Gastronomía</Link>
-          <Link to="/perfumes">Perfumes</Link>
+          {CATEGORIAS_CON_CONTENIDO.map((cat) => (
+            <Link key={cat.slug} to={`/${cat.slug}`}>{cat.nombre}</Link>
+          ))}
           <Link to="/sobre">Sobre</Link>
           <Link to="/filosofia">Filosofía</Link>
         </div>

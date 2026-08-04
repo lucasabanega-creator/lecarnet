@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="hero-video">
+      <div className="hero-video" data-tema="oscuro">
         <video autoPlay muted loop playsInline>
           <source src="/hero.mp4" type="video/mp4" />
         </video>

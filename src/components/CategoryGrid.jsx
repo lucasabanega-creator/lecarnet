@@ -8,11 +8,7 @@ function CatCard({ cat, item }) {
   const mostrarImagen = cat.imagenPortada && !imgError;
 
   return (
-    <Link
-      to={`/${cat.slug}`}
-      className="cat-card"
-      style={{ background: item ? item.tono : "#F4F4F4" }}
-    >
+    <Link to={`/${cat.slug}`} className="cat-card" style={{ background: item.tono }}>
       {mostrarImagen && (
         <img
           src={cat.imagenPortada}
@@ -23,24 +19,24 @@ function CatCard({ cat, item }) {
       )}
       <div className="cat-card-content">
         <CategoryIcon slug={cat.slug} className="cat-card-icono" />
-        <p className="card-cat">{item ? cat.eyebrow : "Próximamente"}</p>
+        <p className="card-cat">{cat.eyebrow}</p>
         <h3>{cat.nombre}</h3>
         <p className="card-desc">{cat.intro}</p>
-        {item ? (
-          <span className="ver-mas">Explorar {cat.nombre.toLowerCase()}</span>
-        ) : (
-          <span className="sin-cta">Fichas en curación — próximamente</span>
-        )}
+        <span className="ver-mas">Explorar {cat.nombre.toLowerCase()}</span>
       </div>
     </Link>
   );
 }
 
 export default function CategoryGrid() {
+  const categorias = Object.values(CATEGORIAS)
+    .map((cat) => ({ cat, item: destacadoPorCategoria(cat.slug) }))
+    .filter(({ item }) => item);
+
   return (
     <div className="cat-grid">
-      {Object.values(CATEGORIAS).map((cat) => (
-        <CatCard key={cat.slug} cat={cat} item={destacadoPorCategoria(cat.slug)} />
+      {categorias.map(({ cat, item }) => (
+        <CatCard key={cat.slug} cat={cat} item={item} />
       ))}
     </div>
   );
