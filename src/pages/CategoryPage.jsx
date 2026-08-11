@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CATEGORIAS, OBJETOS } from "../data/items";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import CategoryIcon from "../components/CategoryIcon";
+import SectionDivider from "../components/SectionDivider";
 
 function CardMedia({ item }) {
   const [error, setError] = useState(false);
@@ -76,9 +77,12 @@ export default function CategoryPage({ catSlug }) {
       </section>
 
       {cat.imagenPortada && (
-        <div className="category-editorial-wrap">
-          <img className="category-editorial" src={cat.imagenPortada} alt="" />
-        </div>
+        <>
+          <SectionDivider />
+          <div className="category-editorial-wrap">
+            <img className="category-editorial" src={cat.imagenPortada} alt="" />
+          </div>
+        </>
       )}
 
       {todos.length === 0 ? (

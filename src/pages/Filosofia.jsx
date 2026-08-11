@@ -1,4 +1,5 @@
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import Monogram from "../components/Monogram";
 
 export default function Filosofia() {
   useDocumentMeta({
@@ -14,6 +15,7 @@ export default function Filosofia() {
 
       <div className="filosofia-cuerpo">
         <div className="capitulo">
+          <Monogram size={32} className="capitulo-sello" />
           <p className="capitulo-titulo">El criterio</p>
           <p className="item-texto">
             Casa Banega no es un ranking ni un catálogo de tendencias. Es un archivo personal de
@@ -23,6 +25,7 @@ export default function Filosofia() {
         </div>
 
         <div className="capitulo">
+          <Monogram size={32} className="capitulo-sello" />
           <p className="capitulo-titulo">La verificación</p>
           <p className="item-texto">
             Verificamos antes de publicar. Preferimos una ficha confirmada a diez inventadas,
@@ -33,6 +36,7 @@ export default function Filosofia() {
         </div>
 
         <div className="capitulo">
+          <Monogram size={32} className="capitulo-sello" />
           <p className="capitulo-titulo">La idea de suficiencia</p>
           <blockquote className="filosofia-cita">
             <p>“Quien sabe que tiene suficiente, es rico.”</p>

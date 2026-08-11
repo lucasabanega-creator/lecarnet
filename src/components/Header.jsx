@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { CATEGORIAS, destacadoPorCategoria } from "../data/items";
+import Monogram from "./Monogram";
 
 const CATEGORIAS_CON_CONTENIDO = Object.values(CATEGORIAS).filter((cat) =>
   destacadoPorCategoria(cat.slug)
@@ -12,6 +13,10 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const headerRef = useRef(null);
   const intersectando = useRef(new Set());
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const header = headerRef.current;
@@ -52,46 +57,38 @@ export default function Header() {
     };
   }, [pathname]);
 
-  const solido = !sobreOscuro;
+  const solido = !sobreOscuro || open;
   const linkClass = ({ isActive }) => "navlink" + (isActive ? " activo" : "");
 
   return (
-    <header ref={headerRef} className={(solido ? "solido" : "") + (open ? " abierto" : "")}>
-      <div className="header-inner">
-        <Link to="/" className="wordmark" onClick={() => setOpen(false)}>
-          <span className="wordmark-texto">Casa Banega</span>
-          <span className="wordmark-linea" />
-        </Link>
-        <nav className="nav-desktop">
+    <>
+      <header ref={headerRef} className={(solido ? "solido" : "") + (open ? " abierto" : "")}>
+        <div className="header-inner">
+          <button className="menu-toggle" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+            <span>{open ? "Cerrar" : "Menú"}</span>
+          </button>
+
+          <Link to="/" className="wordmark" onClick={() => setOpen(false)}>
+            <Monogram size={22} className="wordmark-monograma" />
+            <span className="wordmark-texto">Casa Banega</span>
+          </Link>
+
+          <a className="header-cta" href="mailto:hola@casabanega.com">Escribinos</a>
+        </div>
+      </header>
+
+      <div className={"menu-overlay" + (open ? " abierto" : "")}>
+        <nav className="menu-overlay-nav">
           {CATEGORIAS_CON_CONTENIDO.map((cat) => (
-            <NavLink key={cat.slug} to={`/${cat.slug}`} className={linkClass}>
+            <NavLink key={cat.slug} to={`/${cat.slug}`} className={linkClass} onClick={() => setOpen(false)}>
               {cat.nombre}
             </NavLink>
           ))}
-          <a className="btn-accent" href="mailto:hola@casabanega.com">Escribinos</a>
+          <NavLink to="/sobre" className={linkClass} onClick={() => setOpen(false)}>Sobre</NavLink>
+          <NavLink to="/filosofia" className={linkClass} onClick={() => setOpen(false)}>Filosofía</NavLink>
         </nav>
-        <button
-          className="nav-toggle"
-          aria-label="Abrir menú"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span />
-          <span />
-        </button>
+        <a className="menu-overlay-cta" href="mailto:hola@casabanega.com">hola@casabanega.com</a>
       </div>
-      <nav className="nav-mobile">
-        {CATEGORIAS_CON_CONTENIDO.map((cat) => (
-          <NavLink
-            key={cat.slug}
-            to={`/${cat.slug}`}
-            className={linkClass}
-            onClick={() => setOpen(false)}
-          >
-            {cat.nombre}
-          </NavLink>
-        ))}
-        <a className="btn-accent" href="mailto:hola@casabanega.com">Escribinos</a>
-      </nav>
-    </header>
+    </>
   );
 }
