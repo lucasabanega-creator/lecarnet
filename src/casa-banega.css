@@ -345,13 +345,18 @@ h1.headline-principal {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(16,16,15,0.66) 0%, rgba(16,16,15,0.05) 55%);
+  background: linear-gradient(180deg, rgba(16,16,15,0.4) 0%, rgba(16,16,15,0.18) 45%, rgba(16,16,15,0.5) 100%);
 }
 
 .cat-banner-content {
   position: absolute;
-  left: 0; right: 0; bottom: 0;
+  inset: 0;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: 48px 32px;
   color: #FFFFFF;
 }
