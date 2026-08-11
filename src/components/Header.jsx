@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { CATEGORIAS, destacadoPorCategoria } from "../data/items";
-import Monogram from "./Monogram";
 
 const CATEGORIAS_CON_CONTENIDO = Object.values(CATEGORIAS).filter((cat) =>
   destacadoPorCategoria(cat.slug)
@@ -69,7 +68,6 @@ export default function Header() {
           </button>
 
           <Link to="/" className="wordmark" onClick={() => setOpen(false)}>
-            <Monogram size={22} className="wordmark-monograma" />
             <span className="wordmark-texto">Casa Banega</span>
           </Link>
 

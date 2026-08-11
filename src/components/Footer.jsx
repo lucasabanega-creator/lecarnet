@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { CATEGORIAS, destacadoPorCategoria } from "../data/items";
-import Monogram from "./Monogram";
 
 const CATEGORIAS_CON_CONTENIDO = Object.values(CATEGORIAS).filter((cat) =>
   destacadoPorCategoria(cat.slug)
@@ -11,10 +10,7 @@ export default function Footer() {
     <footer>
       <div className="footer-inner">
         <div className="footer-top">
-          <p className="footer-wordmark">
-            <Monogram size={24} />
-            Casa Banega
-          </p>
+          <p className="footer-wordmark">Casa Banega</p>
           <a
             className="footer-social"
             href="https://instagram.com/casabanega"

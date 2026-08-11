@@ -130,8 +130,6 @@ a.wordmark {
   transition: color 400ms ease;
 }
 
-a.wordmark .monograma { flex-shrink: 0; }
-
 header.solido a.wordmark { color: var(--ink); }
 
 a.header-cta {
@@ -204,20 +202,11 @@ header.solido a.header-cta:hover { color: var(--accent); }
 
 .menu-overlay-cta:hover { color: var(--accent); }
 
-.titulo-hero-linea {
-  width: 44px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.6;
-}
-
 section { max-width: 1200px; margin: 0 auto; padding: 110px 32px; }
 
 .centrado { text-align: center; }
 
 .page-hero { padding-top: 168px; padding-bottom: 70px; }
-
-.pagina-categoria-icono { color: var(--accent); margin: 0 auto 18px; }
 
 .eyebrow {
   font-size: var(--fs-11);
@@ -264,28 +253,8 @@ h1.headline-principal {
 
 .page-hero p.lead { color: var(--texto); font-size: var(--fs-16); line-height: 1.85; }
 
-.section-head-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.section-head-row h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500;
-  font-size: var(--fs-32);
-  margin: 8px 0 0;
-  color: var(--ink);
-}
-
-.cat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
+.cat-intro { padding-top: 56px; padding-bottom: 56px; }
+.cat-intro .lead { color: var(--texto); }
 
 /* --- Últimas verificaciones (home) --- */
 
@@ -333,84 +302,12 @@ h1.headline-principal {
   color: var(--piedra);
 }
 
-.cat-card {
-  position: relative;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  text-decoration: none;
-  display: block;
-}
-
-.cat-card-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  filter: grayscale(8%) saturate(0.95) contrast(1.03);
-  transition: transform 700ms cubic-bezier(.2,.7,.2,1), filter 700ms ease;
-}
-
-.cat-card:hover .cat-card-img {
-  transform: scale(1.045);
-  filter: grayscale(6%) saturate(0.95) contrast(1.05);
-}
-
-.cat-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, rgba(16,16,15,0.74) 0%, rgba(16,16,15,0.1) 60%);
-  z-index: 1;
-}
-
-.cat-card-content {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  z-index: 2;
-  padding: 28px;
-  color: #FFFFFF;
-}
-
-.cat-card-content h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500;
-  font-size: var(--fs-26);
-  margin: 0 0 10px;
-}
-
-.cat-card-content .card-desc {
-  font-size: var(--fs-13);
-  line-height: 1.6;
-  color: rgba(255,255,255,0.85);
-  margin: 0 0 16px;
-  max-width: 100%;
-}
-
 .card-cat {
   font-size: var(--fs-10);
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--accent-claro);
   margin-bottom: 10px;
-}
-
-.ver-mas {
-  display: inline-block;
-  font-size: var(--fs-10);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  border: 1px solid rgba(255,255,255,0.6);
-  padding: 9px 18px;
-}
-
-.sin-cta {
-  display: inline-block;
-  font-size: var(--fs-10);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: rgba(255,255,255,0.7);
 }
 
 .ver-mas-inline {
@@ -425,21 +322,42 @@ h1.headline-principal {
   padding-bottom: 4px;
 }
 
-/* --- Imagen editorial de categoría --- */
+/* --- Banner full-bleed de categoría --- */
 
-.category-editorial-wrap {
-  max-width: 620px;
-  margin: 0 auto 20px;
-  padding: 0 32px;
-}
-
-.category-editorial {
-  display: block;
+.cat-banner {
+  position: relative;
   width: 100%;
-  aspect-ratio: 3/2;
-  object-fit: cover;
-  filter: grayscale(6%) saturate(0.98) contrast(1.02);
+  aspect-ratio: 21/9;
+  min-height: 420px;
+  overflow: hidden;
 }
+
+.cat-banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(8%) saturate(0.95) contrast(1.03);
+}
+
+.cat-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(16,16,15,0.66) 0%, rgba(16,16,15,0.05) 55%);
+}
+
+.cat-banner-content {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 1;
+  padding: 48px 32px;
+  color: #FFFFFF;
+}
+
+.cat-banner-content .eyebrow { color: var(--accent-claro); }
+.cat-banner-content .headline-principal { color: #FFFFFF; margin: 0; }
 
 /* --- Estado vacío / próximamente --- */
 
@@ -1013,22 +931,18 @@ footer {
   color: rgba(255,255,255,0.4);
 }
 
-/* --- Mosaico de inicio (inspirado en el gateway de Brunello Cucinelli:
-   un solo lenguaje visual de tiles de punta a punta, sin video full-bleed
-   interrumpiendo el scroll) --- */
+/* --- Mosaico de inicio: cuadrantes grandes con las categorías --- */
 
 .mosaico-wrap { padding-top: var(--space-11); padding-bottom: var(--space-11); }
 .mosaico-primera { padding-top: 190px; padding-bottom: 0; }
-
-/* Hero de apertura: una sola tile a todo el ancho, no en grilla */
-.tile.hero-tile { aspect-ratio: 21/10; min-height: 460px; }
-@media (max-width: 860px) { .tile.hero-tile { aspect-ratio: 3/4; min-height: 420px; } }
 
 .mosaico {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
+
+.mosaico-grande .tile { min-height: 480px; }
 
 .tile {
   position: relative;
@@ -1040,90 +954,59 @@ footer {
   color: inherit;
 }
 
-/* Tile de video */
+/* Tile de cita (Filosofía): mismo lenguaje foto+degradé que .tile-foto */
 
-.tile-video { justify-content: center; align-items: center; background: var(--ink); }
+a.tile-cita {
+  color: #FFFFFF;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 32px;
+}
 
-.tile-video video {
+.tile-cita-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(0.95) contrast(1.05);
+  z-index: 0;
+  filter: grayscale(15%) contrast(1.05);
+  transition: transform 700ms cubic-bezier(.2,.7,.2,1);
 }
 
-.tile-video::after {
+.tile-cita:hover .tile-cita-img { transform: scale(1.045); }
+
+.tile-cita::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(16,16,15,0.35) 0%, rgba(16,16,15,0.1) 45%, rgba(16,16,15,0.5) 100%);
-}
-
-/* Lista para usar en fotos reales de Filosofía/Sobre cuando existan.
-   Gastronomía y Perfumes se quedan a color: no aplicar ahí. */
-.foto-narrativa { filter: grayscale(1) contrast(1.05); }
-
-.tile-video-overlay {
-  position: relative;
+  background: linear-gradient(180deg, rgba(16,16,15,0.32) 0%, rgba(16,16,15,0.18) 45%, rgba(16,16,15,0.58) 100%);
   z-index: 1;
-  text-align: center;
-  color: #FFFFFF;
-  padding: 0 24px;
-  text-shadow: 0 1px 14px rgba(0,0,0,0.35);
 }
 
-.tile-marca-titulo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500;
-  font-size: clamp(24px, 3.4vw, 34px);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 12px;
-  line-height: 1.1;
-}
+.tile-cita-content { position: relative; z-index: 2; }
 
-.tile-marca-sub {
-  font-size: var(--fs-11);
-  text-transform: uppercase;
-  letter-spacing: 0.24em;
-  color: var(--accent-claro);
-  margin: 0;
-}
-
-/* Tile de cita */
-
-.tile-cita {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: var(--superficie);
-  border: 1px solid var(--linea);
-  color: var(--ink);
-  padding: 32px;
-}
-
-.tile-cita p {
+.tile-cita-quote {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: clamp(20px, 2.4vw, 27px);
   line-height: 1.5;
-  color: var(--ink);
+  color: #FFFFFF;
   margin: 0 0 14px;
 }
 
-.tile-cita cite {
-  display: block;
+.tile-cita-autor {
   font-style: normal;
   font-size: var(--fs-11);
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--piedra);
+  color: rgba(255,255,255,0.75);
+  margin: 0;
 }
+
+.tile-cita .card-cat { color: var(--accent-claro); }
+.tile-cita .ver-mas-inline { margin-top: 22px; color: #FFFFFF; border-bottom-color: rgba(255,255,255,0.4); }
 
 /* Tiles claros (accesos: Filosofía, Boutique) */
 
@@ -1162,7 +1045,7 @@ footer {
 
 /* Tile foto: cuarta celda del mosaico 2x2, imagen real de una categoría */
 
-.tile-foto {
+a.tile-foto {
   color: #FFFFFF;
   justify-content: flex-end;
   padding: 26px;
@@ -1214,71 +1097,7 @@ a.btn-accent {
 
 a.btn-accent:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); }
 
-/* --- Divisor de sección: sello monograma entre bloques full-width --- */
-
-.section-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 8px 32px 48px;
-}
-
-.section-divider-linea {
-  flex: 1;
-  height: 1px;
-  background: var(--linea);
-  max-width: 220px;
-}
-
-.section-divider-sello { color: var(--accent-claro); flex-shrink: 0; }
-
-/* --- Fila editorial (última actividad, home) --- */
-
-.ticker {
-  border-top: 1px solid var(--linea);
-}
-
-.ticker-fila {
-  display: flex;
-  align-items: baseline;
-  gap: 28px;
-  padding: 26px 4px;
-  border-bottom: 1px solid var(--linea);
-  text-decoration: none;
-  transition: padding-left 300ms ease, color 300ms ease;
-}
-
-.ticker-fila:hover { padding-left: 14px; color: var(--accent); }
-
-.ticker-fecha {
-  flex: 0 0 auto;
-  font-size: var(--fs-11);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--piedra);
-}
-
-.ticker-titulo {
-  flex: 1;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: var(--fs-22);
-  color: var(--ink);
-}
-
-.ticker-fila:hover .ticker-titulo { color: var(--accent); }
-
-.ticker-cat {
-  flex: 0 0 auto;
-  font-size: var(--fs-10);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--piedra);
-}
-
-/* Tile oscuro a todo el ancho (CTA de colaboración) */
+/* Tile oscuro a todo el ancho (CTA de la boutique) */
 
 .tile-oscura {
   aspect-ratio: auto;
@@ -1290,6 +1109,33 @@ a.btn-accent:hover { background: var(--accent); color: #FFFFFF; border-color: va
   padding: 64px 32px;
   background: var(--ink);
   color: #FFFFFF;
+}
+
+.tile-oscura-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: grayscale(10%) saturate(0.92) contrast(1.02);
+}
+
+.tile-oscura::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16,16,15,0.62) 0%, rgba(16,16,15,0.5) 50%, rgba(16,16,15,0.72) 100%);
+  z-index: 1;
+}
+
+.tile-oscura-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 
 .tile-oscura .eyebrow { color: var(--accent-claro); }
@@ -1304,14 +1150,10 @@ a.btn-accent:hover { background: var(--accent); color: #FFFFFF; border-color: va
 
 .tile-apoyo-oscura { color: rgba(255,255,255,0.75); max-width: 460px; margin-bottom: 30px; }
 
-/* --- Iconografía de categorías --- */
-
-.cat-icono { display: block; }
-.cat-card-icono { color: #FFFFFF; margin-bottom: 12px; }
-
 /* --- Página Filosofía --- */
 
 .filosofia-page { padding-top: 190px; padding-bottom: var(--space-11); }
+.filosofia-page.con-banner { padding-top: var(--space-9); }
 
 .titulo-divisor {
   display: inline-block;
@@ -1375,7 +1217,6 @@ a.btn-accent:hover { background: var(--accent); color: #FFFFFF; border-color: va
   a.wordmark .wordmark-texto { font-size: var(--fs-14); }
   a.header-cta { font-size: 9px; letter-spacing: 0.1em; }
 
-  .cat-grid { grid-template-columns: 1fr; }
   .grid-cards { grid-template-columns: 1fr 1fr; }
   .grid-cards-uniforme { grid-template-columns: 1fr 1fr; }
   .footer-cols { grid-template-columns: 1fr; gap: 28px; }
@@ -1385,17 +1226,17 @@ a.btn-accent:hover { background: var(--accent); color: #FFFFFF; border-color: va
   .filtros { flex-direction: column; align-items: stretch; }
   .filtro-buscar { min-width: 0; }
   .piramide { grid-template-columns: 1fr; gap: 20px; }
-  .category-editorial-wrap { padding: 0 24px; }
+  .cat-banner { aspect-ratio: 3/4; min-height: 360px; }
+  .cat-banner-content { padding: 32px 24px; }
+  .cat-intro { padding-top: 40px; padding-bottom: 40px; }
   .verificacion-fila { flex-wrap: wrap; gap: 4px 16px; }
   .verificacion-fecha { flex-basis: 100%; order: 3; }
-  .ticker-fila { flex-wrap: wrap; gap: 4px 16px; }
-  .ticker-fecha { flex-basis: 100%; order: 3; }
   .filosofia-page { padding-top: 140px; }
+  .filosofia-page.con-banner { padding-top: var(--space-7); }
   .mosaico { grid-template-columns: 1fr; }
   .mosaico-wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
   .mosaico-primera { padding-top: 140px; padding-bottom: 0; }
   .tile { aspect-ratio: auto; min-height: 340px; }
+  .mosaico-grande .tile { min-height: 420px; }
   .tile-oscura { min-height: 280px; padding: 48px 24px; }
-  .section-divider { padding: 8px 24px 28px; }
-  .section-divider-linea { max-width: 60px; }
 }
