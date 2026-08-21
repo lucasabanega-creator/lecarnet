@@ -42,6 +42,7 @@ export default function Footer() {
             <h4>Contacto</h4>
             <a href="mailto:hola@casabanega.com">hola@casabanega.com</a>
             <a href="https://instagram.com/casabanega" target="_blank" rel="noreferrer">@casabanega</a>
+            <a href="https://lucasbanega.com" target="_blank" rel="noopener">Online Boutique ↗</a>
           </div>
         </div>
       </div>
