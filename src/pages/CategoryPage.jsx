@@ -10,7 +10,7 @@ function CardMedia({ item }) {
 
   if (esProducto) {
     return (
-      <div className="card-media-cuadro" style={{ background: item.tono }}>
+      <div className="card-media-cuadro" >
         {mostrarImagen && (
           <img
             src={item.imagen}
@@ -34,7 +34,7 @@ function CardMedia({ item }) {
       />
     );
   }
-  return <div className="card-media-tono" style={{ background: item.tono }} />;
+  return <div className="card-media-tono"  />;
 }
 
 export default function CategoryPage({ catSlug }) {
@@ -93,7 +93,8 @@ export default function CategoryPage({ catSlug }) {
             <div className="filtros">
               <input
                 className="filtro-buscar"
-                type="text"
+                type="search"
+                aria-label={`Buscar en ${cat.nombre}`}
                 placeholder={`Buscar en ${cat.nombre.toLowerCase()}...`}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -101,6 +102,7 @@ export default function CategoryPage({ catSlug }) {
               {tipos.length > 1 && (
                 <div className="filtro-tags">
                   <button
+                    aria-pressed={!tipoActivo}
                     className={"filtro-tag" + (!tipoActivo ? " activo" : "")}
                     onClick={() => setTipoActivo(null)}
                   >
@@ -109,6 +111,7 @@ export default function CategoryPage({ catSlug }) {
                   {tipos.map((t) => (
                     <button
                       key={t}
+                      aria-pressed={tipoActivo === t}
                       className={"filtro-tag" + (tipoActivo === t ? " activo" : "")}
                       onClick={() => setTipoActivo(t)}
                     >
@@ -121,7 +124,7 @@ export default function CategoryPage({ catSlug }) {
           )}
 
           {items.length === 0 ? (
-            <p className="filtro-sin-resultados">No hay resultados para esa búsqueda.</p>
+            <p role="status" className="filtro-sin-resultados">No hay resultados para esa búsqueda.</p>
           ) : (
             <div className="grid-cards grid-cards-uniforme">
               {items.map((obj) => (

@@ -24,17 +24,20 @@ export default function App() {
     <div className="cb-root">
       <ScrollToTop />
       <Header />
+      <main id="contenido" tabIndex={-1}>
       <Routes>
         <Route path="/" element={<Gateway />} />
-        <Route path="/experiencias" element={<CategoryPage catSlug="experiencias" />} />
-        <Route path="/gastronomia" element={<CategoryPage catSlug="gastronomia" />} />
-        <Route path="/perfumes" element={<CategoryPage catSlug="perfumes" />} />
+        <Route path="/experiencias" element={<CategoryPage key="experiencias" catSlug="experiencias" />} />
+        <Route path="/gastronomia" element={<CategoryPage key="gastronomia" catSlug="gastronomia" />} />
+        <Route path="/perfumes" element={<CategoryPage key="perfumes" catSlug="perfumes" />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/filosofia" element={<Filosofia />} />
         <Route path="/notas" element={<Notas />} />
         <Route path="/notas/:slug" element={<Nota />} />
         <Route path="/:cat/:slug" element={<ItemPage />} />
+      <Route path="*" element={<ItemPage />} />
       </Routes>
+      </main>
       <Footer />
     </div>
   );

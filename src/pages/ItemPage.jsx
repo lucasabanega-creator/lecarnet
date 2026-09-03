@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CATEGORIAS, OBJETOS, itemPorSlug } from "../data/items";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
@@ -56,6 +56,7 @@ export default function ItemPage() {
   const cat = CATEGORIAS[catSlug];
   const item = cat ? itemPorSlug(catSlug, slug) : null;
   const [imgError, setImgError] = useState(false);
+  useEffect(() => setImgError(false), [catSlug, slug]);
 
   useDocumentMeta(
     item
@@ -94,7 +95,7 @@ export default function ItemPage() {
             "item-media" +
             (!item.imagenBanner && item.estiloImagen === "producto" ? " producto" : "")
           }
-          style={{ background: item.tono }}
+
         >
           {(item.imagenBanner || item.imagen) && !imgError && (
             <img
@@ -221,7 +222,7 @@ export default function ItemPage() {
                   key={rel.slug}
                   to={`/${rel.cat}/${rel.slug}`}
                   className="item-relacionado"
-                  style={{ background: rel.tono }}
+
                 >
                   {rel.imagen && <img src={rel.imagen} alt="" />}
                   <span className="item-relacionado-content">

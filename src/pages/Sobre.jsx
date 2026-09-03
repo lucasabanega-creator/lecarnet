@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import Monogram from "../components/Monogram";
 import { CATEGORIAS, OBJETOS } from "../data/items";
 
 export default function Sobre() {
@@ -17,9 +16,9 @@ export default function Sobre() {
 
   return (
     <section className="sobre-page">
+      <p className="eyebrow">CASA BANEGA</p><h1 className="headline-principal">La casa</h1>
       <div className="sobre-grid">
         <div className="sobre-cita">
-          <Monogram size={48} className="sobre-sello" />
           <p className="sobre-cita-texto">
             Casa Banega no es una redacción con staff — es un criterio curado por una sola
             persona, aplicado con el mismo rigor a un hotel de cinco estrellas que a un
