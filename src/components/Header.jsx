@@ -10,9 +10,9 @@ export default function Header() {
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => { const update = () => setScrolled(window.scrollY > 36 || pathname !== "/"); update(); window.addEventListener("scroll", update, { passive: true }); return () => window.removeEventListener("scroll", update); }, [pathname]);
   return <header className={`site-header ${(!isHome || scrolled) ? "is-scrolled" : ""} ${open ? "menu-open" : ""}`}>
-    <a className="skip-link" href="#contenido">Skip to content</a><Link to="/" className="wordmark">Casa Banega</Link>
-    <nav className="desktop-nav" aria-label="Primary navigation"><Link to="/notas">Journal</Link><Link to="/perfumes">Objects</Link><Link to="/experiencias">Places</Link><Link to="/notas">Notes</Link><Link to="/sobre">About</Link><button className="search-control" aria-label="Search">Search</button></nav>
-    <button ref={toggle} className="menu-toggle" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? "Close" : "Menu"}</button>
-    <nav id="mobile-menu" className="mobile-nav" aria-label="Mobile navigation"><Link to="/notas">Journal</Link><Link to="/perfumes">Objects</Link><Link to="/experiencias">Places</Link><Link to="/notas">Notes</Link><Link to="/sobre">About</Link><p>Buenos Aires<br />Argentina</p></nav>
+    <a className="skip-link" href="#contenido">Ir al contenido</a><Link to="/" className="wordmark">CASA BANEGA</Link>
+    <nav className="desktop-nav" aria-label="Navegación principal"><Link to="/notas">Revista</Link><Link to="/perfumes">Objetos</Link><Link to="/experiencias">Lugares</Link><Link to="/notas">Notas</Link><Link to="/sobre">Sobre la casa</Link><button className="search-control" aria-label="Buscar">Buscar</button></nav>
+    <button ref={toggle} className="menu-toggle" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? "Cerrar" : "Menú"}</button>
+    <nav id="mobile-menu" className="mobile-nav" aria-label="Navegación móvil"><Link to="/notas">Revista</Link><Link to="/perfumes">Objetos</Link><Link to="/experiencias">Lugares</Link><Link to="/notas">Notas</Link><Link to="/sobre">Sobre la casa</Link><p>Buenos Aires<br />Argentina</p></nav>
   </header>;
 }
