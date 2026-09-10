@@ -90,22 +90,6 @@ export default function ItemPage() {
       <section className="item-page">
         <Link to={`/${cat.slug}`} className="volver">← {cat.nombre}</Link>
 
-        <div
-          className={
-            "item-media" +
-            (!item.imagenBanner && item.estiloImagen === "producto" ? " producto" : "")
-          }
-
-        >
-          {(item.imagenBanner || item.imagen) && !imgError && (
-            <img
-              src={item.imagenBanner || item.imagen}
-              alt={item.nombre}
-              onError={() => setImgError(true)}
-            />
-          )}
-        </div>
-
         <div className="item-encabezado">
           <p className="eyebrow">
             {item.lugarVinculo ? (
@@ -145,6 +129,21 @@ export default function ItemPage() {
                 </a>
               )}
             </div>
+          )}
+        </div>
+
+        <div
+          className={
+            "item-media" +
+            (!item.imagenBanner && item.estiloImagen === "producto" ? " producto" : "")
+          }
+        >
+          {(item.imagenBanner || item.imagen) && !imgError && (
+            <img
+              src={item.imagenBanner || item.imagen}
+              alt={item.nombre}
+              onError={() => setImgError(true)}
+            />
           )}
         </div>
 
