@@ -1,24 +1,17 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { CATEGORIAS } from "../data/items";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const toggle = useRef(null);
   useEffect(() => setOpen(false), [pathname]);
-  const linkClass = ({ isActive }) => "navlink" + (isActive ? " activo" : "");
-  return (
-    <header className="site-header" onKeyDown={(e) => {
-      if (e.key === "Escape" && open) { setOpen(false); toggle.current?.focus(); }
-    }}>
-      <a className="skip-link" href="#contenido">Saltar al contenido</a>
-      <Link to="/" className="wordmark">CASA BANEGA</Link>
-      <button ref={toggle} className="menu-toggle" aria-expanded={open} aria-controls="navegacion" onClick={() => setOpen(!open)}>{open ? "Cerrar" : "Menú"}</button>
-      <nav id="navegacion" className={open ? "site-nav abierto" : "site-nav"} aria-label="Navegación principal">
-        <div className="nav-categories">{Object.values(CATEGORIAS).map(cat => <NavLink key={cat.slug} to={`/${cat.slug}`} className={linkClass}>{cat.nombre}</NavLink>)}</div>
-        <div className="nav-pages"><NavLink to="/" end className={linkClass}>Índice</NavLink><NavLink to="/sobre" className={linkClass}>La casa</NavLink><NavLink to="/filosofia" className={linkClass}>Criterio</NavLink><NavLink to="/notas" className={linkClass}>Notas</NavLink></div>
-      </nav>
-    </header>
-  );
+  useEffect(() => { const update = () => setScrolled(window.scrollY > 36 || pathname !== "/"); update(); window.addEventListener("scroll", update, { passive: true }); return () => window.removeEventListener("scroll", update); }, [pathname]);
+  return <header className={`site-header ${scrolled ? "is-scrolled" : ""} ${open ? "menu-open" : ""}`}>
+    <a className="skip-link" href="#contenido">Skip to content</a><Link to="/" className="wordmark">Casa Banega</Link>
+    <nav className="desktop-nav" aria-label="Primary navigation"><Link to="/notas">Journal</Link><Link to="/perfumes">Objects</Link><Link to="/experiencias">Places</Link><Link to="/notas">Notes</Link><Link to="/sobre">About</Link><button className="search-control" aria-label="Search">Search</button></nav>
+    <button ref={toggle} className="menu-toggle" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? "Close" : "Menu"}</button>
+    <nav id="mobile-menu" className="mobile-nav" aria-label="Mobile navigation"><Link to="/notas">Journal</Link><Link to="/perfumes">Objects</Link><Link to="/experiencias">Places</Link><Link to="/notas">Notes</Link><Link to="/sobre">About</Link><p>Buenos Aires<br />Argentina</p></nav>
+  </header>;
 }
