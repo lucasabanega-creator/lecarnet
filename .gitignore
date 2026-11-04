@@ -1,0 +1,6 @@
+.seo-cache/
+node_modules/
+.prerender/
+.env
+.env.local
+.DS_Store

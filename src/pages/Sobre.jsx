@@ -6,7 +6,7 @@ export default function Sobre() {
   useDocumentMeta({
     title: "Sobre — Casa Banega",
     description:
-      "Quién escribe Casa Banega y cómo se verifica cada ficha de la guía.",
+      "La mirada de Lucas Banega sobre cultura del lujo, objetos y decisiones de marca.",
   });
 
   const recientes = [...OBJETOS]
@@ -20,9 +20,7 @@ export default function Sobre() {
       <div className="sobre-grid">
         <div className="sobre-cita">
           <p className="sobre-cita-texto">
-            Casa Banega no es una redacción con staff — es un criterio curado por una sola
-            persona, aplicado con el mismo rigor a un hotel de cinco estrellas que a un
-            frasco de perfume.
+            Casa Banega es una publicación de Lucas Banega sobre cultura del lujo y las decisiones que construyen valor. Objetos, espacios y experiencias son el punto de partida.
           </p>
         </div>
 
@@ -37,7 +35,7 @@ export default function Sobre() {
           </div>
           <div className="sobre-ficha-fila">
             <dt>Enfoque</dt>
-            <dd>Experiencias, gastronomía y perfumes de quiet luxury</dd>
+            <dd>Cultura del lujo, estrategia de marca y experiencia</dd>
           </div>
           <div className="sobre-ficha-fila">
             <dt>Contacto</dt>
@@ -53,16 +51,12 @@ export default function Sobre() {
       </div>
 
       <div className="sobre-metodo">
-        <h2 className="item-subtitulo">Cómo se verifica cada ficha</h2>
+        <h2 className="item-subtitulo">Cómo se trabaja cada publicación</h2>
         <p className="item-texto">
-          Cada lugar u objeto publicado en esta guía pasa por el mismo proceso: se investiga
-          en fuentes primarias y secundarias verificables — sitios oficiales, prensa
-          especializada, archivos históricos —, esa fuente se cita al pie de la nota, y la
-          ficha queda firmada con la fecha de la última revisión.
+          Los análisis parten de fuentes identificables: documentos de las marcas, reportes y archivos. Los enlaces acompañan cada publicación. Las selecciones incluyen una razón concreta de elección y una fecha de revisión documental.
         </p>
         <p className="item-texto">
-          Si un dato no se puede confirmar, no se publica. Esa es la única promesa real
-          detrás de la palabra "verificado" que aparece en cada ficha de Casa Banega.
+          Los hechos documentados se distinguen de su interpretación. Una ficha investigada no implica una visita ni una prueba personal. Cuando exista experiencia directa, se indicará expresamente.
         </p>
       </div>
 
@@ -70,8 +64,7 @@ export default function Sobre() {
         <div className="sobre-criterio">
           <h2 className="item-subtitulo">Criterio de selección</h2>
           <p className="item-texto" style={{ marginBottom: 24 }}>
-            No hay una fórmula fija — pero cada ficha publicada tiene una razón concreta
-            detrás, no solo "está de moda" o "es lindo". Dos ejemplos reales:
+            La selección observa la relación entre historia, producto y experiencia. Cada entrada explica qué decisión merece atención y con qué información se sostiene.
           </p>
           <div className="sobre-ejemplos">
             {OBJETOS.filter((item) => item.porQueElegido).map((item) => (
@@ -88,7 +81,7 @@ export default function Sobre() {
 
       {recientes.length > 0 && (
         <div className="sobre-criterio">
-          <h2 className="item-subtitulo">Actividad reciente</h2>
+          <h2 className="item-subtitulo">Revisiones del archivo</h2>
           <ul className="lista-verificaciones">
             {recientes.map((item) => (
               <li key={item.slug}>

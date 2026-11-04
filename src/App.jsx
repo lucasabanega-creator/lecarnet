@@ -9,6 +9,10 @@ import Sobre from "./pages/Sobre";
 import Filosofia from "./pages/Filosofia";
 import Notas from "./pages/Notas";
 import Nota from "./pages/Nota";
+import Selecciones from "./pages/Selecciones";
+import Cartas from "./pages/Cartas";
+import Privacidad from "./pages/Privacidad";
+import NotFound from "./pages/NotFound";
 import "./casa-banega.css";
 
 function ScrollToTop() {
@@ -27,7 +31,9 @@ export default function App() {
       <main id="contenido" tabIndex={-1}>
       <Routes>
         <Route path="/" element={<Gateway />} />
-        <Route path="/experiencias" element={<CategoryPage key="experiencias" catSlug="experiencias" />} />
+        <Route path="/selecciones" element={<Selecciones />} />
+        <Route path="/cartas" element={<Cartas />} />
+        <Route path="/privacidad" element={<Privacidad />} />
         <Route path="/gastronomia" element={<CategoryPage key="gastronomia" catSlug="gastronomia" />} />
         <Route path="/perfumes" element={<CategoryPage key="perfumes" catSlug="perfumes" />} />
         <Route path="/sobre" element={<Sobre />} />
@@ -35,7 +41,7 @@ export default function App() {
         <Route path="/notas" element={<Notas />} />
         <Route path="/notas/:slug" element={<Nota />} />
         <Route path="/:cat/:slug" element={<ItemPage />} />
-      <Route path="*" element={<ItemPage />} />
+      <Route path="*" element={<NotFound />} />
       </Routes>
       </main>
       <Footer />

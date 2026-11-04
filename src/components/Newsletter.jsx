@@ -1,0 +1,13 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+export default function Newsletter(){
+  const [status,setStatus]=useState("idle");
+  const enabled=import.meta.env.VITE_NEWSLETTER_ENABLED==="true";
+  async function submit(event){
+    event.preventDefault();if(status==="sending")return;
+    if(!enabled || import.meta.env.DEV){setStatus("unavailable");return;}
+    const data=new FormData(event.currentTarget);setStatus("sending");
+    try{const response=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(data).toString()});if(!response.ok)throw new Error("subscription");setStatus("success");}catch{setStatus("error");}
+  }
+  return <section id="cartas" className="private-notes section-shell" aria-labelledby="notes-title"><div><p className="kicker">Cartas de Casa Banega</p><h2 id="notes-title">Una mirada que<br/>continúa por correo.</h2><p className="newsletter-dek">Una selección mensual de lecturas sobre lujo, cultura y decisiones de marca.</p></div><div>{enabled ? <form name="cartas" method="POST" onSubmit={submit} aria-label="Suscripción a las cartas"><input type="hidden" name="form-name" value="cartas"/><p hidden><label>No completar <input name="bot-field" tabIndex={-1} autoComplete="off"/></label></p><label htmlFor="newsletter-email">Correo electrónico</label><div className="notes-form"><input id="newsletter-email" name="email" type="email" autoComplete="email" placeholder="tu@correo.com" required disabled={status==="success"}/><button type="submit" disabled={status==="sending" || status==="success"}>{status==="sending" ? "Enviando…" : status==="success" ? "Recibido" : "Suscribirme →"}</button></div><label className="newsletter-consent"><input type="checkbox" name="consentimiento" value="si" required/> Quiero recibir las cartas y leí la <Link to="/privacidad">información de privacidad</Link>.</label></form> : <div className="newsletter-contact"><p>Para pedir las cartas, escribí a la casa.</p><a className="editorial-link" href="mailto:hola@casabanega.com?subject=Cartas%20de%20Casa%20Banega">Pedir las cartas por correo →</a></div>}<p role="status" aria-live="polite" className="form-status">{status==="success" ? "Recibimos tu solicitud para las cartas. Podés pedir la baja escribiendo a hola@casabanega.com." : status==="error" ? "No pudimos registrar tu solicitud. Intentá nuevamente o escribí a hola@casabanega.com." : status==="unavailable" ? "El registro no está disponible en esta vista. Escribí a hola@casabanega.com para pedir las cartas." : ""}</p></div></section>;
+}

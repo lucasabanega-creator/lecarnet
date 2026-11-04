@@ -2,53 +2,27 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CATEGORIAS, OBJETOS, itemPorSlug } from "../data/items";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { absoluteUrl } from "../site";
+import NotFound from "./NotFound";
 import VerificationBadge from "../components/VerificationBadge";
 
 function construirSchema(item, cat) {
-  const imagen = item.imagenBanner || item.imagen;
-  const imagenAbsoluta = imagen ? window.location.origin + imagen : undefined;
-
-  const datosProperty = (item.datosTecnicos || []).map((d) => ({
-    "@type": "PropertyValue",
-    name: d.label,
-    value: d.valor,
-  }));
-
-  if (item.piramide) {
-    return {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      name: item.nombre,
-      description: item.desc,
-      image: imagenAbsoluta,
-      category: item.tipo,
-      brand: item.marca ? { "@type": "Brand", name: item.marca } : undefined,
-      additionalProperty: [
-        { "@type": "PropertyValue", name: "Nota de salida", value: item.piramide.salida },
-        { "@type": "PropertyValue", name: "Nota de corazón", value: item.piramide.corazon },
-        { "@type": "PropertyValue", name: "Nota de fondo", value: item.piramide.fondo },
-        ...datosProperty,
-      ],
-    };
-  }
-
   return {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: item.nombre,
-    description: item.desc,
-    image: imagenAbsoluta,
-    articleSection: cat.nombre,
-    author: item.curador ? { "@type": "Person", name: item.curador } : undefined,
-    dateModified: item.verificadoISO,
-    additionalProperty: datosProperty.length > 0 ? datosProperty : undefined,
+    "@context":"https://schema.org", "@type":"Article", headline:item.nombre,
+    description:item.desc,image:absoluteUrl(item.imagenBanner || item.imagen),articleSection:cat.nombre,
+    author:{"@type":"Person",name:item.curador,url:absoluteUrl("/sobre")},
+    publisher:{"@type":"Organization",name:"Casa Banega",url:absoluteUrl("/")},
+    dateModified:item.verificadoISO,datePublished:item.publicadoISO || item.verificadoISO,
+    mainEntityOfPage:absoluteUrl(`/${item.cat}/${item.slug}`),
+    citation:item.fuente.map(f=>typeof f === "string" ? f : f.url),
+    about:item.piramide ? {"@type":"Product",name:item.nombre,brand:{"@type":"Brand",name:item.marca},image:absoluteUrl(item.imagen)} : {"@type":"Place",name:item.nombre}
   };
 }
 
 function FotoGaleria({ src, alt }) {
   const [error, setError] = useState(false);
   if (error) return null;
-  return <img src={src} alt={alt} loading="lazy" onError={() => setError(true)} />;
+  return <img src={src} alt={alt} width="600" height="800" loading="lazy" onError={() => setError(true)} />;
 }
 
 export default function ItemPage() {
@@ -64,21 +38,13 @@ export default function ItemPage() {
           title: `${item.nombre} — Casa Banega`,
           description: item.desc,
           image: item.imagenBanner || item.imagen,
-          type: item.piramide ? "product" : "article",
+          type: "article",
           structuredData: construirSchema(item, cat),
         }
-      : { title: "No encontrado — Casa Banega" }
+      : { title: "No encontrado — Casa Banega", noindex: true }
   );
 
-  if (!cat || !item) {
-    return (
-      <section className="page-hero centrado">
-        <p className="eyebrow">No encontrado</p>
-        <h1 className="headline-principal">Este lugar no está en la guía</h1>
-        <Link to="/" className="ver-mas-inline">Volver al inicio</Link>
-      </section>
-    );
-  }
+  if (!cat || !item) return <NotFound />;
 
   const relacionados = [...OBJETOS]
     .filter((o) => o.slug !== item.slug)
@@ -88,7 +54,7 @@ export default function ItemPage() {
   return (
     <div data-cat={cat.slug}>
       <section className="item-page">
-        <Link to={`/${cat.slug}`} className="volver">← {cat.nombre}</Link>
+        <Link to="/selecciones" className="volver">← Selecciones</Link>
 
         <div className="item-encabezado">
           <p className="eyebrow">
@@ -142,21 +108,23 @@ export default function ItemPage() {
             <img
               src={item.imagenBanner || item.imagen}
               alt={item.nombre}
+              width="1200" height="800"
               onError={() => setImgError(true)}
             />
           )}
         </div>
 
+        <div className="item-cuerpo research-note"><p>{item.metodo || "Selección documental. Esta ficha no implica una visita ni una prueba personal."}</p>{item.mapa && <a className="editorial-link" href={item.mapa} target="_blank" rel="noreferrer">Ver ubicación en el mapa ↗</a>}</div>
         {item.historia && (
           <div className="item-cuerpo">
-            <h2 className="item-subtitulo">Historia</h2>
+            <h2 className="item-subtitulo">Historia y contexto</h2>
             <p className="item-texto">{item.historia}</p>
           </div>
         )}
 
         {item.porQueElegido && (
           <div className="item-cuerpo">
-            <h2 className="item-subtitulo">Por qué la elegí</h2>
+            <h2 className="item-subtitulo">Criterio de selección</h2>
             <p className="item-texto">{item.porQueElegido}</p>
           </div>
         )}
@@ -214,7 +182,7 @@ export default function ItemPage() {
 
         {relacionados.length > 0 && (
           <div className="item-cuerpo">
-            <h2 className="item-subtitulo">Seguí en la guía</h2>
+            <h2 className="item-subtitulo">Otra selección de la casa</h2>
             <div className="item-relacionados">
               {relacionados.map((rel) => (
                 <Link
@@ -223,7 +191,7 @@ export default function ItemPage() {
                   className="item-relacionado"
 
                 >
-                  {rel.imagen && <img src={rel.imagen} alt="" />}
+                  {rel.imagen && <img src={rel.imagen} alt="" loading="lazy" width="600" height="800" />}
                   <span className="item-relacionado-content">
                     <span className="card-cat">{CATEGORIAS[rel.cat].nombre}</span>
                     <span className="item-relacionado-nombre">{rel.nombre}</span>

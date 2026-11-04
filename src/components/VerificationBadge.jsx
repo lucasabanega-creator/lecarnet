@@ -1,22 +1,2 @@
 import { Link } from "react-router-dom";
-
-export default function VerificationBadge({ curador, verificado, fuentes }) {
-  if (!curador && !(fuentes && fuentes.length)) return null;
-
-  return (
-    <div className="verificacion-badge">
-      <div className="verificacion-texto">
-        {curador && (
-          <p className="verificacion-linea">
-            <span className="verificacion-label">Verificado</span> por{" "}
-            <Link to="/sobre" className="verificacion-curador">{curador}</Link>
-            {verificado ? ` · ${verificado}` : ""}
-          </p>
-        )}
-        {fuentes && fuentes.length > 0 && (
-          <p className="verificacion-fuentes">Fuentes: {fuentes.join(" · ")}</p>
-        )}
-      </div>
-    </div>
-  );
-}
+export default function VerificationBadge({curador,verificado,fuentes}){return <aside className="verificacion-badge"><p>Selección de <Link className="verificacion-curador" to="/sobre">{curador}</Link>{verificado ? ` · Revisión documental: ${verificado}` : ""}</p>{fuentes?.length>0 && <><p className="verificacion-label">Fuentes</p><ul className="verificacion-fuentes">{fuentes.map(f=>{const fuente=typeof f==="string" ? {nombre:f,url:`https://${f}`} : f;return <li key={fuente.url}><a href={fuente.url} target="_blank" rel="noreferrer">{fuente.nombre} ↗</a></li>;})}</ul></>}</aside>;}

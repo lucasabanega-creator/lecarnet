@@ -1,51 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { notaPorSlug } from "../data/notas";
-
-export default function Nota() {
-  const { slug } = useParams();
-  const nota = notaPorSlug(slug);
-
-  useDocumentMeta(
-    nota
-      ? {
-          title: `${nota.titulo} — Casa Banega`,
-          description: nota.bajada || nota.titulo,
-          type: "article",
-          structuredData: {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            headline: nota.titulo,
-            description: nota.bajada,
-            author: { "@type": "Person", name: "Lucas Banega" },
-            datePublished: nota.fechaISO,
-          },
-        }
-      : { title: "No encontrado — Casa Banega" }
-  );
-
-  if (!nota) {
-    return (
-      <section className="page-hero centrado">
-        <p className="eyebrow">No encontrado</p>
-        <h1 className="headline-principal">Esta nota no está en la guía</h1>
-        <Link to="/notas" className="ver-mas-inline">Volver a notas</Link>
-      </section>
-    );
-  }
-
-  return (
-    <section className="filosofia-page centrado">
-      <Link to="/notas" className="volver">← Notas</Link>
-      <p className="eyebrow">{nota.fecha}</p>
-      <h1 className="headline-principal">{nota.titulo}</h1>
-      <span className="titulo-divisor" />
-
-      <div className="filosofia-cuerpo">
-        {nota.cuerpo.map((parrafo, i) => (
-          <p className="item-texto" key={i}>{parrafo}</p>
-        ))}
-      </div>
-    </section>
-  );
+import { notaPorSlug, NOTAS } from "../data/notas";
+import { SITE, absoluteUrl } from "../site";
+import NotFound from "./NotFound";
+export default function Nota(){const {slug}=useParams();const nota=notaPorSlug(slug);return nota ? <Article nota={nota}/> : <NotFound/>;}
+function Article({nota}){
+  useDocumentMeta({title:`${nota.titulo} — Casa Banega`,description:nota.bajada,image:nota.imagen,type:"article",structuredData:{"@context":"https://schema.org","@type":"Article",headline:nota.titulo,description:nota.bajada,image:absoluteUrl(nota.imagen || SITE.image),author:{"@type":"Person",name:"Lucas Banega",url:absoluteUrl("/sobre")},publisher:{"@type":"Organization",name:SITE.name,url:SITE.url},datePublished:nota.fechaISO,dateModified:nota.fechaISO,mainEntityOfPage:absoluteUrl(`/notas/${nota.slug}`),citation:nota.fuentes.map(f=>f.url)}});
+  return <article className="essay-page section-shell"><Link className="volver" to="/notas">← Revista</Link><header className="essay-heading"><p className="kicker">{nota.categoria}</p><h1 className="headline-principal">{nota.titulo}</h1><p className="lead">{nota.bajada}</p><p className="byline">Por <Link to="/sobre">Lucas Banega</Link> · <time dateTime={nota.fechaISO}>{nota.fecha}</time></p></header>{nota.imagen && <img className="essay-image" src={nota.imagen} width="1200" height="800" alt="Eau Parfumée Thé Impérial de Bvlgari"/>}<div className="filosofia-cuerpo">{nota.cuerpo.map((p,i)=><p className="item-texto" key={i}>{p}</p>)}<aside className="article-sources"><h2>Fuentes y lectura</h2><p>La interpretación editorial corresponde a Casa Banega. Los hechos se apoyan en las siguientes fuentes, consultadas el 4 de noviembre de 2026.</p><ul>{nota.fuentes.map(f=><li key={f.url}><a href={f.url} target="_blank" rel="noreferrer">{f.nombre} ↗</a></li>)}</ul></aside>{nota.relacionado && <Link className="editorial-link" to={nota.relacionado}>Ver la selección relacionada →</Link>}<nav className="next-reads" aria-label="Seguir leyendo"><h2>Seguir leyendo</h2>{NOTAS.filter(n=>n.slug!==nota.slug).slice(0,2).map(n=><Link key={n.slug} to={`/notas/${n.slug}`}>{n.titulo} →</Link>)}</nav><Link className="editorial-link" to="/cartas">Recibir las cartas de la casa →</Link></div></article>;
 }

@@ -1,0 +1,3 @@
+import { Link } from "react-router-dom";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
+export default function NotFound(){useDocumentMeta({title:"Página no encontrada — Casa Banega",description:"Esta dirección no corresponde a una publicación de Casa Banega.",noindex:true});return <section className="page-hero"><p className="eyebrow">404</p><h1 className="headline-principal">Esta página no está<br/>en el archivo.</h1><p className="archive-intro">Podés seguir leyendo en la revista o recorrer las selecciones.</p><Link className="editorial-link" to="/notas">Ir a la revista →</Link></section>;}
