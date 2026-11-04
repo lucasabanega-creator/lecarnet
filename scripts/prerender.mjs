@@ -14,7 +14,7 @@ for(const pathname of [...routes,"/404"]){
   const target=pathname==="/" ? "dist/index.html" : pathname==="/404" ? "dist/404.html" : `dist${pathname}/index.html`;
   await mkdir(target.slice(0,target.lastIndexOf("/")),{recursive:true});await writeFile(target,output.replace(/[ \t]+$/gm,""));
 }
-await writeFile("dist/sitemap.xml",`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(path=>`<url><loc>${escape(origin+path)}</loc></url>`).join("\n")}</urlset>\n`);
+await writeFile("dist/sitemap.xml",`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(path=>`<url><loc>${escape(origin+(path==="/" ? "/" : path+"/"))}</loc></url>`).join("\n")}</urlset>\n`);
 await writeFile("dist/robots.txt",`User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`);
 await rm(".prerender",{recursive:true,force:true});
 console.log(`Generated ${routes.length} pages, 404, robots and sitemap for ${origin}.`);

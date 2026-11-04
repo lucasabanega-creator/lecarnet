@@ -23,13 +23,13 @@ No se añadieron dependencias.
 
 ## Alojamiento y publicación
 
-El dominio confirmado es https://casabanega.com. Se comprobó respuesta pública 200 y servidor Netlify. La versión pública sigue siendo la anterior hasta desplegar esta compilación. La carpeta local no incluye vínculo de sitio ni acceso autenticado de Netlify.
+El dominio confirmado es https://casabanega.com. Se comprobó respuesta pública 200 y servidor Netlify. La actualización fue publicada mediante GitHub en la rama main y desplegada por Netlify. Se comprobaron la portada, un artículo con texto en el HTML, sitemap, robots y un 404 real en el dominio. Las URLs canónicas usan la barra final que aplica Netlify. La terminal tiene acceso a GitHub; no hay credenciales de Netlify disponibles.
 
 Mantener el flujo de publicación existente. En Netlify: comando `npm run build`, directorio `dist`. Verificar URLs directas de artículos, `/sitemap.xml`, `/robots.txt` y una URL inexistente después de publicar. No crear otro sitio ni cambiar DNS para estas mejoras.
 
 ## Activar las cartas
 
-1. En el sitio de Netlify, habilitar detección de formularios en Forms.
+1. En el sitio de Netlify, habilitar detección de formularios en Forms. La definición pública conserva `data-netlify`, por lo que su procesamiento no quedó confirmado en el despliegue comprobado.
 2. Desplegar: `/cartas` incluye una definición estática oculta del formulario `cartas`, aunque el registro público todavía esté apagado.
 3. Configurar `VITE_NEWSLETTER_ENABLED=true` y volver a compilar/desplegar.
 4. Enviar una solicitud autorizada y comprobar su presencia en Netlify Forms, incluyendo Spam si corresponde. Verificar también el estado de error.

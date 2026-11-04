@@ -5,4 +5,4 @@ export const SITE = {
   image: "/social-card.png",
 };
 export function absoluteUrl(path, origin = SITE.url) { return origin ? new URL(path, origin).href : path; }
-export function canonicalPath(path) { const clean=path.split(/[?#]/)[0]; return clean === "/" ? "/" : clean.replace(/\/+$/, ""); }
+export function canonicalPath(path) { const clean=path.split(/[?#]/)[0]; return clean === "/" ? "/" : clean.replace(/\/+$/, "") + "/"; }
