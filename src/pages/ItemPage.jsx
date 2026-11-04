@@ -2,20 +2,20 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CATEGORIAS, OBJETOS, itemPorSlug } from "../data/items";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
-import { absoluteUrl } from "../site";
+import { absoluteUrl, SITE } from "../site";
 import NotFound from "./NotFound";
 import VerificationBadge from "../components/VerificationBadge";
 
 function construirSchema(item, cat) {
   return {
     "@context":"https://schema.org", "@type":"Article", headline:item.nombre,
-    description:item.desc,image:absoluteUrl(item.imagenBanner || item.imagen),articleSection:cat.nombre,
+    description:item.desc,image:absoluteUrl(item.imagenBanner || item.imagen || SITE.image),articleSection:cat.nombre,
     author:{"@type":"Person",name:item.curador,url:absoluteUrl("/sobre")},
     publisher:{"@type":"Organization",name:"Casa Banega",url:absoluteUrl("/")},
     dateModified:item.verificadoISO,datePublished:item.publicadoISO || item.verificadoISO,
-    mainEntityOfPage:absoluteUrl(`/${item.cat}/${item.slug}`),
+    mainEntityOfPage:absoluteUrl(`/${item.cat}/${item.slug}/`),
     citation:item.fuente.map(f=>typeof f === "string" ? f : f.url),
-    about:item.piramide ? {"@type":"Product",name:item.nombre,brand:{"@type":"Brand",name:item.marca},image:absoluteUrl(item.imagen)} : {"@type":"Place",name:item.nombre}
+    about:item.piramide ? {"@type":"Product",name:item.nombre,brand:{"@type":"Brand",name:item.marca},image:absoluteUrl(item.imagen)} : {"@type":item.schemaType || "Place",name:item.nombre,...(item.direccion ? {address:{"@type":"PostalAddress",streetAddress:item.direccion,addressLocality:"Buenos Aires",addressCountry:"AR"}} : {})}
   };
 }
 
@@ -72,7 +72,7 @@ export default function ItemPage() {
           </p>
           <h1 className="headline-principal">{item.nombre}</h1>
           <p className="lead item-desc">{item.desc}</p>
-          {(item.enlaceOficial || item.enlaceMenu) && (
+          {(item.enlaceOficial || item.enlaceMenu || item.enlaceReserva) && (
             <div className="item-enlaces">
               {item.enlaceOficial && (
                 <a
@@ -84,6 +84,7 @@ export default function ItemPage() {
                   Ver en el sitio oficial ↗
                 </a>
               )}
+              {item.enlaceReserva && <a className="btn-externo" href={item.enlaceReserva} target="_blank" rel="noreferrer">Consultar reservas ↗</a>}
               {item.enlaceMenu && (
                 <a
                   className="btn-externo"
@@ -98,7 +99,7 @@ export default function ItemPage() {
           )}
         </div>
 
-        <div
+        <figure
           className={
             "item-media" +
             (!item.imagenBanner && item.estiloImagen === "producto" ? " producto" : "")
@@ -107,12 +108,13 @@ export default function ItemPage() {
           {(item.imagenBanner || item.imagen) && !imgError && (
             <img
               src={item.imagenBanner || item.imagen}
-              alt={item.nombre}
+              alt={item.imagenAlt || item.nombre}
               width="1200" height="800"
               onError={() => setImgError(true)}
             />
           )}
-        </div>
+          {item.creditoImagen && <figcaption className="image-credit">Fuente de imagen: <a href={item.creditoImagen.url} target="_blank" rel="noreferrer">{item.creditoImagen.nombre} ↗</a></figcaption>}
+        </figure>
 
         <div className="item-cuerpo research-note"><p>{item.metodo || "Selección documental. Esta ficha no implica una visita ni una prueba personal."}</p>{item.mapa && <a className="editorial-link" href={item.mapa} target="_blank" rel="noreferrer">Ver ubicación en el mapa ↗</a>}</div>
         {item.historia && (
@@ -129,6 +131,7 @@ export default function ItemPage() {
           </div>
         )}
 
+        {item.paraVisitar && <div className="item-cuerpo"><h2 className="item-subtitulo">Antes de ir</h2><p className="item-texto">{item.paraVisitar}</p></div>}
         {item.piramide && (
           <div className="item-cuerpo">
             <h2 className="item-subtitulo">Pirámide olfativa</h2>

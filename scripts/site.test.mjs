@@ -26,7 +26,7 @@ test("Every public page ships content, unique metadata and crawlable internal de
 });
 test("Sitemap only contains generated public pages; errors are noindex",async()=>{
   const sitemap=await readFile('dist/sitemap.xml','utf8');
-  const urls=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);assert.equal(urls.length,14);assert.ok(!urls.some(u=>u.includes('/experiencias') || u.includes('/404')));
+  const urls=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);assert.equal(urls.length,pages.length-1);assert.ok(!urls.some(u=>u.includes('/experiencias') || u.includes('/404')));
   for(const url of urls)await access(join('dist',new URL(url).pathname,'index.html'));
   const error=await readFile('dist/404.html','utf8');assert.match(error,/name="robots" content="noindex, follow"/);
   assert.match(await readFile('netlify.toml','utf8'),/status = 404/);
@@ -37,4 +37,12 @@ test("Editorial promises and newsletter fallback are explicit",async()=>{
   assert.match(home,/richemont-crecer-y-conservar-margen/);assert.match(home,/hermes-vitrina-como-relato/);assert.match(home,/bvlgari-del-hotel-al-objeto/);
   assert.match(home,/mailto:hola@casabanega.com\?subject=/);
   assert.ok((await stat('public/sculpture-1600.jpg')).size<400000);
+});
+
+test("Five researched reviews are published with sources, directions and image attribution",async()=>{
+  for(const slug of ["la-patisserie-recoleta","presencia-gran-cafe","casa-cavia","amayta","shelter-coffee"]){
+    const html=await readFile(`dist/gastronomia/${slug}/index.html`,"utf8");
+    assert.match(html,/Reseña documental/);assert.match(html,/Antes de ir/);assert.match(html,/Dirección/);assert.match(html,/Fuente de imagen/);assert.match(html,/google.com\/maps\/search/);
+    assert.ok((await stat(`public/gastronomia/${slug}.jpg`)).size<500000);
+  }
 });

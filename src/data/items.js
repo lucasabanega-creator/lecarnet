@@ -1,3 +1,5 @@
+import { RESENAS } from "./reviews";
+
 export const CATEGORIAS = {
   experiencias: {
     slug: "experiencias",
@@ -32,6 +34,7 @@ export const CATEGORIAS = {
 
 // Contenido en curaduría. Solo se publica lo que está verificado con fuentes reales.
 export const OBJETOS = [
+  ...RESENAS,
   {
     cat: "perfumes",
     slug: "eau-parfumee-the-imperial",
